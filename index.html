@@ -518,6 +518,8 @@ html[data-tema="escuro"] .as-flow li.fim span,html[data-tema="escuro"] .j-fase:l
 @media (max-width:400px){.pg-quem h3{font-size:32px}}
 a[data-scroll]{display:inline-flex;align-items:center;min-height:44px}
 .ab a[target="_blank"]{display:inline-flex;align-items:center;min-height:44px}
+/* modo escuro: contorno claro na pipa pequena do topo, para a face preta não sumir no fundo */
+html[data-tema="escuro"] .marca .logo-pipa polygon{stroke:var(--tinta);stroke-width:7;stroke-linejoin:round;paint-order:stroke}
 /* imagens dos cases */
 .fig{margin:32px 0;display:flex;flex-direction:column;gap:12px}
 .fig-img{border-radius:16px;overflow:hidden;background:var(--papel);position:relative}
