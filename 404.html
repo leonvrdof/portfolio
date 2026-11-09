@@ -33,7 +33,10 @@
 }
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--ceu);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.55}
+body{margin:8px;background:var(--ceu);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.55}
+/* só a parte preta (contato e rodapé) vai de ponta a ponta; o resto mantém a margem de 8px de antes */
+.contato,footer.rodape{margin-inline:-8px;padding-inline:8px}
+footer.rodape{margin-bottom:-8px}
 a{color:var(--tinta)}a:hover{color:var(--vermelho)}
 [tabindex="-1"]:focus{outline:none}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--vermelho);outline-offset:3px;border-radius:8px}
