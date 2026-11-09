@@ -162,6 +162,10 @@ section.bloco{padding-block:var(--secao)}
 .hero .txt{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:28px}
 .hero h1{font-size:clamp(2.4rem,12vw,9rem);overflow-wrap:anywhere}
 .hero p{margin:0;max-width:560px;font-size:1.25rem;color:var(--texto)}
+/* prova logo abaixo da promessa (auditoria RCD, item 2) e frase que explica o que acontece no clique (item 3) */
+.hero p.prova{display:flex;gap:12px;align-items:flex-start;font-size:1rem;line-height:1.5;color:var(--tinta);border-left:4px solid var(--vermelho);padding-left:16px}
+.hero p.prova svg{flex:none;color:var(--vermelho);margin-top:0}
+.hero p.gatilho{font-size:14px;margin-top:-12px}
 .acoes{display:flex;flex-wrap:wrap;gap:16px}
 .hero .arte{flex:1 1 260px;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;margin:0}
 .legenda-pipa{max-width:300px;font-size:14px;line-height:1.5;color:var(--grafite);text-align:center;display:flex;flex-direction:column;gap:8px}
@@ -663,10 +667,12 @@ dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
       <span class="rotulo">Designer conversacional · UX Writer</span>
       <h1 class="nome lanterna">Leonardo<br><span style="white-space:nowrap">Fernandes<svg class="bola" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><defs><clipPath id="bolaClip"><circle r="47"/></clipPath></defs><g class="bola-giro"><circle r="47" fill="#C8102E"/><g clip-path="url(#bolaClip)" fill="#141414"><polygon points="0.0,-15.0 14.3,-4.6 8.8,12.1 -8.8,12.1 -14.3,-4.6"/><polygon points="18.8,-25.9 13.7,-41.5 27.0,-51.2 40.4,-41.5 35.3,-25.9"/><polygon points="30.4,9.9 43.7,0.2 57.1,9.9 52.0,25.5 35.5,25.5"/><polygon points="0.0,32.0 13.3,41.7 8.2,57.3 -8.2,57.3 -13.3,41.7"/><polygon points="-30.4,9.9 -35.5,25.5 -52.0,25.5 -57.1,9.9 -43.7,0.2"/><polygon points="-18.8,-25.9 -35.3,-25.9 -40.4,-41.5 -27.0,-51.2 -13.7,-41.5"/></g><g stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><line x1="0.0" y1="-15.0" x2="0.0" y2="-31.0"/><line x1="14.3" y1="-4.6" x2="29.5" y2="-9.6"/><line x1="8.8" y1="12.1" x2="18.2" y2="25.1"/><line x1="-8.8" y1="12.1" x2="-18.2" y2="25.1"/><line x1="-14.3" y1="-4.6" x2="-29.5" y2="-9.6"/></g></g><circle r="47" fill="none" stroke="currentColor" stroke-width="3"/></svg></span></h1>
       <p>Desenho conversas de chatbots e assistentes no WhatsApp: o fluxo, o tom de voz e cada mensagem, testados com quem vai usar.</p>
+      <p class="prova"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg><span><strong>2º lugar entre mais de 1.200 participantes</strong> no Bootcamp de Design Conversacional com IA da Blip, em 2025.</span></p>
       <div class="acoes">
-        <a class="btn cheio" href="/" data-ir="inicio" data-alvo="projetos">Acessar projetos</a>
-        <a class="btn vazio" href="/sobre" data-ir="sobre">Sobre mim</a>
+        <a class="btn cheio" href="/lia" data-ir="lia" data-alvo="lia-prototipo">Conversar com a Lia</a>
+        <a class="btn vazio" href="/" data-ir="inicio" data-alvo="projetos">Acessar projetos</a>
       </div>
+      <p class="gatilho">A Lia é a minha assistente de viagens. O protótipo funciona no navegador, como uma conversa no WhatsApp.</p>
     </div>
     <figure class="arte">
       <svg id="pipaSvg" width="300" height="420" viewBox="0 0 260 420" aria-hidden="true" style="max-width:100%;overflow:visible">
