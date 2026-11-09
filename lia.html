@@ -533,6 +533,20 @@ a[data-scroll]{display:inline-flex;align-items:center;min-height:44px}
 .ab a[target="_blank"]{display:inline-flex;align-items:center;min-height:44px}
 /* modo escuro: contorno claro na pipa pequena do topo, para a face preta não sumir no fundo */
 html[data-tema="escuro"] .marca .logo-pipa polygon{stroke:var(--tinta);stroke-width:7;stroke-linejoin:round;paint-order:stroke}
+/* resumo no topo dos cases e convite no fim (auditoria RCD, itens 4 e 5) */
+.resumo{background:var(--papel);border-radius:var(--raio-g);padding:28px;display:flex;flex-direction:column;gap:16px;margin:0 0 24px}
+.case-corpo .resumo h2.ch{margin:0}
+.resumo p{margin:0}
+.resumo-frase{font-size:1.125rem;color:var(--tinta)}
+.resumo .pg-ficha{padding:0;margin:0;background:none;border-radius:0}
+.resumo-links{display:flex;flex-wrap:wrap;gap:12px 24px}
+.resumo-links a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+.convite{border-top:1px solid var(--linha)}
+.convite .wrap{padding-block:56px;display:flex;flex-direction:column;gap:16px}
+.convite h2{margin:0;font-size:clamp(1.6rem,3vw,2.2rem)}
+.convite p{margin:0}
+.convite .acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+@media (max-width:600px){.resumo{padding:20px}.convite .acoes .btn{flex:1 1 100%;justify-content:center}}
 /* imagens dos cases */
 .fig{margin:32px 0;display:flex;flex-direction:column;gap:12px}
 .fig-img{border-radius:16px;overflow:hidden;background:var(--papel);position:relative}
@@ -626,6 +640,7 @@ dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
 .mm-exc ul{flex-direction:row!important;flex-wrap:wrap}
 .mm-exc li{flex:1 1 200px}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://leonvrdof.vercel.app/#leonardo", "name": "Leonardo Fernandes", "alternateName": "Leonardo Fernandes de Almeida", "jobTitle": "Designer Conversacional e UX Writer", "description": "Designer conversacional e UX Writer. Desenha conversas de chatbots e assistentes no WhatsApp.", "url": "https://leonvrdof.vercel.app/", "image": "https://leonvrdof.vercel.app/img/4ce42e69cf.webp", "sameAs": ["https://www.linkedin.com/in/leonvrdof", "https://github.com/leonvrdof"], "address": {"@type": "PostalAddress", "addressLocality": "São Paulo", "addressRegion": "SP", "addressCountry": "BR"}, "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Universidade Anhembi Morumbi"}, {"@type": "CollegeOrUniversity", "name": "Universidade Cruzeiro do Sul"}], "knowsAbout": ["Design conversacional", "UX Writing", "Chatbots", "WhatsApp", "Content Design", "UX Design", "Acessibilidade"], "knowsLanguage": ["pt-BR", "es", "en"]}, {"@type": "WebSite", "@id": "https://leonvrdof.vercel.app/#site", "url": "https://leonvrdof.vercel.app/", "name": "Leonardo Fernandes — Designer Conversacional", "inLanguage": "pt-BR", "author": {"@id": "https://leonvrdof.vercel.app/#leonardo"}}]}</script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -849,7 +864,14 @@ dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
 <!-- LIA -->
 <div class="tela" data-tela="lia" hidden>
   <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">Design conversacional · WhatsApp · Público 50+</span><h1>Como acabar com a indecisão na hora de viajar?</h1></div>
-  <article class="wrap case-corpo"><h2 class="ch">Quem nunca já se sentiu perdido na hora de escolher um destino para passar as férias?</h2>
+  <article class="wrap case-corpo"><section class="resumo largo" aria-labelledby="resumo-lia">
+  <h2 class="ch" id="resumo-lia">Resumo</h2>
+  <p class="resumo-frase">Projetei a Lia, assistente de viagens no WhatsApp para pessoas com 50 anos ou mais. Ela guia o planejamento passo a passo, da escolha do destino ao checklist final.</p>
+  <dl class="pg-ficha"><div><dt>Contexto</dt><dd>Bootcamp DCIA da Blip, 2025, com mentoria individual</dd></div><div><dt>Meu papel</dt><dd>Conversation designer, da entrevista ao protótipo</dd></div><div><dt>Canais</dt><dd>WhatsApp e BlipChat</dd></div><div><dt>Modelo</dt><dd>Híbrido: menu guiado e IA em momentos específicos</dd></div></dl>
+  <p class="resumo-num"><strong>Em números:</strong> 1 entrevista guiada, fluxo feliz em 10 etapas e fluxo revisado depois da validação com a entrevistada.</p>
+  <p class="resumo-links"><a href="#lia-prototipo" data-scroll="1">Conversar com a Lia</a><a target="_blank" rel="noopener" href="https://www.figma.com/design/iS4Jq0wyODvgVXuYrSGNNh/Fluxo-Conversacional---Assistente-viagens?node-id=249-3258&t=ekY5Blnh5QaFz3Wc-1">Acessar os fluxos no Figma<span class="sr"> (abre em nova aba)</span></a></p>
+</section>
+<h2 class="ch">Quem nunca já se sentiu perdido na hora de escolher um destino para passar as férias?</h2>
 <p>A ideia de viajar é animadora, mas o processo de planejamento pode ser frustrante. Entre pesquisar passagens, comparar hospedagens, entender o clima e decidir o que realmente vale a pena visitar, muitas pessoas acabam se sentindo inseguras e sobrecarregadas. Para alguns, viajar não é apenas escolher um lugar no mapa, mas lidar com dúvidas, falta de informação e medo de tomar decisões erradas. Esse projeto nasceu justamente a partir dessa dor, com o objetivo de tornar o planejamento de viagens mais simples, acessível e menos estressante.</p>
 <h2 class="ch">Conheça a Lia</h2>
 <p>Assistente de viagens no WhatsApp, pensada para pessoas com 50 anos ou mais.</p>
@@ -963,6 +985,13 @@ dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
     <div class="txt"><span class="rotulo">Protótipo navegável · MVP</span><h2>Converse com a Lia</h2><p>Escolha o destino da sua próxima viagem conversando com a Lia, do jeito que seria no WhatsApp.</p><p class="aviso">Protótipo de testes. Use dados fictícios.</p><a class="btn cheio" href="https://lia-prototipo-de-testes.vercel.app/" target="_blank" rel="noopener">Abrir o protótipo em tela cheia<span aria-hidden="true"> ↗</span><span class="sr"> (abre em nova aba)</span></a></div>
     <div class="celular"><iframe data-src="https://lia-prototipo-de-testes.vercel.app/?modo=vitrine" title="Protótipo da Lia: conversa simulada no WhatsApp" loading="lazy"></iframe><button class="toque" type="button"><span>Toque para conversar</span></button></div>
   </div></section>
+  <section class="convite" aria-label="Contato">
+    <div class="wrap">
+      <h2>Gostou deste projeto?</h2>
+      <p>Tem uma vaga ou um projeto de design conversacional? Me chama.</p>
+      <div class="acoes"><a class="btn cheio" href="mailto:leonvrdof@gmail.com">Enviar e-mail</a><a class="btn vazio" href="https://www.linkedin.com/in/leonvrdof" target="_blank" rel="noopener">LinkedIn<span class="sr"> (abre em nova aba)</span></a><a class="btn vazio" href="https://leonvrdof.vercel.app/curriculo.pdf" target="_blank" rel="noopener">Currículo (PDF)<span class="sr"> (abre em nova aba)</span></a></div>
+    </div>
+  </section>
   <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><span></span><a href="/tom" data-ir="tom">Próximo: Clínica Veterinária Vila Matilde<span aria-hidden="true"> →</span></a></div></nav>
 </div>
 
@@ -1005,14 +1034,28 @@ dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
     <div class="txt"><span class="rotulo">Protótipo navegável · MVP</span><h2>Converse com o Tom</h2><p>Agende uma consulta para o seu pet conversando com o Tom, como um tutor faria no WhatsApp.</p><p class="aviso">Protótipo de testes. Use dados fictícios.</p><a class="btn cheio" href="https://tom-prototipo-de-testes.vercel.app/" target="_blank" rel="noopener">Abrir o protótipo em tela cheia<span aria-hidden="true"> ↗</span><span class="sr"> (abre em nova aba)</span></a></div>
     <div class="celular"><iframe data-src="https://tom-prototipo-de-testes.vercel.app/?modo=vitrine" title="Protótipo do Tom: conversa simulada no WhatsApp" loading="lazy"></iframe><button class="toque" type="button"><span>Toque para conversar</span></button></div>
   </div></section>
+  <section class="convite" aria-label="Contato">
+    <div class="wrap">
+      <h2>Gostou deste projeto?</h2>
+      <p>Tem uma vaga ou um projeto de design conversacional? Me chama.</p>
+      <div class="acoes"><a class="btn cheio" href="mailto:leonvrdof@gmail.com">Enviar e-mail</a><a class="btn vazio" href="https://www.linkedin.com/in/leonvrdof" target="_blank" rel="noopener">LinkedIn<span class="sr"> (abre em nova aba)</span></a><a class="btn vazio" href="https://leonvrdof.vercel.app/curriculo.pdf" target="_blank" rel="noopener">Currículo (PDF)<span class="sr"> (abre em nova aba)</span></a></div>
+    </div>
+  </section>
   <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><a href="/lia" data-ir="lia"><span aria-hidden="true">←</span> Anterior: Lia</a><a href="/drogaria" data-ir="drogaria">Próximo: Drogaria Popular<span aria-hidden="true"> →</span></a></div></nav>
 </div>
 
 <!-- DROGARIA -->
 <div class="tela" data-tela="drogaria" hidden>
   <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">Fluxo determinístico · WhatsApp · FAQ</span><h1>Desenhando uma experiência conversacional para a Drogaria Popular</h1></div>
-  <article class="wrap case-corpo"><h2 class="ch">Desafio</h2>
-<p>A farmácia Drogaria Popular nos contratou para criar um chatbot no WhatsApp para atender seus clientes.</p>
+  <article class="wrap case-corpo"><section class="resumo largo" aria-labelledby="resumo-drogaria">
+  <h2 class="ch" id="resumo-drogaria">Resumo</h2>
+  <p class="resumo-frase">Desenhei o fluxo de um chatbot no WhatsApp para a Drogaria Popular. Ele confere se a pessoa tem cadastro e responde às dúvidas frequentes, sem IA.</p>
+  <dl class="pg-ficha"><div><dt>Formato</dt><dd>Desafio de design</dd></div><div><dt>Meu papel</dt><dd>Conversation designer e UX Writer</dd></div><div><dt>Método</dt><dd>Double Diamond</dd></div><div><dt>Ferramentas</dt><dd>Figma e Hemingway App</dd></div></dl>
+  <p class="resumo-num"><strong>Em números:</strong> fluxo em 4 etapas (boas-vindas, validação do cadastro, dúvidas frequentes e finalização) e nenhuma resposta gerada por IA.</p>
+  <p class="resumo-links"><a target="_blank" rel="noopener" href="https://www.figma.com/design/TVb5pWH3tjjAR1mfWDVTxu/Drogaria-Popular?node-id=0-1">Acessar o fluxo no Figma<span class="sr"> (abre em nova aba)</span></a></p>
+</section>
+<h2 class="ch">Desafio</h2>
+<p>O desafio: criar um chatbot no WhatsApp para atender os clientes da Drogaria Popular, uma farmácia.</p>
 <p>Escopo do projeto:</p>
 <ul>
 <li>O chatbot precisa identificar se o usuário possui cadastro ou não;</li>
@@ -1081,18 +1124,24 @@ dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
 <li>Teste de usabilidade: Antes da implementação do chatbot, será necessário submetê-lo a testes de usabilidade para validar todos os fluxos criados, bem como testes A/B visando a melhoria contínua.</li>
 <li>Features futuras: Criação de novos fluxos conversacionais, como a opção de compras dentro do WhatsApp, aproveitando o desenvolvimento do fluxo de cadastro. Como também a curadoria e análises de métricas, como CSAT, NPS, taxa de transbordo entre outras.</li>
 </ul></article>
+  <section class="convite" aria-label="Contato">
+    <div class="wrap">
+      <h2>Gostou deste projeto?</h2>
+      <p>Tem uma vaga ou um projeto de design conversacional? Me chama.</p>
+      <div class="acoes"><a class="btn cheio" href="mailto:leonvrdof@gmail.com">Enviar e-mail</a><a class="btn vazio" href="https://www.linkedin.com/in/leonvrdof" target="_blank" rel="noopener">LinkedIn<span class="sr"> (abre em nova aba)</span></a><a class="btn vazio" href="https://leonvrdof.vercel.app/curriculo.pdf" target="_blank" rel="noopener">Currículo (PDF)<span class="sr"> (abre em nova aba)</span></a></div>
+    </div>
+  </section>
   <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><a href="/tom" data-ir="tom"><span aria-hidden="true">←</span> Anterior: Clínica Veterinária</a><a href="/petgram" data-ir="petgram">Próximo: Petgram<span aria-hidden="true"> →</span></a></div></nav>
 </div>
 
 <!-- PETGRAM -->
 <div class="tela" data-tela="petgram" hidden>
   <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">UX/UI · App · Cubos Academy</span><h1>Petgram</h1></div>
-  <article class="wrap case-corpo"><section class="pg-abre largo">
-  <dl class="pg-ficha">
-    <div><dt>Contexto</dt><dd>Curso de UX/UI Design, Cubos Academy</dd></div>
-    <div><dt>Meu papel</dt><dd>Gestor do projeto, da pesquisa ao teste</dd></div>
-    <div><dt>Formato</dt><dd>Projeto em grupo, com 3 designers</dd></div>
-  </dl>
+  <article class="wrap case-corpo"><section class="resumo largo" aria-labelledby="resumo-petgram">
+  <h2 class="ch" id="resumo-petgram">Resumo</h2>
+  <p class="resumo-frase">Em grupo, criamos o Petgram, um app para tutores trocarem histórias e dicas de cuidado com cães e gatos, da pesquisa ao teste de usabilidade.</p>
+  <dl class="pg-ficha"><div><dt>Contexto</dt><dd>Curso de UX/UI Design, Cubos Academy</dd></div><div><dt>Meu papel</dt><dd>Gestor do projeto, da pesquisa ao teste</dd></div><div><dt>Formato</dt><dd>Projeto em grupo, com 3 designers</dd></div></dl>
+  <p class="resumo-num"><strong>Em números:</strong> questionário com 58 pessoas, 6 entrevistas e teste no Maze com 15 pessoas e 3 tarefas.</p>
 </section>
 
 <h2 class="ch">Problema</h2>
@@ -1266,18 +1315,24 @@ dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
   </ul>
 </section>
 </article>
+  <section class="convite" aria-label="Contato">
+    <div class="wrap">
+      <h2>Gostou deste projeto?</h2>
+      <p>Tem uma vaga ou um projeto de design conversacional? Me chama.</p>
+      <div class="acoes"><a class="btn cheio" href="mailto:leonvrdof@gmail.com">Enviar e-mail</a><a class="btn vazio" href="https://www.linkedin.com/in/leonvrdof" target="_blank" rel="noopener">LinkedIn<span class="sr"> (abre em nova aba)</span></a><a class="btn vazio" href="https://leonvrdof.vercel.app/curriculo.pdf" target="_blank" rel="noopener">Currículo (PDF)<span class="sr"> (abre em nova aba)</span></a></div>
+    </div>
+  </section>
   <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><a href="/drogaria" data-ir="drogaria"><span aria-hidden="true">←</span> Anterior: Drogaria Popular</a><a href="/assai" data-ir="assai">Próximo: Redesign Assaí<span aria-hidden="true"> →</span></a></div></nav>
 </div>
 
 <!-- ASSAI -->
 <div class="tela" data-tela="assai" hidden>
   <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">UX/UI · App · Supermercado</span><h1>Redesign Assaí Atacadista</h1></div>
-  <article class="wrap case-corpo"><section class="largo">
-  <dl class="pg-ficha">
-    <div><dt>Formato</dt><dd>Projeto individual</dd></div>
-    <div><dt>Meu papel</dt><dd>UX/UI designer, da análise ao UI</dd></div>
-    <div><dt>Plataforma</dt><dd>App Android e iOS</dd></div>
-  </dl>
+  <article class="wrap case-corpo"><section class="resumo largo" aria-labelledby="resumo-assai">
+  <h2 class="ch" id="resumo-assai">Resumo</h2>
+  <p class="resumo-frase">Redesenhei o app do Assaí Atacadista para a compra acontecer dentro dele, com retirada na loja, sem depender do iFood e da Rappi.</p>
+  <dl class="pg-ficha"><div><dt>Formato</dt><dd>Projeto individual</dd></div><div><dt>Meu papel</dt><dd>UX/UI designer, da análise ao UI</dd></div><div><dt>Plataforma</dt><dd>App Android e iOS</dd></div></dl>
+  <p class="resumo-num"><strong>Em números:</strong> 4 frustrações recorrentes nas avaliações de 1 estrela, benchmark com 3 concorrentes e 8 telas redesenhadas.</p>
 </section>
 
 <h2 class="ch">Sobre o projeto</h2>
@@ -1405,6 +1460,13 @@ dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
   </ul>
 </section>
 </article>
+  <section class="convite" aria-label="Contato">
+    <div class="wrap">
+      <h2>Gostou deste projeto?</h2>
+      <p>Tem uma vaga ou um projeto de design conversacional? Me chama.</p>
+      <div class="acoes"><a class="btn cheio" href="mailto:leonvrdof@gmail.com">Enviar e-mail</a><a class="btn vazio" href="https://www.linkedin.com/in/leonvrdof" target="_blank" rel="noopener">LinkedIn<span class="sr"> (abre em nova aba)</span></a><a class="btn vazio" href="https://leonvrdof.vercel.app/curriculo.pdf" target="_blank" rel="noopener">Currículo (PDF)<span class="sr"> (abre em nova aba)</span></a></div>
+    </div>
+  </section>
   <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><a href="/petgram" data-ir="petgram"><span aria-hidden="true">←</span> Anterior: Petgram</a><a href="/" data-ir="inicio" data-alvo="projetos">Todos os projetos<span aria-hidden="true"> →</span></a></div></nav>
 </div>
 </main>
