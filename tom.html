@@ -1,0 +1,1547 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<script>window.ROTAS_LIMPAS=true</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tom, Clínica Veterinária Vila Matilde — Leonardo Fernandes</title>
+<link rel="canonical" href="https://leonvrdof.vercel.app/tom">
+<meta name="description" content="Assistente no WhatsApp da clínica: agenda consultas, envia a receita digital e tira dúvidas sobre o cuidado com o pet. Com protótipo para testar.">
+<meta property="og:title" content="Tom, Clínica Veterinária Vila Matilde — Leonardo Fernandes">
+<meta property="og:description" content="Assistente no WhatsApp da clínica: agenda consultas, envia a receita digital e tira dúvidas sobre o cuidado com o pet. Com protótipo para testar.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://leonvrdof.vercel.app/tom">
+<meta property="og:image" content="https://leonvrdof.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Leonardo Fernandes, Designer Conversacional e UX Writer. Ao lado, um celular com a conversa da Lia, assistente de viagens no WhatsApp.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F7F7F5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Montserrat:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: site de uma coluna larga (máx. 1240px), visual claro único de propósito; a pipa tricolor é o único elemento marcante */
+:root{
+  /* escala de espaço (4 em 4), raios e larguras */ --secao:clamp(64px,9vw,96px); --raio-p:8px; --raio-m:16px; --raio-g:28px; --raio-cel:44px; --texto-max:680px;
+  --ceu:#F7F7F5; --papel:#FFFFFF; --tinta:#141414; --texto:#3B3B3B; --grafite:#5E5E5E; --linha:#D6D6D2; --vermelho:#C8102E;
+  --titulo:'Big Shoulders Display','Arial Narrow',sans-serif; --corpo:'Montserrat',system-ui,sans-serif; --mono:'DM Mono',ui-monospace,monospace;
+  color-scheme:light;
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--ceu);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.55}
+a{color:var(--tinta)}a:hover{color:var(--vermelho)}
+[tabindex="-1"]:focus{outline:none}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--vermelho);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,.ch,.titulo{font-family:var(--titulo);font-weight:800;text-transform:uppercase;line-height:.95;letter-spacing:.005em;text-wrap:balance;margin:0}
+/* ponto final em forma de bola */
+.bola{display:inline-block;width:.24em;height:.24em;margin-left:.05em;vertical-align:baseline;overflow:visible}
+.bola-giro{transform-box:fill-box;transform-origin:center;transition:transform .9s cubic-bezier(.3,1.4,.5,1)}
+.nome:hover .bola-giro{transform:rotate(200deg)}
+@media (prefers-reduced-motion: reduce){.bola-giro{transition:none}.nome:hover .bola-giro{transform:none}}
+.pular{position:absolute;left:16px;top:-80px;z-index:50;background:var(--tinta);color:#fff;padding:12px 20px;border-radius:8px;font-weight:700;text-decoration:none}
+.pular:focus{top:12px;color:#fff}
+main:focus{outline:none}
+.rab-mini{opacity:0;transform-box:view-box;transform-origin:112px 178px;transform:rotate(-25deg) scaleY(.4);transition:opacity .25s ease,transform .45s cubic-bezier(.3,1.5,.5,1)}
+.marca:hover .rab-mini,.marca:focus-visible .rab-mini{opacity:1;transform:rotate(0) scaleY(1);animation:rabMini 1.4s ease-in-out .45s infinite alternate}
+@keyframes rabMini{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+@media (prefers-reduced-motion: reduce){.rab-mini{transition:opacity .2s;transform:none}.marca:hover .rab-mini,.marca:focus-visible .rab-mini{animation:none}}
+.hero{overflow-x:clip}
+.lanterna{position:relative;isolation:isolate}
+.luz{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .4s ease;background:radial-gradient(circle 260px at var(--lx,50%) var(--ly,50%),var(--luz),transparent 72%)}
+.luz.acesa{opacity:1}
+main{position:relative;z-index:1}
+:root{--luz:rgba(200,16,46,.14)}
+html[data-tema="escuro"]{--luz:rgba(240,74,94,.2)}
+@media (hover:none),(prefers-reduced-motion:reduce){.luz{display:none}}
+.marca-nome{display:inline-block;transition:opacity .3s ease,transform .3s ease}
+body.nome-no-hero .marca-nome{opacity:0;transform:translateY(6px);pointer-events:none;visibility:hidden;transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s}
+@media (prefers-reduced-motion: reduce){.marca-nome{transition:none}}
+.ponto{color:var(--vermelho)}
+.rotulo{font-family:var(--corpo);font-size:14px;font-weight:600;letter-spacing:0;color:var(--grafite)}
+
+/* topo */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--ceu)}
+header.topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ceu) 94%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid transparent}
+header.topo.rolou{border-bottom-color:var(--linha)}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
+.marca{display:flex;align-items:center;gap:12px;font-weight:800;font-size:19px;letter-spacing:-.01em;text-decoration:none;color:var(--tinta)}
+.menu{display:flex;align-items:center;gap:28px;font-weight:600;font-size:16px}
+.menu a{text-decoration:none}
+.menu a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--vermelho)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 28px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none;border:2px solid var(--tinta);cursor:pointer;font-family:inherit}
+.btn.cheio{background:var(--tinta);color:var(--ceu)}.btn.cheio:hover{background:var(--vermelho);border-color:var(--vermelho);color:#fff}
+.btn.vazio{background:transparent;color:var(--tinta)}.btn.vazio:hover{border-color:var(--vermelho);color:var(--vermelho)}
+.abrir-menu{display:none;align-items:center;gap:12px;background:none;color:var(--tinta);border:2px solid var(--tinta);border-radius:999px;min-height:48px;padding:0 20px 0 16px;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+.abrir-menu:hover{border-color:var(--vermelho);color:var(--vermelho)}
+.hamb{position:relative;width:20px;height:14px;display:inline-block}
+.hamb i{position:absolute;left:0;width:100%;height:2px;border-radius:8px;background:currentColor;transition:transform .25s ease,opacity .2s ease}
+.hamb i:nth-child(1){top:0}.hamb i:nth-child(2){top:6px}.hamb i:nth-child(3){top:12px}
+.abrir-menu[aria-expanded="true"] .hamb i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.abrir-menu[aria-expanded="true"] .hamb i:nth-child(2){opacity:0}
+.abrir-menu[aria-expanded="true"] .hamb i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.menu-extra{display:none}
+@media (max-width:1080px){
+  .abrir-menu{display:inline-flex}
+  .menu{display:none;position:fixed;left:0;right:0;top:var(--topo-h,80px);bottom:0;background:var(--ceu);flex-direction:column;align-items:stretch;gap:0;padding:8px max(20px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;border-top:1px solid var(--linha);z-index:25;counter-reset:m}
+  .menu.aberto{display:flex}
+  .menu > a:not(.btn){counter-increment:m;display:flex;align-items:baseline;gap:16px;padding:20px 0;border-bottom:1px solid var(--linha);font-family:var(--titulo);font-weight:800;text-transform:uppercase;font-size:clamp(2.2rem,9vw,3.4rem);line-height:1}
+  .menu > a:not(.btn)::before{content:"0" counter(m);font-family:var(--mono);font-size:13px;font-weight:400;color:var(--vermelho);letter-spacing:.06em}
+  .menu > a[aria-current="page"]{box-shadow:none;color:var(--vermelho)}
+  .menu .btn{margin-top:24px;min-height:56px;font-size:18px}
+  .menu-extra{display:flex;flex-direction:column;gap:8px;margin-top:28px;font-size:15px;color:var(--grafite)}
+  .menu-extra a{font-weight:700;padding:8px 0}
+  body.menu-aberto{overflow:hidden}
+}
+@media (max-width:1080px) and (prefers-reduced-motion:reduce){.hamb i{transition:none}}
+body.menu-aberto header.topo{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--ceu);border-bottom-color:var(--linha)}
+@media (max-width:900px){
+  .tela .hero{flex-wrap:wrap;padding-block:24px 64px}
+  .tela .hero .arte{order:2}
+  .tela .hero .arte svg{max-height:300px}
+}
+@media (max-width:400px){.marca svg.logo-pipa{width:52px;height:26px}.marca{font-size:15px!important}.topo .wrap{gap:8px}.abrir-menu{padding:0 12px 0 12px!important}}
+@media (max-width:440px){
+  .marca{font-size:16px;gap:8px;white-space:nowrap}
+  .abrir-menu{padding:0 16px 0 12px;gap:8px}
+}
+
+/* Tema escuro: escolhido no botão do topo ou pelo sistema */
+html[data-tema="escuro"]{--ceu:#121212;--papel:#1C1C1C;--tinta:#F2F2EE;--texto:#D6D6D2;--grafite:#A8A8A2;--linha:#3A3A38;--vermelho:#F04A5E;--aviso:#3A3220;color-scheme:dark}
+html[data-tema="escuro"] .faixa-proto,html[data-tema="escuro"] .as-flow li.fim,html[data-tema="escuro"] .as-flow li.fim::before{color:#121212}
+html[data-tema="escuro"] .btn.cheio:hover{color:#121212}
+html[data-tema="escuro"] .as-tabela td:nth-child(2){background:rgba(240,74,94,.08)}
+html[data-tema="escuro"] .as-tabela td.nao{color:#FF7A88}
+html[data-tema="escuro"] .celular .msgs{color:#3B3B3B}
+html[data-tema="escuro"] .as-d small{color:#8E0B20}
+html[data-tema="escuro"] .as-d .rotulo{color:#5E5E5E}
+html[data-tema="escuro"] .as-d p{color:#3B3B3B!important}
+html[data-tema="escuro"] .as-reviews blockquote p{color:#3B3B3B!important}
+html[data-tema="escuro"] .as-reviews li::before{color:#9A6B00}
+html[data-tema="escuro"] .card:hover{box-shadow:0 14px 30px rgba(0,0,0,.5)}
+html[data-tema="escuro"] .copiar{border-color:var(--grafite)}
+.tema{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;border:2px solid var(--tinta);background:none;color:var(--tinta);cursor:pointer;flex:none;padding:0}
+.tema:hover{border-color:var(--vermelho);color:var(--vermelho)}
+.tema svg{width:22px;height:22px}
+.tema .lua{display:none}
+html[data-tema="escuro"] .tema .sol{display:none}
+html[data-tema="escuro"] .tema .lua{display:block}
+.tema-seg{display:inline-flex;border:2px solid var(--tinta);border-radius:999px;padding:3px;gap:2px;flex:none}
+.tema-seg button{border:0;background:none;color:var(--tinta);font:inherit;font-weight:700;font-size:14px;min-height:38px;padding:0 16px;border-radius:999px;cursor:pointer}
+.tema-seg button[aria-checked="true"]{background:var(--tinta);color:var(--ceu)}
+.tema-seg button:not([aria-checked="true"]):hover{color:var(--vermelho)}
+.tema-seg-menu{display:none!important}
+.tema{display:none}
+@media (max-width:1080px){.topo-acoes .tema-seg{display:none}.topo-acoes .tema{display:inline-flex}}
+/* topo no celular: nada passa da borda da tela */
+.marca{min-width:0;flex:0 1 auto;min-height:44px}
+.marca svg{flex:none}
+.marca-nome{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.topo-acoes{flex:none}
+.abrir-menu{white-space:nowrap;justify-content:center;min-width:7.4em;flex:none}
+@media (max-width:430px){.marca-nome{display:none}.topo-acoes{gap:8px}.abrir-menu{min-width:6.6em}}
+.topo-acoes{display:flex;align-items:center;gap:12px}
+.contato-topo{display:none}
+@media (min-width:1081px){
+  .topo .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+  .topo .wrap > .marca{justify-self:start}
+  .menu{justify-self:center;grid-column:2;grid-row:1}
+  .menu > .btn{display:none}
+  .topo-acoes{justify-self:end;grid-column:3;grid-row:1}
+  .contato-topo{display:inline-flex}
+}
+.marca svg{color:var(--tinta)}
+/* telas */
+.tela[hidden]{display:none!important}
+section.bloco{padding-block:var(--secao)}
+.hero{display:flex;flex-wrap:wrap-reverse;align-items:center;gap:24px;padding-block:40px var(--secao)}
+.hero .txt{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.hero h1{font-size:clamp(2.4rem,12vw,9rem);overflow-wrap:anywhere}
+.hero p{margin:0;max-width:560px;font-size:1.25rem;color:var(--texto)}
+.acoes{display:flex;flex-wrap:wrap;gap:16px}
+.hero .arte{flex:1 1 260px;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;margin:0}
+.legenda-pipa{max-width:300px;font-size:14px;line-height:1.5;color:var(--grafite);text-align:center;display:flex;flex-direction:column;gap:8px}
+.legenda-pipa .dica{font-size:14px;font-weight:600;color:var(--vermelho)}
+@media (hover:none){.legenda-pipa .dica{display:none}}
+@media (hover:none),(prefers-reduced-motion:reduce){.legenda-pipa .dica{display:none}}
+.rab{transform-box:view-box;transform-origin:112px 178px;animation:rab 2.6s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-4deg) translateY(0)}to{transform:rotate(4deg) translateY(-10px)}}
+@keyframes rab{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+@media (prefers-reduced-motion: reduce){.sway,.rab{animation:none}}
+
+.cab{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px}
+.cab h2{font-size:clamp(2.6rem,5vw,4rem)}
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px}
+.card{background:var(--papel);border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--tinta);transition:transform .2s,box-shadow .2s;min-width:0}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(20,20,20,.08);color:var(--tinta)}
+@media (prefers-reduced-motion: reduce){.card{transition:none}.card:hover{transform:none}}
+.card h4{margin:0;font-size:1.35rem;line-height:1.25;font-weight:800}
+.card p{margin:0;color:var(--texto);font-size:16px}
+.card .ir{margin-top:auto;font-weight:700;font-size:15px}
+.card.menor{border:1px solid var(--linha);background:transparent}
+.sub{margin:48px 0 20px;font-size:15px;font-weight:700}
+/* ===== Cards com capa: a conversa (design conversacional) e a tela do app (product design) ===== */
+.card{position:relative;padding:0 0 28px;overflow:hidden;border:2px solid var(--tinta);transition:transform .2s,box-shadow .2s}
+.card>:not(.capa):not(.selo){margin-inline:28px}
+@media (max-width:600px){.card>:not(.capa):not(.selo){margin-inline:20px}}
+.card.menor{border:2px solid var(--tinta);background:var(--papel)}
+.card:hover,.card:focus-visible{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--tinta)}
+html[data-tema="escuro"] .card:hover,html[data-tema="escuro"] .card:focus-visible{box-shadow:8px 8px 0 var(--tinta)}
+.fato{font-size:14px;color:var(--grafite);margin-top:auto;padding-top:8px}
+.fato + .ir{margin-top:8px}
+.card .ir{display:inline-flex;gap:8px;align-items:center}
+.card:hover .ir span[aria-hidden],.card:focus-visible .ir span[aria-hidden]{transform:translateX(4px)}
+.card .ir span[aria-hidden]{transition:transform .2s}
+.capa{height:236px;margin-bottom:8px;position:relative;overflow:hidden;border-bottom:2px solid var(--tinta)}
+.selo{position:absolute;top:58px;left:14px;z-index:2;background:var(--vermelho);color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px}
+html[data-tema="escuro"] .selo{color:#121212}
+/* conversa */
+.capa-zap{background:#EFEAE2;display:flex;flex-direction:column;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+html[data-tema="escuro"] .capa-zap{background:#0B141A}
+.zap-topo{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#F6F6F6;color:#111;font-size:13px}
+html[data-tema="escuro"] .zap-topo{background:#1F2C33;color:#E9EDEF}
+.zap-topo i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-style:normal;font-size:13px;flex:none}
+.zap-topo b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zap-msgs{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px 12px}
+.bl{max-width:82%;padding:8px 12px;border-radius:8px;font-size:13px;line-height:1.35;color:#111;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.bl.eu{align-self:flex-end;background:#D9FDD3}
+html[data-tema="escuro"] .bl{background:#202C33;color:#E9EDEF}
+html[data-tema="escuro"] .bl.eu{background:#005C4B}
+.bl-botoes{display:flex;gap:8px;flex-wrap:wrap}
+.bl-botoes span{font-size:12px;color:#0A7CFF;background:#fff;border-radius:8px;padding:4px 12px}
+html[data-tema="escuro"] .bl-botoes span{background:#202C33;color:#53BDEB}
+.digitando{display:none;align-self:flex-start;gap:4px;align-items:center;padding:8px 12px}
+.digitando i{width:6px;height:6px;border-radius:50%;background:#8696A0;animation:pula 1s infinite}
+.digitando i:nth-child(2){animation-delay:.15s}.digitando i:nth-child(3){animation-delay:.3s}
+@keyframes pula{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-3px);opacity:1}}
+/* com mouse: o último balão chega quando a pessoa passa o mouse ou foca o card */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .capa-zap .ultimo,.capa-zap .bl-botoes{display:none}
+  .capa-zap .digitando{display:flex}
+  .capa-zap .digitando{max-height:40px;overflow:hidden}
+  .card:hover .capa-zap .digitando,.card:focus-visible .capa-zap .digitando{animation:some .15s .7s forwards}
+  .card:hover .capa-zap .ultimo,.card:focus-visible .capa-zap .ultimo{display:block;animation:chega .25s .7s both}
+  .card:hover .capa-zap .bl-botoes,.card:focus-visible .capa-zap .bl-botoes{display:flex;animation:chega .25s 1s both}
+}
+@keyframes some{to{max-height:0;padding-top:0;padding-bottom:0;opacity:0;margin-top:-8px}}
+@keyframes chega{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* app */
+.capa-app{display:flex;justify-content:center;align-items:flex-start;padding-top:24px}
+.capa-pet{background:#E8EFF7}.capa-ass{background:#FFE58A}
+html[data-tema="escuro"] .capa-pet{background:#9CC3EE}html[data-tema="escuro"] .capa-ass{background:#F4D35E}
+.capa-app img{width:150px;height:auto;border:5px solid #141414;border-radius:28px;transform:rotate(-6deg) translateY(4px);transition:transform .3s;box-shadow:0 18px 30px -16px rgba(0,0,0,.5)}
+.card:hover .capa-app img,.card:focus-visible .capa-app img{transform:rotate(-3deg) translateY(-8px)}
+@media (prefers-reduced-motion: reduce){.card,.card:hover,.card:focus-visible{transform:none}.capa-app img,.card:hover .capa-app img{transition:none;transform:rotate(-6deg)}}
+.grupo{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin:8px 0 20px;padding-top:20px;border-top:2px solid var(--tinta)}
+.grade + .grupo{margin-top:56px}
+.grupo span{font-family:var(--titulo);font-weight:800;text-transform:uppercase;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1}
+.grupo small{font-size:15px;color:var(--grafite)}
+
+.linha-tempo{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;border-top:2px solid var(--tinta)}
+.linha-tempo li{position:relative;padding-top:28px;display:flex;flex-direction:column;gap:8px}
+.linha-tempo li::before{content:"";position:absolute;top:-9px;left:0;width:16px;height:16px;border-radius:50%;background:var(--tinta)}
+.linha-tempo li.gol::before{background:var(--vermelho);width:22px;height:22px;top:-12px;left:-3px}
+.linha-tempo strong{font-size:19px;line-height:1.3}
+.linha-tempo span{color:var(--texto);font-size:16px}
+@media (max-width:900px){
+  .linha-tempo{grid-template-columns:1fr;gap:28px;border-top:0;border-left:2px solid var(--tinta);margin-left:8px;padding:4px 0 4px 0}
+  .linha-tempo li{padding:0 0 0 28px}
+  .linha-tempo li::before{top:4px;left:-9px}
+  .linha-tempo li.gol::before{top:1px;left:-12px}
+  .linha-tempo li:last-child{padding-bottom:0}
+}
+
+.contato{background:var(--tinta);color:var(--ceu)}
+.contato h2{font-size:clamp(3rem,7vw,5.5rem)}
+.contato p{max-width:600px;font-size:1.2rem;color:color-mix(in srgb,var(--ceu) 85%,var(--tinta))}
+.contato .btn.cheio{background:var(--ceu);color:var(--tinta);border-color:var(--ceu)}
+.contato .btn.vazio{color:var(--ceu);border-color:var(--ceu)}
+.email{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-family:var(--mono);font-size:17px}
+.copiar{background:none;border:1px solid #8A8A86;color:var(--ceu);border-radius:999px;min-height:44px;padding:0 20px;font:inherit;font-size:15px;cursor:pointer}
+footer.rodape{background:var(--tinta);color:color-mix(in srgb,var(--ceu) 78%,var(--tinta));border-top:1px solid var(--linha)}
+footer.rodape .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding-block:24px;font-size:14px}
+footer.rodape .feito{display:inline-flex;align-items:center;gap:24px}
+
+/* sobre */
+.sobre-topo{display:flex;flex-wrap:wrap;gap:48px;align-items:center;padding-block:40px 72px}
+.foto-sobre{flex:1 1 300px;max-width:420px;margin:0;display:flex;flex-direction:column;gap:12px}
+.foto-sobre img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:28px}
+.foto-sobre figcaption{font-size:15px;line-height:1.5;color:var(--grafite)}
+.foto{flex:1 1 300px;max-width:420px;aspect-ratio:1;border-radius:28px;background:var(--papel);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;color:var(--grafite);text-align:center;padding:20px}
+.sobre-topo .txt{flex:999 1 460px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.sobre-topo h1{font-size:clamp(3rem,12vw,6rem)}
+.sobre-topo p{margin:0;max-width:640px;font-size:1.2rem;color:var(--texto)}
+dl.dados{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 24px;font-size:16px}
+dl.dados dt{color:var(--grafite)}dl.dados dd{margin:0}
+.principios{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px}
+.principios div{background:var(--papel);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:8px}
+.principios strong{font-size:19px;line-height:1.3}
+.principios span{color:var(--texto);font-size:16px}
+.sec-t{font-size:clamp(2.2rem,4vw,3.2rem);margin-bottom:20px}
+details.ab{border-top:1px solid var(--linha)}
+.lista-ab{border-bottom:1px solid var(--linha)}
+details.ab summary{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) auto 26px;gap:12px 20px;align-items:center;padding:24px 0;cursor:pointer}
+details.ab summary::-webkit-details-marker{display:none}
+details.ab summary.num{grid-template-columns:44px minmax(0,1fr) auto 26px}
+details.ab .t{display:flex;flex-direction:column;gap:4px;min-width:0}
+details.ab .t strong{font-size:19px;line-height:1.3}
+details.ab .t span{color:var(--texto);font-size:16px}
+details.ab .data{font-size:14px;color:var(--grafite);white-space:nowrap}
+details.ab .seta{transition:transform .2s}
+details.ab[open] .seta{transform:rotate(180deg)}
+@media (prefers-reduced-motion: reduce){details.ab .seta{transition:none}}
+.painel{padding:0 0 28px;color:var(--texto);font-size:16px;display:flex;flex-direction:column;gap:16px}
+.painel.recuo{padding-left:64px}
+.painel ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.colunas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px}
+.colunas b{display:block;color:var(--tinta);margin-bottom:8px;font-size:15px}
+.link-cert{align-self:flex-start;font-weight:700;text-decoration:none;box-shadow:inset 0 -2px 0 var(--vermelho)}
+dl.ficha{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px 28px;background:var(--papel);border-radius:28px;padding:28px 32px}
+dl.ficha dt{color:var(--grafite)}dl.ficha dd{margin:0}
+@media (max-width:640px){
+  details.ab summary,details.ab summary.num{grid-template-columns:minmax(0,1fr) 26px}
+  details.ab summary .data{grid-column:1;grid-row:2}
+  details.ab summary.num>.n{display:none}
+  .painel.recuo{padding-left:0}
+  dl.ficha,dl.dados{grid-template-columns:1fr;gap:2px}
+  dl.ficha dd,dl.dados dd{margin-bottom:12px}
+}
+
+/* cases */
+.case-topo{padding-block:32px 40px;display:flex;flex-direction:column;gap:20px}
+.case-topo h1{max-width:900px;overflow-wrap:anywhere}
+.voltar{align-self:flex-start;font-weight:700;text-decoration:none;font-size:16px;min-height:44px;display:inline-flex;align-items:center}
+.case-topo h1{font-size:clamp(2.8rem,6.5vw,5.2rem)}
+.case-corpo{padding-bottom:64px}
+.case-corpo>*{max-width:var(--texto-max)}
+.case-corpo p,.case-corpo li{color:var(--texto)}
+.case-corpo h2.ch{font-size:clamp(1.9rem,3.6vw,2.6rem);margin:56px 0 16px;color:var(--tinta)}
+.case-corpo h3{font-size:19px;margin:32px 0 12px}
+.case-corpo a{font-weight:700;text-decoration:none;box-shadow:inset 0 -2px 0 var(--vermelho)}
+.case-corpo blockquote{margin:28px 0;padding:4px 0 4px 20px;border-left:4px solid var(--vermelho);font-weight:600}
+.case-corpo blockquote p{margin:0}
+.case-corpo ul,.case-corpo ol{padding-left:24px;display:flex;flex-direction:column;gap:8px}
+/* Petgram: blocos visuais */
+.case-corpo>.largo{max-width:none}
+.pg-ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:0 0 24px;padding:24px;background:var(--papel);border-radius:28px}
+.pg-ficha dt{font-size:14px;font-weight:600;color:var(--grafite)}
+.pg-ficha dd{margin:4px 0 0;font-weight:600}
+.pg-pergunta,.pg-destaque{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:700;line-height:1.3;color:var(--tinta);border-left:5px solid var(--vermelho);padding-left:20px}
+.pg-chips{list-style:none;padding:0!important;display:flex!important;flex-direction:row!important;flex-wrap:wrap;gap:12px!important;counter-reset:c}
+.pg-chips li{counter-increment:c;background:var(--papel);border:1px solid var(--linha);border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;color:var(--tinta)}
+.pg-chips li::before{content:counter(c,decimal-leading-zero);font-family:var(--mono);color:var(--vermelho);margin-right:8px;font-weight:500}
+.pg-chips-claros li::before{content:none}
+.pg-card{background:var(--papel);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.pg-card p{margin:0}
+.pg-ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px}
+.pg-larga{grid-column:1/-1}
+.pg-formula{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--tinta)!important}
+.pg-formula b{color:var(--vermelho)}
+.pg-formula strong{background:#195CAA;color:#fff;padding:4px 16px;border-radius:16px}
+.pg-simbolo{width:96px;height:96px;border-radius:28px;background:#195CAA;color:#FFAA9D;display:grid;place-items:center;font-size:64px;font-weight:800;font-family:var(--corpo)}
+.pg-diamante{list-style:none;padding:0!important;display:grid!important;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0!important;border:2px solid var(--tinta);border-radius:28px;overflow:hidden;counter-reset:d}
+.pg-diamante li{counter-increment:d;padding:24px;display:flex;flex-direction:column;gap:8px;background:var(--papel);border-right:2px solid var(--tinta)}
+.pg-diamante li:last-child{border-right:0}
+.pg-diamante li::before{content:"0" counter(d);font-family:var(--mono);color:var(--vermelho)}
+.pg-diamante strong{font-family:var(--titulo);text-transform:uppercase;font-size:28px;line-height:1}
+.pg-diamante span{font-size:15px;color:var(--grafite)}
+@media (max-width:820px){.pg-diamante li{border-right:0;border-bottom:2px solid var(--tinta)}.pg-diamante li:last-child{border-bottom:0}}
+.pg-mais{margin:20px 0;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.pg-mais summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:700}
+.pg-mais summary::after{content:"+";margin-left:auto;font-size:24px;color:var(--vermelho)}
+.pg-mais[open] summary::after{content:"−"}
+.pg-numeros{list-style:none;padding:0!important;display:grid!important;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px!important}
+.pg-numeros li{background:var(--papel);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.pg-numeros strong{font-family:var(--titulo);font-size:clamp(40px,3.6vw,52px);line-height:.9;color:var(--vermelho)}
+.pg-numeros .pg-palavra strong{font-size:clamp(30px,2.6vw,40px)}
+.pg-numeros span{font-size:15px}
+.pg-csd{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.pg-csd section{background:var(--papel);border-radius:28px;padding:24px;border-top:6px solid var(--tinta)}
+.pg-csd section:nth-child(2){border-top-color:var(--grafite)}
+.pg-csd section:nth-child(3){border-top-color:var(--vermelho)}
+.pg-csd h3{margin:0 0 16px!important;display:flex;align-items:center;gap:12px;font-size:20px}
+.pg-letra{font-family:var(--titulo);font-size:44px;line-height:1;color:var(--vermelho)}
+.pg-csd ul{list-style:none;padding:0!important;gap:12px!important}
+.pg-csd li{background:var(--ceu);border-radius:16px;padding:12px 16px;font-size:15px}
+.pg-amostra{display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 8px}
+.pg-amostra div{flex:1 1 220px;background:var(--tinta);color:var(--ceu);border-radius:28px;padding:24px;display:flex;align-items:baseline;gap:16px}
+.pg-amostra strong{font-family:var(--titulo);font-size:72px;line-height:.9}
+.pg-barras{list-style:none;padding:0!important;gap:16px!important}
+.pg-barras li{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 56px;align-items:center;gap:16px}
+.pg-trilho{height:14px;background:var(--linha);border-radius:999px;overflow:hidden}
+.pg-trilho i{display:block;height:100%;background:var(--vermelho);border-radius:999px}
+.pg-barras strong{font-family:var(--titulo);font-size:28px;text-align:right}
+@media (max-width:640px){.pg-barras li{grid-template-columns:1fr 56px}.pg-barras .pg-rot{grid-column:1/-1}}
+.pg-falas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pg-falas blockquote{margin:0!important;background:var(--papel);border-radius:28px;padding:20px 24px!important}
+.pg-persona{background:var(--papel);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:20px}
+.pg-quem{display:flex;gap:20px;align-items:center}
+.pg-quem h3{margin:0!important;font-family:var(--titulo);text-transform:uppercase;font-size:40px;line-height:1}
+.pg-quem p{margin:8px 0 0}
+.pg-foto{flex:none;width:88px;height:88px;border-radius:50%;background:var(--tinta);color:var(--ceu);display:grid;place-items:center;font-family:var(--titulo);font-size:44px}
+.pg-persona blockquote{margin:0!important}
+.pg-colunas{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.pg-colunas h4{margin:0 0 12px;font-size:17px}
+.pg-canvas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pg-canvas div{background:var(--papel);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.pg-canvas p{margin:0;font-weight:600;color:var(--tinta)}
+.pg-ideias{list-style:none;padding:0!important;display:grid!important;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px!important}
+.pg-ideias li{background:var(--papel);border-radius:16px;padding:20px;font-weight:600;border-left:4px solid var(--vermelho)}
+.pg-moscow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.pg-moscow section{background:var(--papel);border-radius:28px;padding:24px}
+.pg-moscow section.m1{background:var(--tinta);color:var(--ceu)}
+.pg-moscow section.m1 li{color:var(--ceu)}
+.pg-moscow h3{margin:0 0 12px!important;font-size:19px;display:flex;flex-direction:column;gap:2px}
+.pg-moscow h3 span{font-size:14px;font-weight:400;opacity:.8}
+.pg-moscow ul{font-size:15px;gap:8px!important}
+.pg-style{display:flex;flex-wrap:wrap;gap:16px;align-items:stretch}
+.pg-cores{list-style:none;padding:0!important;margin:0;display:flex!important;flex-direction:row!important;flex-wrap:wrap;gap:12px!important;flex:2 1 400px}
+.pg-cores li{flex:1 1 120px;background:var(--papel);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600}
+.pg-cores i{display:block;height:64px;border-radius:8px;border:1px solid var(--linha)}
+.pg-cores code{font-family:var(--mono);color:var(--grafite);font-size:13px}
+.pg-tipo{flex:1 1 220px;background:var(--papel);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.pg-tipo p{margin:0}
+.pg-cv{display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);align-items:stretch}
+.pg-cv>section{background:var(--papel);padding:28px;display:flex;flex-direction:column;gap:20px}
+.pg-cv-valor{border-radius:28px;border:2px solid var(--tinta)}
+.pg-cv-cliente{border-radius:44px;border:2px dashed var(--tinta)}
+.pg-cv h3{margin:0!important;font-family:var(--titulo);text-transform:uppercase;font-size:30px;line-height:1}
+.pg-cv h4{margin:0 0 8px;font-size:15px;color:var(--vermelho);font-weight:700}
+.pg-cv ul{list-style:none;padding:0!important;display:flex!important;flex-direction:row!important;flex-wrap:wrap;gap:8px!important}
+.pg-cv li{background:var(--ceu);border-radius:8px;padding:8px 12px;font-size:14px;line-height:1.35}
+.pg-cv-seta{display:grid;place-items:center;font-size:30px;color:var(--vermelho)}
+@media (max-width:900px){.pg-cv{grid-template-columns:1fr}.pg-cv-seta{height:48px;transform:rotate(90deg)}}
+.pg-wf{list-style:none;padding:0!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px!important}
+@media (max-width:900px){.pg-wf{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important}}
+.pg-wf li{min-width:0}
+.pg-wf li{display:flex;flex-direction:column;gap:8px;align-items:center;font-size:14px;font-weight:600}
+.pg-tel{box-sizing:border-box;min-width:0;width:100%;max-width:220px;aspect-ratio:9/16;background:#fff;border:2px solid #9a9a9a;border-radius:28px;padding:16px 12px;display:flex;flex-direction:column;gap:4px;overflow:hidden;font-size:9px;color:#555;font-family:var(--corpo)}
+.pg-tel b{font-size:9px;color:#333}
+.w-logo{align-self:center;width:44%;aspect-ratio:1;background:#ddd;display:grid;place-items:center;font-weight:700;font-size:11px;margin-bottom:8px}
+.w-logo.p{width:26%;margin-bottom:2px}
+.w-campo{height:14px;background:#e3e3e3;flex:none}
+.w-campo.baixo{margin-top:auto;border-radius:8px}
+.w-btn{background:#d0d0d0;text-align:center;padding:8px;font-weight:700;margin-top:8px}
+.w-btn.claro{margin-top:auto}
+.w-link{align-self:center;background:#e3e3e3;padding:2px 8px;font-size:8px}
+.w-redes{display:flex;gap:8px;justify-content:center}.w-redes i{width:12px;height:12px;border-radius:50%;background:#ccc}
+.w-abas{display:flex;justify-content:space-between;border-bottom:1px solid #ccc;padding-bottom:3px}.w-abas i{font-style:normal}.w-abas i.on{font-weight:700;color:#222;text-decoration:underline}
+.w-user{display:flex;align-items:center;gap:4px}.w-user i{width:12px;height:12px;border-radius:50%;background:#ccc}
+.w-x{flex:none;height:44px;background:#e6e6e6 linear-gradient(to top right,transparent calc(50% - .5px),#aaa,transparent calc(50% + .5px)),linear-gradient(to top left,transparent calc(50% - .5px),#aaa,transparent calc(50% + .5px));border:1px solid #aaa}
+.w-x.g{height:90px}
+.w-par{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.w-titulo{align-self:center;background:#ddd;padding:4px 12px;font-weight:700;font-size:11px;color:#333;margin:4px 0}
+.w-pets{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 16px}.w-pets i{aspect-ratio:1;border-radius:50%;background:#ddd;border:1px solid #aaa}
+.w-perfil{display:flex;gap:8px;align-items:center;border-bottom:1px solid #ccc;padding-bottom:8px;margin-bottom:8px}.w-perfil i{width:34%;aspect-ratio:1;border-radius:50%;background:#ddd;flex:none}.w-perfil span{display:block;font-size:8px}
+.w-bloco{background:#ddd;padding:16px 4px;text-align:center;margin:3px 8px;font-size:10px;color:#333}
+.w-topo{display:flex;align-items:center;gap:4px;font-weight:700;color:#333;border-bottom:1px solid #ccc;padding-bottom:4px}.w-topo i{width:12px;height:12px;border-radius:50%;background:#ccc}
+.w-msg{display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid #eee}.w-msg i{width:14px;height:14px;border-radius:50%;background:#ccc;flex:none}.w-msg span{height:6px;background:#ddd;flex:1}
+.w-dia{align-self:center;font-weight:700}
+.w-bal{height:12px;width:50%;background:#ddd}.w-bal.d{align-self:flex-end;background:#c9c9c9}
+.pg-numeros .pg-fonte{margin-top:auto;font-size:14px;font-weight:600;min-height:44px;display:inline-flex;align-items:flex-end;color:var(--grafite);box-shadow:none;text-decoration:underline;text-underline-offset:3px;padding-top:8px}
+.pg-numeros .pg-fonte:hover{color:var(--vermelho)}
+.pg-nota{font-size:14px;color:var(--grafite)!important}
+.pg-fontes{margin-top:24px;border-top:1px solid var(--linha);padding-top:8px}
+.pg-fontes>*{max-width:760px}
+.pg-fontes h2.ch{font-size:clamp(1.6rem,3vw,2.2rem)!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.w-teclado{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:auto}.w-teclado i{height:16px;background:#e3e3e3}
+.w-lista{display:flex;flex-direction:column;gap:2px}
+.as-reviews{list-style:none;padding:0!important;display:grid!important;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px!important}
+.as-reviews li{background:var(--tinta);color:var(--ceu);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.as-reviews li::before{content:"★☆☆☆☆" / "Avaliação de 1 estrela";letter-spacing:3px;color:#F5B400;font-size:15px}
+.as-reviews strong{font-size:18px;line-height:1.25}
+.as-reviews blockquote{margin:0!important;padding:0 0 0 16px!important;border-left:3px solid var(--vermelho)!important;font-weight:400!important}
+.as-reviews blockquote p{color:#E2E2DE!important;font-size:15px}
+.as-cenarios{list-style:none;padding:0!important;display:grid!important;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.as-cen{background:var(--papel);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:8px;border-top:6px solid var(--linha)}
+.as-cen:nth-child(2){border-top-color:var(--grafite)}.as-cen.forte{border-top-color:var(--vermelho)}
+.as-cen p{margin:0;font-size:15px}
+.as-cen strong{font-family:var(--titulo);font-size:44px;line-height:1;color:var(--vermelho)}
+.as-perda{font-size:14px;color:var(--grafite)}
+.as-mercado{display:flex;flex-wrap:wrap;align-items:stretch;gap:16px}
+.as-mercado>div:not(.as-seta){flex:1 1 220px;background:var(--papel);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.as-mercado>div:last-child{background:var(--tinta);color:var(--ceu)}
+.as-mercado strong{font-family:var(--titulo);font-size:52px;line-height:1}
+.as-seta{display:grid;place-items:center;font-size:36px;color:var(--vermelho)}
+@media (max-width:640px){.as-seta{width:100%;transform:rotate(90deg);height:36px}}
+.as-antes{list-style:none;padding:0!important;gap:16px!important}
+.as-antes li{display:grid;grid-template-columns:1fr 1fr;border-radius:28px;overflow:hidden;border:2px solid var(--tinta)}
+.as-antes li>div{padding:24px;display:flex;flex-direction:column;gap:8px}
+.as-a{background:var(--papel)}.as-d{background:var(--tinta);color:var(--ceu)}
+.as-d .rotulo{color:#BDBDB8}.as-d p{color:#E2E2DE!important}
+.as-antes strong{font-size:19px;line-height:1.25}
+.as-antes p{margin:0;font-size:15px}
+.as-antes small{font-size:14px;color:var(--vermelho);margin-top:auto}
+.as-d small{color:#FF8A9B}
+@media (max-width:640px){.as-antes li{grid-template-columns:1fr}}
+.as-tabela{overflow-x:auto;background:var(--papel);border-radius:28px;padding:8px}
+.as-tabela table{width:100%;border-collapse:collapse;min-width:560px;font-size:15px}
+.as-tabela th,.as-tabela td{padding:16px 16px;text-align:left;border-bottom:1px solid var(--linha)}
+.as-tabela thead th{font-size:14px;color:var(--grafite);font-weight:700}
+.as-tabela tbody tr:last-child th,.as-tabela tbody tr:last-child td{border-bottom:0}
+.as-tabela td::before{content:"✓ ";color:#1E7B3C;font-weight:700}
+.as-tabela td.nao{color:var(--vermelho);font-weight:700}.as-tabela td.nao::before{content:"✕ ";color:var(--vermelho)}
+.as-tabela td:nth-child(2){background:#FBEFF1}
+.as-flow{list-style:none;padding:0!important;display:flex!important;flex-direction:row!important;flex-wrap:wrap;gap:12px!important;counter-reset:f}
+.as-flow li{counter-increment:f;flex:1 1 180px;background:var(--papel);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:4px;position:relative}
+.as-flow li::before{content:counter(f,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--vermelho)}
+.as-flow li span{font-size:14px;color:var(--grafite)}
+.as-flow li.fim{background:var(--vermelho);color:#fff}.as-flow li.fim::before{color:#fff}
+.pg-tarefas{list-style:none;padding:0!important;display:grid!important;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px!important}
+.pg-tarefas li{background:var(--papel);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.pg-tarefas strong{font-size:18px;line-height:1.3}
+.pg-tarefas p{margin:0;font-size:15px}
+.pg-tarefas b{color:var(--vermelho)}
+
+figure.ph{margin:32px 0;border-radius:28px;background:var(--papel);border:2px dashed var(--linha);min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px;text-align:center}
+figure.ph div{font-weight:700}
+figure.ph figcaption{font-size:14px;color:var(--grafite)}
+.converse{background:var(--papel)}
+.converse .wrap{display:flex;flex-wrap:wrap;gap:48px;align-items:center;padding-block:var(--secao)}
+.converse .txt{flex:999 1 400px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.converse h2{font-size:clamp(2.4rem,5vw,3.8rem)}
+.converse p{margin:0;color:var(--texto);max-width:520px}
+.converse .btn{align-self:flex-start}
+@media (max-width:600px){.converse .btn{align-self:stretch}}
+.aviso{font-size:15px;background:var(--aviso,#FFF6E0);border-radius:16px;padding:12px 16px;color:var(--tinta)}
+.celular{flex:1 1 300px;max-width:350px;height:min(700px,86vh);min-height:560px;border:10px solid var(--tinta);border-radius:44px;background:#ECE5DD;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.45)}
+.celular{position:relative}
+.celular iframe{display:block;width:100%;height:100%;border:0}
+.toque{display:none}
+@media (hover:none){.toque{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:0 16px 96px;border:0;background:linear-gradient(to bottom,transparent 45%,rgba(0,0,0,.35));color:#fff;font:inherit;cursor:pointer}
+.toque span{background:var(--tinta);color:var(--ceu);border-radius:999px;padding:12px 20px;font-weight:700;font-size:16px;min-height:44px;display:inline-flex;align-items:center}}
+.celular .barra{background:#0B6E4F;color:#fff;padding:16px 16px;font-weight:700;font-size:15px}
+.celular .msgs{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;justify-content:center;align-items:center;text-align:center;font-size:14px;color:var(--texto)}
+.proximo{border-top:1px solid var(--linha)}
+.proximo .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:28px}
+.proximo a{font-weight:700;text-decoration:none}
+
+.as-flow li.fim span{color:#fff}
+html[data-tema="escuro"] .as-flow li.fim span,html[data-tema="escuro"] .j-fase:last-child .j-num{color:#121212}
+.pg-quem>div{min-width:0}.pg-quem h3{overflow-wrap:anywhere}
+@media (max-width:400px){.pg-quem h3{font-size:32px}}
+a[data-scroll]{display:inline-flex;align-items:center;min-height:44px}
+.ab a[target="_blank"]{display:inline-flex;align-items:center;min-height:44px}
+/* modo escuro: contorno claro na pipa pequena do topo, para a face preta não sumir no fundo */
+html[data-tema="escuro"] .marca .logo-pipa polygon{stroke:var(--tinta);stroke-width:7;stroke-linejoin:round;paint-order:stroke}
+/* imagens dos cases */
+.fig{margin:32px 0;display:flex;flex-direction:column;gap:12px}
+.fig-img{border-radius:16px;overflow:hidden;background:var(--papel);position:relative}
+.fig img{display:block;width:100%;height:auto}
+.fig figcaption{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;font-size:14px;color:var(--grafite)}
+.fig-alta .fig-img{max-height:620px}
+.fig-alta .fig-img::after{content:"";position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(to bottom,transparent,var(--ceu))}
+.fig-larga{max-width:900px!important}
+.ampliar{font:inherit;font-weight:700;font-size:15px;color:var(--tinta);background:var(--papel);border:1px solid var(--linha);border-radius:999px;min-height:44px;padding:0 20px;cursor:pointer}
+.ampliar:hover{border-color:var(--vermelho);color:var(--vermelho)}
+.maze{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+.maze .fig{margin:0}.maze .maze-1{grid-column:1/-1}
+@media (max-width:700px){.maze{grid-template-columns:1fr}}
+dialog.lupa{width:min(1100px,96vw);max-width:none;max-height:92vh;padding:0;border:0;border-radius:16px;background:var(--papel);color:var(--tinta);overflow:auto}
+dialog.lupa::backdrop{background:rgba(0,0,0,.75)}
+.lupa-topo{position:sticky;top:0;left:0;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 12px 12px 20px;background:var(--papel);border-bottom:1px solid var(--linha);font-size:14px;color:var(--grafite)}
+.lupa-corpo{padding:16px;overflow:auto}
+.lupa-corpo img{display:block;max-width:none;margin:0 auto;border-radius:8px}
+/* mapa de empatia (Lia) */
+.emp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+.emp-centro{grid-column:1/-1;display:flex;align-items:center;gap:16px;margin:0!important}
+.emp-centro .pg-foto{width:64px;height:64px;font-size:32px}
+.emp-centro strong{display:block;font-family:var(--titulo);text-transform:uppercase;font-size:34px;line-height:1;color:var(--tinta)}
+.emp section{background:var(--papel);border-radius:28px;padding:24px;border-top:6px solid var(--tinta)}
+.emp section:nth-of-type(2){border-top-color:var(--grafite)}
+.emp section:nth-of-type(3){border-top-color:var(--vermelho)}
+.emp h3{margin:0 0 12px!important;font-size:19px}
+.emp ul{list-style:none;padding:0!important;gap:12px!important}
+.emp li{background:var(--ceu);border-radius:16px;padding:12px 16px;font-size:15px}
+@media (max-width:700px){.emp{grid-template-columns:1fr}}
+.canais{margin:16px 0 0}
+/* diagrama de afinidades (Petgram) */
+.afin{columns:3 280px;column-gap:16px;margin:28px 0}
+.afin-g{break-inside:avoid;background:var(--papel);border-radius:28px;padding:20px;margin:0 0 16px;border-top:6px solid var(--tinta)}
+.afin-g.c1{border-top-color:var(--grafite)}.afin-g.c2{border-top-color:var(--vermelho)}.afin-g.c3{border-top-color:var(--linha)}
+.afin-g h3{margin:0 0 12px!important;font-size:18px;display:flex;flex-direction:column;gap:2px}
+.afin-n{font-size:14px;font-weight:400;color:var(--grafite)}
+.afin-g ul{list-style:none;padding:0!important;gap:8px!important}
+.afin-g li{background:var(--ceu);border-radius:16px;padding:12px 12px;font-size:14px;line-height:1.5}
+.afin-mais{margin-top:8px}
+.afin-mais summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700;font-size:15px;color:var(--tinta)}
+.afin-mais summary::after{content:"+";margin-left:8px;color:var(--vermelho);font-size:20px}
+.afin-mais[open] summary::after{content:"−"}
+.emp-pet li{font-size:14px;padding:12px 12px}
+.emp .emp-dor{border-top-color:var(--vermelho)!important}
+.emp .emp-ganho{border-top-color:var(--tinta)!important}
+/* telas no mesmo padrão (Assaí e mapas de calor do Petgram) */
+.telas{list-style:none;padding:0!important;margin:28px 0;display:grid!important;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:20px!important}
+.telas figure{margin:0;display:flex;flex-direction:column;gap:12px;align-items:center}
+.tela-cel{position:relative;width:100%;max-width:240px;border:6px solid var(--tinta);border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 20px 40px -24px rgba(0,0,0,.45)}
+.tela-cel img{display:block;width:100%;height:auto}
+.telas figcaption{font-weight:700;font-size:15px;color:var(--tinta);text-align:center}
+.telas figcaption small{display:block;font-weight:400;color:var(--grafite);font-size:13px}
+.calor{position:absolute;inset:0;pointer-events:none;opacity:.88}
+.calor i{position:absolute;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(220,0,0,.95) 0 18%,rgba(255,140,0,.85) 34%,rgba(255,230,0,.6) 50%,rgba(60,200,90,.35) 64%,rgba(60,120,255,.12) 72%,transparent 74%);filter:blur(1px)}
+.telas-mais{font-size:15px;color:var(--grafite)!important}
+@media (max-width:1000px){.telas{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.telas{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.maze-tarefas{display:flex;flex-direction:column;gap:12px;margin:28px 0}
+.maze-t{background:var(--papel);border-radius:28px;padding:24px}
+.maze-txt{max-width:640px;display:flex;flex-direction:column;gap:8px}
+.maze-txt h3{margin:0!important;font-size:20px}
+.maze-txt p{margin:0;font-size:15px}.maze-txt b{color:var(--vermelho)}
+.maze-t .telas{margin:20px 0 0}
+.maze-t .tela-cel{border-width:5px;border-radius:28px}
+/* jornada em etapas (Lia) */
+.jornada{display:flex;flex-direction:column;gap:28px;margin:32px 0;counter-reset:none}
+.j-fase{display:grid;grid-template-columns:190px 1fr;gap:12px 24px;align-items:start}
+.j-fase h3{margin:4px 0 0!important;font-size:20px;display:flex;flex-direction:column;gap:4px;color:var(--tinta)}
+.j-fase ol{list-style:none;padding:0 0 0 16px!important;margin:0;gap:0!important;border-left:2px dashed var(--linha)}
+.j-fase li{display:flex;gap:16px;align-items:flex-start;padding:0 0 12px;margin-left:-32px}
+.j-fase li:last-child{padding-bottom:0}
+.j-num{flex:none;width:32px;height:32px;margin-top:8px;border-radius:50%;background:var(--tinta);color:var(--ceu);display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:500}
+.j-fase li p{margin:0;background:var(--papel);border-radius:16px;padding:12px 16px;flex:1;min-width:0}
+.j-fase:last-child .j-num{background:var(--vermelho);color:#fff}
+@media (max-width:700px){.j-fase{grid-template-columns:1fr}.j-fase ol{margin-left:16px}}
+/* double diamond com tipo de fase (Drogaria) */
+.dd em{font-style:normal;font-size:14px;font-weight:600;color:var(--grafite)}
+.dd li::before{content:none}
+/* mapa mental (Drogaria) */
+.mm{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:28px 0}
+@media (max-width:1000px){.mm{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.mm{grid-template-columns:1fr}}
+.mm section{background:var(--papel);border-radius:28px;padding:24px}
+.mm h4{margin:0 0 12px;font-size:19px;display:flex;flex-direction:column;gap:2px;color:var(--tinta)}
+.mm ol,.mm ul{list-style:none;padding:0!important;gap:8px!important}
+.mm li{font-size:15px;background:var(--ceu);border-radius:8px;padding:12px 12px}
+.mm li.mm-ramo{margin-left:16px;background:transparent;border-left:3px solid var(--vermelho);border-radius:0;padding:4px 0 4px 12px}
+.mm li b{color:var(--tinta)}
+.mm-exc{grid-column:1/-1}
+.mm-exc ul{flex-direction:row!important;flex-wrap:wrap}
+.mm-exc li{flex:1 1 200px}
+</style>
+</head>
+<body>
+
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="ic-sol" viewBox="0 0 256 256"><path d="M116,36V20a12,12,0,0,1,24,0V36a12,12,0,0,1-24,0Zm80,92a68,68,0,1,1-68-68A68.07,68.07,0,0,1,196,128Zm-24,0a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,128ZM51.51,68.49a12,12,0,1,0,17-17l-12-12a12,12,0,0,0-17,17Zm0,119-12,12a12,12,0,0,0,17,17l12-12a12,12,0,1,0-17-17ZM196,72a12,12,0,0,0,8.49-3.51l12-12a12,12,0,0,0-17-17l-12,12A12,12,0,0,0,196,72Zm8.49,115.51a12,12,0,0,0-17,17l12,12a12,12,0,0,0,17-17ZM48,128a12,12,0,0,0-12-12H20a12,12,0,0,0,0,24H36A12,12,0,0,0,48,128Zm80,80a12,12,0,0,0-12,12v16a12,12,0,0,0,24,0V220A12,12,0,0,0,128,208Zm108-92H220a12,12,0,0,0,0,24h16a12,12,0,0,0,0-24Z"/></symbol><symbol id="ic-lua" viewBox="0 0 256 256"><path d="M236.37,139.4a12,12,0,0,0-12-3A84.07,84.07,0,0,1,119.6,31.59a12,12,0,0,0-15-15A108.86,108.86,0,0,0,49.69,55.07,108,108,0,0,0,136,228a107.09,107.09,0,0,0,64.93-21.69,108.86,108.86,0,0,0,38.44-54.94A12,12,0,0,0,236.37,139.4Zm-49.88,47.74A84,84,0,0,1,68.86,69.51,84.93,84.93,0,0,1,92.27,48.29Q92,52.13,92,56A108.12,108.12,0,0,0,200,164q3.87,0,7.71-.27A84.79,84.79,0,0,1,186.49,187.14Z"/></symbol></defs></svg>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo" id="topo">
+  <div class="wrap">
+    <a class="marca" href="/" data-ir="inicio" aria-label="Leonardo Fernandes, página inicial">
+      <svg class="logo-pipa" width="66" height="33" viewBox="0 0 440 220" aria-hidden="true" style="overflow:visible"><polygon points="108,21 182,71 116,185 34,99" fill="#3A0610"></polygon><polygon points="104,14 178,64 107,82" fill="#FFFFFF" stroke="currentColor" stroke-width="6"></polygon><polygon points="104,14 107,82 30,92" fill="#D9223C"></polygon><polygon points="30,92 107,82 112,178" fill="#141414"></polygon><polygon points="107,82 178,64 112,178" fill="#8E0B20"></polygon><path class="linha-logo" d="M107 82 C 190 150, 280 190, 372 128" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><g class="lata-logo"><rect x="360" y="124" width="50" height="76" fill="#C8102E"/><g stroke="#8E0B20" stroke-width="3"><line x1="360" y1="134" x2="410" y2="134"/><line x1="360" y1="142" x2="410" y2="142"/><line x1="360" y1="150" x2="410" y2="150"/><line x1="360" y1="158" x2="410" y2="158"/><line x1="360" y1="166" x2="410" y2="166"/><line x1="360" y1="174" x2="410" y2="174"/><line x1="360" y1="182" x2="410" y2="182"/><line x1="360" y1="190" x2="410" y2="190"/></g><rect x="356" y="118" width="58" height="12" rx="3" fill="#9A9A95"/><rect x="356" y="196" width="58" height="12" rx="3" fill="#9A9A95"/><rect x="356" y="118" width="58" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="4"/><rect x="356" y="196" width="58" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="4"/><rect x="360" y="124" width="50" height="76" fill="none" stroke="currentColor" stroke-width="4"/></g><g class="rab-mini"><path d="M112 178 C 132 200, 104 222, 128 246 C 146 264, 126 282, 146 300" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><g transform="translate(118,212) rotate(20)"><polygon points="-18,-11 0,0 -18,11" fill="#C8102E"/><polygon points="18,-11 0,0 18,11" fill="#C8102E"/></g><g transform="translate(136,256) rotate(-15)"><polygon points="-15,-9 0,0 -15,9" fill="#141414"/><polygon points="15,-9 0,0 15,9" fill="#141414"/></g><g transform="translate(140,292) rotate(10)"><polygon points="-12,-8 0,0 -12,8" fill="#C8102E"/><polygon points="12,-8 0,0 12,8" fill="#C8102E"/></g></g></svg>
+      <span class="marca-nome" aria-hidden="true">Leonardo Fernandes</span>
+    </a>
+    <div class="topo-acoes">
+    <a class="btn cheio contato-topo" href="/" data-ir="inicio" data-alvo="contato">Contato</a>
+    <div class="tema-seg" role="radiogroup" aria-label="Tema do site"><button type="button" role="radio" data-tema="claro" aria-checked="true">Claro</button><button type="button" role="radio" data-tema="escuro" aria-checked="false">Escuro</button></div>
+    <button class="tema" type="button" id="trocarTema" aria-label="Ativar tema escuro"><svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><svg class="lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+    <button class="abrir-menu" type="button" aria-expanded="false" aria-controls="menu" id="abrirMenu"><span class="hamb" aria-hidden="true"><i></i><i></i><i></i></span><span id="abrirMenuTxt">Menu</span></button>
+    </div>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="/" data-ir="inicio" data-alvo="projetos">Projetos</a>
+      <a href="/sobre" data-ir="sobre">Sobre mim</a>
+      <a href="https://drive.google.com/file/d/1dd31fQJmol4zbfp_AZuKnHgmWsnpY5HH/view" target="_blank" rel="noopener">Currículo<span class="sr"> (abre em nova aba)</span></a>
+      <a class="btn cheio" href="/" data-ir="inicio" data-alvo="contato">Contato</a>
+      <div class="tema-seg tema-seg-menu" role="radiogroup" aria-label="Tema do site"><button type="button" role="radio" data-tema="claro" aria-checked="true">Claro</button><button type="button" role="radio" data-tema="escuro" aria-checked="false">Escuro</button></div>
+      <div class="menu-extra"><span>Leonardo Fernandes · São Paulo</span><a href="https://www.linkedin.com/in/leonvrdof" target="_blank" rel="noopener">LinkedIn<span class="sr"> (abre em nova aba)</span></a></div>
+    </nav>
+  </div>
+</header>
+
+<div class="luz" aria-hidden="true"></div>
+<main id="conteudo" tabindex="-1">
+<!-- INÍCIO -->
+<div class="tela" id="tela-inicio" data-tela="inicio">
+  <section class="wrap hero">
+    <div class="txt">
+      <span class="rotulo">Designer conversacional · UX Writer</span>
+      <h1 class="nome lanterna">Leonardo<br><span style="white-space:nowrap">Fernandes<svg class="bola" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><defs><clipPath id="bolaClip"><circle r="47"/></clipPath></defs><g class="bola-giro"><circle r="47" fill="#C8102E"/><g clip-path="url(#bolaClip)" fill="#141414"><polygon points="0.0,-15.0 14.3,-4.6 8.8,12.1 -8.8,12.1 -14.3,-4.6"/><polygon points="18.8,-25.9 13.7,-41.5 27.0,-51.2 40.4,-41.5 35.3,-25.9"/><polygon points="30.4,9.9 43.7,0.2 57.1,9.9 52.0,25.5 35.5,25.5"/><polygon points="0.0,32.0 13.3,41.7 8.2,57.3 -8.2,57.3 -13.3,41.7"/><polygon points="-30.4,9.9 -35.5,25.5 -52.0,25.5 -57.1,9.9 -43.7,0.2"/><polygon points="-18.8,-25.9 -35.3,-25.9 -40.4,-41.5 -27.0,-51.2 -13.7,-41.5"/></g><g stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><line x1="0.0" y1="-15.0" x2="0.0" y2="-31.0"/><line x1="14.3" y1="-4.6" x2="29.5" y2="-9.6"/><line x1="8.8" y1="12.1" x2="18.2" y2="25.1"/><line x1="-8.8" y1="12.1" x2="-18.2" y2="25.1"/><line x1="-14.3" y1="-4.6" x2="-29.5" y2="-9.6"/></g></g><circle r="47" fill="none" stroke="currentColor" stroke-width="3"/></svg></span></h1>
+      <p>Desenho conversas de chatbots e assistentes no WhatsApp: o fluxo, o tom de voz e cada mensagem, testados com quem vai usar.</p>
+      <div class="acoes">
+        <a class="btn cheio" href="/" data-ir="inicio" data-alvo="projetos">Acessar projetos</a>
+        <a class="btn vazio" href="/sobre" data-ir="sobre">Sobre mim</a>
+      </div>
+    </div>
+    <figure class="arte">
+      <svg id="pipaSvg" width="300" height="420" viewBox="0 0 260 420" aria-hidden="true" style="max-width:100%;overflow:visible">
+        <path id="linha" d="M130 120 Q 120 300 150 420" fill="none" stroke="currentColor" stroke-width="1.2" stroke-opacity=".5"></path>
+        <g id="pipa" transform="translate(23,38)">
+          <polygon points="108,21 182,71 116,185 34,99" fill="#3A0610"></polygon>
+          <polygon points="104,14 178,64 107,82" fill="#FFFFFF"></polygon>
+          <polygon points="104,14 107,82 30,92" fill="#D9223C"></polygon>
+          <polygon points="30,92 107,82 112,178" fill="#141414"></polygon>
+          <polygon points="107,82 178,64 112,178" fill="#8E0B20"></polygon>
+          <polygon points="104,14 178,64 112,178 30,92" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></polygon>
+          <line x1="104" y1="14" x2="112" y2="178" stroke="currentColor" stroke-width="3" stroke-linecap="round"></line>
+          <path d="M30 92 Q 104 52, 178 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+          <g class="rab" id="rabiola">
+            <path d="M112 178 C 128 200, 108 218, 130 238 S 126 256, 138 260" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+            <g transform="translate(121,196) rotate(20)"><polygon points="-8,-5 0,0 -8,5" fill="#C8102E"></polygon><polygon points="8,-5 0,0 8,5" fill="#C8102E"></polygon></g>
+            <g transform="translate(118,222) rotate(-15)"><polygon points="-7,-4 0,0 -7,4" fill="#141414"></polygon><polygon points="7,-4 0,0 7,4" fill="#141414"></polygon></g>
+            <g transform="translate(132,246) rotate(18)"><polygon points="-6,-4 0,0 -6,4" fill="#C8102E"></polygon><polygon points="6,-4 0,0 6,4" fill="#C8102E"></polygon></g>
+          </g>
+        </g>
+      </svg>
+      <figcaption class="legenda-pipa"><span class="dica" aria-hidden="true">Mexa o mouse: você é o vento.</span>A pipa fez parte da minha infância. Com ela aprendi a ler o vento e a esperar a hora certa de dar linha. Hoje faço isso com conversas.</figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap" id="projetos" style="padding-bottom:var(--secao);scroll-margin-top:90px">
+    <div class="cab">
+      <div style="display:flex;flex-direction:column;gap:8px"><h2>Projetos</h2></div>
+    </div>
+    <h3 class="grupo"><span>Design conversacional</span><small>3 projetos · chatbots e assistentes</small></h3>
+    <div class="grade">
+      <a class="card" href="/lia" data-ir="lia">
+        <div class="capa capa-zap" aria-hidden="true"><div class="zap-topo"><i style="background:#0E5A78"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 15.5v-1.8l-7.5-4.6V4a1.5 1.5 0 0 0-3 0v5.1L3 13.7v1.8l7.5-2.3v4.4L8.5 19v1.5l3.5-1 3.5 1V19l-2-1.4v-4.4z"/></svg></i><b>Lia · Assistente de viagens</b></div><div class="zap-msgs"><div class="bl eu">Oi</div><div class="bl ele">Olá! Eu sou a <b>Lia</b>, sua assistente de viagens. 🌍</div><div class="bl ele digitando"><i></i><i></i><i></i></div><div class="bl ele ultimo">Você já tem um destino em mente ou prefere que eu sugira algumas opções?</div><div class="bl-botoes"><span>Tenho um destino</span><span>Quero sugestões</span></div></div></div>
+        <span class="selo">Teste a conversa</span>
+        <span class="rotulo">WhatsApp · Público 50+</span>
+        <h4>Lia, assistente de viagens</h4>
+        <p>Assistente no WhatsApp que ajuda pessoas com 50 anos ou mais a escolher o destino da viagem, uma pergunta de cada vez.</p>
+        <span class="fato">Entrevista · persona · fluxo em 10 etapas</span>
+        <span class="ir">Acessar projeto<span aria-hidden="true"> →</span></span>
+      </a>
+      <a class="card" href="/tom" data-ir="tom">
+        <div class="capa capa-zap" aria-hidden="true"><div class="zap-topo"><i style="background:#1F8A5B"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="6" cy="10" rx="2.2" ry="2.8"/><ellipse cx="10" cy="5.5" rx="2.2" ry="2.8"/><ellipse cx="14" cy="5.5" rx="2.2" ry="2.8"/><ellipse cx="18" cy="10" rx="2.2" ry="2.8"/><path d="M12 11c-3 0-6 4.5-6 7 0 1.7 1.5 2.5 3 2.2 1.2-.3 2-.9 3-.9s1.8.6 3 .9c1.5.3 3-.5 3-2.2 0-2.5-3-7-6-7z"/></svg></i><b>Clínica Veterinária Vila Matilde</b></div><div class="zap-msgs"><div class="bl eu">Oi</div><div class="bl ele">Olá! Eu sou o <b>Tom</b>, assistente virtual da clínica. 🐾</div><div class="bl ele digitando"><i></i><i></i><i></i></div><div class="bl ele ultimo">Por aqui, você agenda consultas, recebe a receita digital e tira dúvidas sobre o seu pet.</div><div class="bl-botoes"><span>Agendar consulta</span></div></div></div>
+        <span class="selo">Teste a conversa</span>
+        <span class="rotulo">WhatsApp · Bot persona</span>
+        <h4>Tom, da Clínica Veterinária Vila Matilde</h4>
+        <p>Assistente no WhatsApp da clínica: agenda consultas, envia a receita digital e tira dúvidas sobre o cuidado com o pet.</p>
+        <span class="fato">Agendamento · receita digital · dúvidas</span>
+        <span class="ir">Acessar projeto<span aria-hidden="true"> →</span></span>
+      </a>
+      <a class="card" href="/drogaria" data-ir="drogaria">
+        <div class="capa capa-zap" aria-hidden="true"><div class="zap-topo"><i style="background:#C8102E"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z"/></svg></i><b>Drogaria Popular</b></div><div class="zap-msgs"><div class="bl ele">Agora, preciso saber se você tem cadastro com a gente.</div><div class="bl ele digitando"><i></i><i></i><i></i></div><div class="bl ele ultimo">Envie seu CPF (somente números).</div></div></div>
+        <span class="rotulo">WhatsApp · Fluxo determinístico</span>
+        <h4>Drogaria Popular</h4>
+        <p>Fluxo sem IA para o WhatsApp da farmácia: confere o cadastro pelo CPF e responde às dúvidas frequentes.</p>
+        <span class="fato">4 etapas · sem IA · FAQ</span>
+        <span class="ir">Acessar projeto<span aria-hidden="true"> →</span></span>
+      </a>
+    </div>
+    <h3 class="grupo"><span>Product design</span><small>2 projetos · apps</small></h3>
+    <div class="grade">
+      <a class="card menor" href="/petgram" data-ir="petgram">
+        <div class="capa capa-app capa-pet" aria-hidden="true"><img width="428" height="926" src="/img/312268eed6.webp" alt=""></div>
+        <span class="rotulo">App · Cubos Academy</span>
+        <h4>Petgram</h4>
+        <p>App para tutores trocarem histórias e dicas de cuidado com cães e gatos. Projeto em grupo, da pesquisa ao teste de usabilidade.</p>
+        <span class="fato">58 respostas · 6 entrevistas · 15 pessoas no teste</span>
+        <span class="ir">Acessar projeto<span aria-hidden="true"> →</span></span>
+      </a>
+      <a class="card menor" href="/assai" data-ir="assai">
+        <div class="capa capa-app capa-ass" aria-hidden="true"><img width="301" height="654" src="/img/2a1b09190f.webp" alt=""></div>
+        <span class="rotulo">App · Supermercado</span>
+        <h4>Redesign Assaí Atacadista</h4>
+        <p>Redesign do app para a compra acontecer dentro dele, com retirada na loja, sem depender do iFood e do Rappi.</p>
+        <span class="fato">Benchmark · user flow · 8 telas</span>
+        <span class="ir">Acessar projeto<span aria-hidden="true"> →</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:var(--secao)">
+    <h2 class="sec-t">Trajetória</h2>
+    <ol class="linha-tempo">
+      <li><span class="rotulo">2021</span><strong>Análise e Desenvolvimento de Sistemas</strong><span>Universidade Anhembi Morumbi. Onde conheci UX.</span></li>
+      <li><span class="rotulo">2023</span><strong>UX/UI na Cubos Academy</strong><span>Gestor do projeto Petgram, da pesquisa ao teste com usuários.</span></li>
+      <li class="gol"><span class="rotulo">2025</span><strong>2º lugar no Bootcamp DCIA da Blip</strong><span>Entre mais de 1.200 participantes.</span></li>
+      <li><span class="rotulo">2026</span><strong>Cohort de IA Aplicada</strong><span>Arara School: grounding, agentes e IA com fonte da verdade.</span></li>
+      <li><span class="rotulo">2026</span><strong>Tecnólogo em Inteligência Artificial</strong><span>Universidade Cruzeiro do Sul. Em andamento, com conclusão prevista para 2028.</span></li>
+    </ol>
+  </section>
+
+  <section class="contato" id="contato" style="scroll-margin-top:70px">
+    <div class="wrap" style="padding-block:var(--secao);display:flex;flex-direction:column;gap:24px">
+      <h2>Bora trocar uma ideia?</h2>
+      <p style="margin:0">Tem uma vaga, um projeto ou quer falar sobre design conversacional? Me chama.</p>
+      <div class="email"><span id="emailTxt">leonvrdof@gmail.com</span><button class="copiar" type="button" id="copiarEmail">Copiar e-mail</button><span id="copiado" role="status" style="font-family:var(--corpo);font-size:14px"></span></div>
+      <div class="acoes"><a class="btn vazio" href="https://www.linkedin.com/in/leonvrdof" target="_blank" rel="noopener">linkedin.com/in/leonvrdof<span class="sr"> (abre em nova aba)</span></a></div>
+    </div>
+  </section>
+</div>
+
+<!-- SOBRE -->
+<div class="tela" id="tela-sobre" data-tela="sobre" hidden>
+  <section class="wrap sobre-topo">
+    <figure class="foto-sobre"><img src="/img/4ce42e69cf.webp" width="460" height="575" alt="Leonardo Fernandes sentado em uma rocha, de boné e jaqueta clara, com montanhas e um pico nevado ao fundo, sob céu azul."><figcaption>Fora da tela, gosto de viajar. Foi daí que nasceu a Lia, minha assistente de viagens.</figcaption></figure>
+    <div class="txt">
+      <span class="rotulo">Designer conversacional · UX Writer · São Paulo</span>
+      <h1>Sobre mim</h1>
+      <p>Sou designer conversacional e UX Writer. Venho de Análise e Desenvolvimento de Sistemas, passei pelo UX/UI e encontrei no design conversacional o lugar onde técnica e escrita se encontram. Hoje desenho conversas para chatbots e agentes de IA, com regras documentadas que a IA consegue seguir.</p>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:var(--secao)">
+    <h2 class="sec-t">Como eu trabalho</h2>
+    <div class="principios">
+      <div><strong>Escuto antes de escrever</strong><span>Entendo quem vai conversar com o bot e o que essa pessoa precisa resolver antes da primeira mensagem.</span></div>
+      <div><strong>Toda regra fica escrita</strong><span>Guidelines, glossário e decisões numa pasta que a IA consulta. O chat esquece, a pasta não.</span></div>
+      <div><strong>A IA sugere, eu valido</strong><span>Uso IA para ganhar velocidade, mas cada mensagem passa por mim e precisa citar a regra que a sustenta.</span></div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:var(--secao)">
+    <h2 class="sec-t">Experiência profissional</h2>
+    <div class="lista-ab">
+      <details class="ab">
+        <summary><span class="t"><strong>Analista de Curadoria e Validação de Dados</strong><span>DBIOS Back Office Services · Remoto</span><span>Curadoria, validação e tratamento de dados em operações de alto volume, com foco em qualidade, LGPD e SLAs.</span></span><span class="data">set. 2021 – atual</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="painel"><div class="colunas">
+          <div><b>Resultados</b><ul><li>Cerca de 6.500 documentos processados em uma semana, nos picos de demanda.</li><li>Entre o 2º e o 3º maior volume da equipe, chegando ao 1º lugar em alguns períodos.</li><li>Velocidade com baixo índice de erros, com a qualidade validada em auditoria interna.</li></ul></div>
+          <div><b>O que eu faço</b><ul><li>Validação, conferência, extração e transcrição de dados de documentos como RG, CNH, comprovante de residência e CRLV.</li><li>Controle de qualidade seguindo LGPD, SLAs e metas de produtividade.</li><li>Atuação em várias operações ao mesmo tempo, me adaptando às mudanças de demanda.</li></ul></div>
+          <div><b>Projetos</b><ul><li>Idwall e FlexDoc: validação e curadoria de documentos.</li><li>FTD Educação e Editora Moderna: cadastro de livros e materiais escolares.</li><li>DHL: conferência de invoices internacionais, em painel todo em inglês.</li><li>Sompo Seguros: inspeção fotográfica de equipamentos segurados.</li></ul></div>
+        </div></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:var(--secao)">
+    <h2 class="sec-t" style="margin-top:8px">Formação e trajetória</h2>
+    <div class="lista-ab">
+      <details class="ab"><summary class="num"><span class="n rotulo">01</span><span class="t"><strong>Análise e Desenvolvimento de Sistemas</strong><span>Universidade Anhembi Morumbi. A base técnica, e onde conheci UX.</span></span><span class="data">2019–2021</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="painel recuo"><p style="margin:0">Graduação concluída em 2021.</p></div></details>
+      <details class="ab"><summary class="num"><span class="n rotulo">02</span><span class="t"><strong>UX/UI Designer, Cubos Academy</strong><span>Gestor do projeto Petgram, da pesquisa ao teste de usabilidade.</span></span><span class="data">2023–2024</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="painel recuo"><ul><li>Assumi a gestão do projeto durante o desenvolvimento, organizando demandas, prioridades e alinhamentos da equipe.</li><li>Fui responsável pelo visual no Figma e pela construção da interface.</li><li>Participei de todas as etapas de UX: desk research, matriz CSD, pesquisas qualitativas e quantitativas, personas, prototipação e testes de usabilidade.</li><li>Apresentei o projeto a uma banca de designers seniores, professores e cerca de 80 alunos.</li></ul><a class="link-cert" href="https://drive.google.com/file/d/18XzPXnfDzU1wuMJhEUeVdbAIhWjHvJtb/view" target="_blank" rel="noopener">Acessar certificado<span class="sr"> (abre em nova aba)</span></a></div></details>
+      <details class="ab"><summary class="num"><span class="n rotulo" style="color:var(--vermelho)">03</span><span class="t"><strong>Bootcamp DCIA, Blip · 2º lugar</strong><span>Oito semanas de design conversacional com IA. 2º lugar geral entre mais de 1.200 participantes.</span></span><span class="data">2025</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="painel recuo"><ul><li>Imersão na integração entre UX, design conversacional e IA: jornadas, fluxos conversacionais, DC-UX e DC-IA.</li><li>IA generativa, NLP, curadoria e otimização de modelos de IA e validação de fluxos.</li><li>Métricas de experiência como TMA, CSAT e NPS, no ecossistema Blip (Builder, NLP e Analytics).</li><li>Criação de um assistente de planejamento de viagens para pessoas com 50 anos ou mais, que virou a Lia.</li><li>Mentorias individuais com uma liderança de design conversacional da Blip.</li></ul><a class="link-cert" href="https://drive.google.com/file/d/1DTA5SBISSQAHxvkcUF4uRqbpmNDBm-Ar/view" target="_blank" rel="noopener">Acessar certificado<span class="sr"> (abre em nova aba)</span></a></div></details>
+      <details class="ab"><summary class="num"><span class="n rotulo">04</span><span class="t"><strong>Cohort de IA Aplicada, Arara School</strong><span>Turma piloto: grounding, agentes, Source of Truth e IA conectada ao Figma e ao Drive.</span></span><span class="data">2026</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="painel recuo"><p style="margin:0">Quatro encontros ao vivo de content design, design conversacional, agentes, RAG e evals, tudo com Claude e mão na massa.</p></div></details>
+      <details class="ab"><summary class="num"><span class="n rotulo">05</span><span class="t"><strong>Tecnólogo em Inteligência Artificial</strong><span>Universidade Cruzeiro do Sul. Graduação em andamento.</span></span><span class="data">2026–2028</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="painel recuo"><p style="margin:0">Comecei em agosto de 2026, com conclusão prevista para agosto de 2028.</p></div></details>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:var(--secao)">
+    <h2 class="sec-t">Ficha técnica</h2>
+    <dl class="ficha">
+      <dt>Design</dt><dd>Design conversacional, UX Writing, fluxos, bot persona, Design System, Discovery</dd>
+      <dt>IA</dt><dd>IA generativa, NLP, engenharia de prompt, curadoria de IA, métricas conversacionais</dd>
+      <dt>Técnico</dt><dd>RegEx, fuzzy match, SQL, Python</dd>
+      <dt>Ferramentas</dt><dd>Figma, Blip, Claude, Claude Code</dd>
+      <dt>Idiomas</dt><dd>Espanhol avançado (C1/C2), <a href="https://drive.google.com/file/d/1vNCueachM_-a9tOxhyMcvnPG4Gf6FKdb/view" target="_blank" rel="noopener">acessar certificado<span class="sr"> (abre em nova aba)</span></a> · Inglês intermediário (B1), <a href="https://drive.google.com/file/d/1cl2HgAb4YlKy2JHA6CHo10mzZxIxlqu2/view" target="_blank" rel="noopener">acessar certificado<span class="sr"> (abre em nova aba)</span></a></dd>
+    </dl>
+  </section>
+
+  <section class="wrap" style="padding-bottom:var(--secao)">
+    <h2 class="sec-t">Formação complementar</h2>
+    <div class="lista-ab">
+      <details class="ab"><summary><span class="t"><strong>Blip</strong><span>Design conversacional com IA · 6 cursos</span></span><span class="data">nov. 2025 – mar. 2026</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="painel"><ul><li>Design Conversacional com IA</li><li>Inteligência Conversacional e Soluções de IA</li><li>Cascata de Validação em IA Conversacional</li><li>Experiência Conversacional com IA</li><li>Métricas e Análise de IA Conversacional</li><li>Credencial Fundamentos em Design Conversacional</li></ul><a class="link-cert" href="https://drive.google.com/file/d/1DTA5SBISSQAHxvkcUF4uRqbpmNDBm-Ar/view" target="_blank" rel="noopener">Acessar certificado<span class="sr"> (abre em nova aba)</span></a></div></details>
+      <details class="ab"><summary><span class="t"><strong>Arara School</strong><span>Design conversacional e UX Writing · 3 cursos</span></span><span class="data">jul. 2026 – atual</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="painel"><ul><li>Designer Conversacional</li><li>UX Writing para Chatbots</li><li>ChatGPT para UX Writers</li></ul></div></details>
+      <details class="ab"><summary><span class="t"><strong>UX Craft Academy</strong><span>Masterclass: Métricas &amp; AI Agents</span></span><span class="data">mar. 2026 · 3 horas</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="painel"><ul><li>Métricas &amp; AI Agents: Qualidade, Confiabilidade e Impacto</li></ul><p style="margin:0">Masterclass sobre avaliação de agentes conversacionais em três camadas: técnica, experiencial e impacto. Aborda análise de métricas (latência, fallback, drift), critérios de qualidade percebida e protocolos de avaliação humana contínua, além de métodos para conectar métricas conversacionais a eficiência operacional, adoção, retenção e experimentos para medir impacto real.</p><a class="link-cert" href="https://drive.google.com/file/d/18gX2uQvrh5Hg-5ZoU9TBQxZuyX94bBDG/view" target="_blank" rel="noopener">Acessar certificado<span class="sr"> (abre em nova aba)</span></a></div></details>
+      <details class="ab"><summary><span class="t"><strong>Alura</strong><span>UX Writing, UX, acessibilidade, NLP e prompts · 6 cursos</span></span><span class="data">out. 2025 – mar. 2026</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="painel"><ul><li>Formação UX Writing</li><li>UX Design: Conheça o universo da experiência em produtos digitais</li><li>Acessibilidade em UX: Realizando pesquisas inclusivas</li><li>NLP: explorando LLM para aplicações de chatbot</li><li>NLP: regex e modelos de linguagem</li><li>Engenharia de Prompt: criando prompts eficazes para IA Generativa</li></ul></div></details>
+      <details class="ab"><summary><span class="t"><strong>Udemy</strong><span>Figma: design de interfaces do zero ao profissional</span></span><span class="data">jul. 2021 · 11 horas</span><svg class="seta" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="painel"><p style="margin:0">Curso focado em UI/UX, criação de interfaces responsivas (mobile e desktop), prototipação de baixa e alta fidelidade e desenvolvimento de guias de estilo com componentes, tipografia e paleta de cores.</p><a class="link-cert" href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-0d0aced2-6e6e-4cdb-9500-b3bb0e66b9f6.pdf" target="_blank" rel="noopener">Acessar certificado<span class="sr"> (abre em nova aba)</span></a></div></details>
+    </div>
+  </section>
+</div>
+
+<!-- LIA -->
+<div class="tela" data-tela="lia" hidden>
+  <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">Design conversacional · WhatsApp · Público 50+</span><h1>Como acabar com a indecisão na hora de viajar?</h1></div>
+  <article class="wrap case-corpo"><h2 class="ch">Quem nunca já se sentiu perdido na hora de escolher um destino para passar as férias?</h2>
+<p>A ideia de viajar é animadora, mas o processo de planejamento pode ser frustrante. Entre pesquisar passagens, comparar hospedagens, entender o clima e decidir o que realmente vale a pena visitar, muitas pessoas acabam se sentindo inseguras e sobrecarregadas. Para alguns, viajar não é apenas escolher um lugar no mapa, mas lidar com dúvidas, falta de informação e medo de tomar decisões erradas. Esse projeto nasceu justamente a partir dessa dor, com o objetivo de tornar o planejamento de viagens mais simples, acessível e menos estressante.</p>
+<h2 class="ch">Conheça a Lia</h2>
+<p>Assistente de viagens no WhatsApp, pensada para pessoas com 50 anos ou mais.</p>
+<p><a href="#lia-prototipo" data-scroll="1">Ir para os protótipos, no fim da página</a></p>
+<h2 class="ch">Canvas do Problema Conversacional</h2>
+<p>Para compreender melhor as dificuldades enfrentadas por pessoas que desejam viajar, mas não sabem por onde começar, foi realizada uma entrevista com a Dona Lígia. O objetivo foi identificar seus principais problemas, medos e dúvidas no momento em que pensa em planejar uma viagem.</p>
+<p>Durante a conversa, ficou evidente que, apesar de ter vontade frequente de viajar, ela sente muita insegurança em relação ao processo de planejamento. Suas dúvidas vão desde a escolha do destino até questões mais práticas, como comprar passagens e escolher hospedagem.</p>
+<p>A rotina de trabalho do esposo também pesa: ela adia viagens repetidamente, e isso gera frustração e estresse, com a sensação de que o tempo está passando e ela não está aproveitando como gostaria.</p>
+<p>Quem quer viajar, mas se sente perdido diante de tantas escolhas e informações, precisa de apoio para decidir com segurança.</p>
+<h2 class="ch">Análise e construção do Mapa de Empatia</h2>
+<p>Depois da entrevista, organizei o que a Dona Lígia contou num mapa de empatia: o que ela pensa e sente, o que ouve, o que vê e como age. Além das dificuldades práticas, apareceram os sentimentos que pesam nas decisões dela. O mapa serviu de base para definir o escopo da solução.</p>
+<h2 class="ch">Entrevista Guiada</h2>
+<h3>Bloco 1 - Contexto</h3>
+<p>1 - Como você costuma planejar suas viagens?</p>
+<p>R: Tenho bastante dificuldade pra planejar uma viagem por conta do serviço do meu esposo. Tenho muitas dúvidas sobre como fazer isso. Eu iria procurar uma agência de viagens, por ser mais seguro. Lá, eles iriam me mostrar passeios, hotéis... Poderia até ser um pouco mais caro, mas eu me sentiria mais confortável.</p>
+<p>2 - Quando você começa a pensar em viajar, quais dúvidas vêm na sua mente?</p>
+<p>R: Pra onde eu vou viajar, o destino. No aeroporto também: como fazer o check-in, como vejo o portão de embarque... Eu teria que perguntar pro pessoal que trabalha lá.</p>
+<p>3 - Com que frequência a senhora pensa em planejar uma viagem?</p>
+<p>R: Sempre. Toda semana eu penso nisso, mas só fico na vontade por causa do trabalho dele (do esposo).</p>
+<h3>Bloco 2 - Dor</h3>
+<p>1 - Qual é a parte mais difícil na hora de decidir o destino?</p>
+<p>R: Pra onde ir, como ir, o que tem lá, se é calor ou frio. Tenho vontade de ir pro Paraguai fazer compras.</p>
+<p>2 - O que mais te incomoda nisso?</p>
+<p>R: Fico estressada porque eu não conheço nada. O tempo está passando, eu estou ficando cada vez mais velha... Quero aproveitar enquanto estiver bem, porque depois não vai ter como.</p>
+<p>3 - Já aconteceu de escolher um destino e depois perceber que não era o que você imaginou?</p>
+<p>R: Já! Fui com meu esposo pra Poços de Caldas e, quando chegamos lá, a cidade estava completamente vazia, ninguém na rua. Não tivemos uma boa sensação e decidimos ir pra outro lugar, um destino que já estamos acostumados a ir: Serra Negra. Lá a gente se sente familiarizada com a cidade. Já fomos várias vezes, sempre pro mesmo hotel. Já fomos em outro, mas não gostamos.</p>
+<h3>Bloco 3 - Comportamento atual</h3>
+<p>1 - Se você tivesse que resolver isso hoje, como faria?</p>
+<p>R: Iria em uma agência de viagens.</p>
+<p>2 - Você costuma pedir a opinião ou ajuda de alguém?</p>
+<p>R: Sim, pra você e pra Letícia, que são pessoas viajadas e, com certeza, me ajudariam com isso.</p>
+<p>3 - Você usa algum sistema de busca? Procura no YouTube, vê no TikTok, na televisão?</p>
+<p>R: Às vezes, à noite, eu recebo no meu celular promoções de passagens. Mas como eu vou comprar se eu não sei fazer isso? Assisto vídeos no YouTube, vejo os lugares, o que é bonito lá, as paisagens.</p>
+<h3>Bloco 4 - Impacto</h3>
+<p>1 - De tudo o que falamos, isso te faz perder tempo?</p>
+<p>R: Não. Costumo ver isso só de noite, às vezes.</p>
+<p>2 - Isso te gera estresse ou alguma frustração por não conseguir resolver?</p>
+<p>R: Muito estresse. Eu fico indignada que o tempo está passando e eu não vou sair por causa dele (do esposo).</p>
+<p>3 - Você já deixou de viajar por conta disso?</p>
+<p>R: Muitas vezes. Minhas amigas do bordado sempre viajam e me convidam, mas eu acho tão sem graça ir sem ele, porque na maioria das vezes elas levam os maridos. Vai chegar uma hora que eu vou sozinha e ele vai ficar.</p>
+<div class="emp largo" role="group" aria-label="Mapa de empatia da Dona Lígia">
+  <p class="emp-centro"><span class="pg-foto" aria-hidden="true">L</span><span><span class="rotulo">Mapa de empatia</span><strong>Dona Lígia</strong></span></p>
+  <section><h3>O que pensa e sente</h3><ul><li>Sente muita vontade de viajar e pensa nisso com frequência ("toda semana").</li><li>Tem medo de errar em processos importantes (passagens, hotel, aeroporto).</li><li>Se sente insegura por não saber planejar uma viagem sozinha.</li><li>Pensa que o tempo está passando e que está envelhecendo, o que aumenta a urgência de viajar.</li></ul></section>
+  <section><h3>O que ouve</h3><ul><li>Comentários e convites das amigas do bordado que viajam com frequência.</li><li>Recomendações de pessoas próximas que já viajam bastante.</li><li>A ideia de que agência de viagem é mais segura e confiável.</li></ul></section>
+  <section><h3>O que vê</h3><ul><li>Vídeos no YouTube mostrando paisagens, destinos e lugares bonitos.</li><li>Conteúdos de promoções e anúncios de viagens no celular.</li><li>Vê pessoas próximas viajando (amigas e conhecidos), o que aumenta a vontade.</li></ul></section>
+  <section><h3>O que faz e fala</h3><ul><li>Fala frequentemente sobre vontade de viajar, mas não coloca em prática.</li><li>Evita viajar sozinha ou sem o marido, mesmo quando é convidada pelas amigas.</li><li>Pede ajuda para pessoas próximas e confia em quem tem experiência.</li></ul></section>
+</div>
+
+<h2 class="ch">Síntese dos Insights da Entrevista</h2>
+<p>A entrevista mostrou que a maior dificuldade da Dona Lígia não é escolher o destino, e sim a falta de segurança e autonomia em todo o planejamento. O medo de errar na compra das passagens e no aeroporto, somado à dependência do esposo e de outras pessoas, faz com que ela adie viagens que gostaria de fazer. Ela vê conteúdos de viagem e pensa nisso toda semana, mas a ansiedade, a necessidade de aprovação e o receio do desconhecido impedem que a vontade vire ação. E pesa a sensação de que o tempo está passando: ela quer aproveitar enquanto tem saúde.</p>
+<h2 class="ch">Sentimentos Identificados</h2>
+<p>Durante a entrevista, foi possível identificar sentimentos que impactam diretamente a forma como Dona Lígia se relaciona com o planejamento de viagens:</p>
+<ul>
+<li>Insegurança: não possui confiança para realizar etapas da viagem sozinha, como comprar passagens, reservar hotéis ou lidar com processos do aeroporto.</li>
+<li>Dependência: sente necessidade de apoio e validação de outras pessoas, como o marido, familiares ou agências de viagem, para conseguir tomar decisões.</li>
+<li>Insatisfação: demonstra frustração por não conseguir realizar um desejo frequente de viajar e conhecer novos lugares.</li>
+<li>Medo: possui receio de errar em situações desconhecidas, principalmente no aeroporto, como check-in, embarque e localização do portão.</li>
+<li>Ansiedade: pensa constantemente em viajar, mas não consegue transformar essa vontade em ação, o que aumenta o sentimento de frustração e adiamento.</li>
+</ul>
+<h2 class="ch">Persona</h2>
+<p>Com base nos sentimentos identificados na entrevista, foi criada a persona da Dona Lígia, que representa um público com grande vontade de viajar, mas que se sente inseguro e dependente de apoio para planejar uma viagem com autonomia e confiança.</p>
+<article class="pg-persona largo" aria-label="Persona Lígia Terriaga">
+  <div class="pg-quem">
+    <div class="pg-foto" aria-hidden="true">L</div>
+    <div><h3>Lígia Terriaga</h3><p>66 anos · aposentada · São Paulo</p></div>
+  </div>
+  <p>Dona Lígia tem 66 anos, mora em São Paulo e é aposentada. Ela sonha em viajar, mas se sente insegura por não saber planejar uma viagem sozinha, principalmente na compra de passagens, escolha de hotel e processos do aeroporto. Além disso, a rotina de trabalho do marido influencia diretamente suas decisões, fazendo com que ela adie viagens com frequência. Por depender de outras pessoas para se sentir segura e por não conseguir colocar seus planos em prática, ela acaba acumulando frustração e ansiedade, com a sensação de que o tempo está passando e ela não está aproveitando como gostaria.</p>
+  <blockquote><p>"Quero aproveitar a vida e viajar enquanto ainda tenho saúde, mas preciso de confiança para não me perder e não errar no caminho."</p></blockquote>
+  <div class="pg-colunas">
+    <section><h4>Objetivos</h4><ul><li>Viajar mais vezes e conhecer novos lugares enquanto ainda tem saúde e disposição.</li><li>Ter confiança para planejar a viagem com autonomia, sem depender de outras pessoas.</li><li>Escolher destinos e hospedagens com segurança, sabendo o que vale a pena.</li><li>Sentir-se preparada para o aeroporto, sabendo exatamente o que fazer em cada etapa.</li></ul></section>
+    <section><h4>Dores</h4><ul><li>Insegurança para planejar uma viagem sozinha (passagem, hotel, destino).</li><li>Medo do aeroporto e do processo de embarque (check-in, portão, procedimentos).</li><li>Dificuldade em escolher o destino certo, por não saber o que esperar do lugar.</li><li>Frustração e ansiedade por adiar viagens, sentindo que o tempo está passando e ela não está aproveitando a vida.</li></ul></section>
+  </div>
+</article>
+
+<h2 class="ch">Objetivo do Chatbot</h2>
+<p>Guiar a pessoa no planejamento e na compra da viagem, para que quem tem mais idade viaje com autonomia e segurança. O chatbot ajuda em qualquer etapa: de quem ainda está decidindo para onde ir a quem já comprou as passagens e precisa de ajuda com hospedagem, roteiro e passeios.</p>
+<h2 class="ch">Canal</h2>
+<p>O chatbot será acessado por:</p>
+<ul class="pg-chips pg-chips-claros canais" aria-label="Canais"><li>BlipChat</li><li>WhatsApp</li></ul>
+<h2 class="ch">Definição - Modelo híbrido</h2>
+<h3>Como isso funcionará na prática?</h3>
+<p>Para este projeto, foi definido que o chatbot seguirá um modelo híbrido, combinando fluxos determinísticos com menus guiados e respostas inteligentes em momentos específicos.</p>
+<p>Escolhi o modelo híbrido porque o público 50+, representado pela Dona Lígia, tem medo de errar em processos digitais. O menu guiado mostra o que fazer em cada passo e reduz o risco de confusão. Mas há momentos de dúvida aberta, como “o que fazer nesse destino?” ou “qual é a melhor época para viajar?”, e aí uma conversa mais livre ajuda mais.</p>
+<p>Assim, a navegação continua simples e segura, e a conversa fica mais natural quando a pessoa precisa.</p>
+<ul>
+<li>Menu: “Escolher destino”, “Comprar passagem”, “Escolher hospedagem”, “Dúvidas sobre aeroporto”</li>
+<li>IA: responder perguntas como “Qual destino é melhor pra quem gosta de frio?” ou “O que fazer em Foz do Iguaçu?”</li>
+</ul>
+<h2 class="ch">Tom e voz</h2>
+<p>O tom de voz escolhido será acolhedor e humanizado, transmitindo confiança e paciência. A linguagem será simples, objetiva e sem termos técnicos, buscando reduzir a ansiedade do usuário e reforçar a sensação de apoio durante o planejamento da viagem.</p>
+<h2 class="ch">Fluxo Feliz</h2>
+<p>O Fluxo Feliz é o caminho ideal dentro do chatbot: a pessoa planeja a viagem do começo ao fim, da escolha do destino ao resumo final com checklist, sem travar. Com base na entrevista e na validação com a Dona Lígia, ele foi organizado em quatro etapas principais, os momentos mais difíceis de planejar uma viagem.</p>
+<ol class="as-flow largo" aria-label="As quatro etapas principais do fluxo feliz">
+<li><strong>Escolher o destino ideal</strong></li>
+<li><strong>Comprar a passagem</strong><span>e receber orientação passo a passo sobre o aeroporto</span></li>
+<li><strong>Reservar a hospedagem</strong><span>com segurança</span></li>
+<li class="fim"><strong>Receber dicas</strong><span>de pontos turísticos e atividades no destino escolhido</span></li>
+</ol>
+<h2 class="ch">Feedback</h2>
+<p>Na validação do fluxo, a Dona Lígia mostrou que só sugerir pontos turísticos não bastava para ela se sentir segura e agir. Ela queria recomendações concretas, como passeios com guia, pacotes organizados e opções prontas, porque isso diminui a insegurança e facilita a decisão. Por isso, o chatbot precisa ajudar na prática, e não só informar.</p>
+<h2 class="ch">Fluxo macro e micro</h2>
+<p>Desenhei os fluxos para diminuir a ansiedade e a insegurança que apareceram na entrevista, quebrando as etapas difíceis do planejamento em passos guiados e previsíveis.</p>
+<p><a target="_blank" rel="noopener" href="https://www.figma.com/design/iS4Jq0wyODvgVXuYrSGNNh/Fluxo-Conversacional---Assistente-viagens?node-id=249-3258&amp;t=ekY5Blnh5QaFz3Wc-1">Acessar os fluxos macro, micro e do MVP no Figma<span class="sr"> (abre em nova aba)</span></a></p>
+<div class="jornada largo"><section class="j-fase"><h3><span class="rotulo">Parte 1</span>Escolher o destino</h3><ol start="1"><li><span class="j-num" aria-hidden="true">01</span><p><span class="sr">Etapa 1: </span>Dona Lígia inicia a conversa com o chatbot no WhatsApp.</p></li><li><span class="j-num" aria-hidden="true">02</span><p><span class="sr">Etapa 2: </span>O chatbot apresenta o menu principal e ela escolhe “Planejar uma viagem completa”.</p></li><li><span class="j-num" aria-hidden="true">03</span><p><span class="sr">Etapa 3: </span>Dona Lígia informa suas preferências (tipo de viagem: frio/calor, praia/interior).</p></li><li><span class="j-num" aria-hidden="true">04</span><p><span class="sr">Etapa 4: </span>Ela define o orçamento e o período desejado para viajar.</p></li><li><span class="j-num" aria-hidden="true">05</span><p><span class="sr">Etapa 5: </span>O chatbot sugere destinos ideais e Dona Lígia seleciona o destino desejado.</p></li></ol></section><section class="j-fase"><h3><span class="rotulo">Parte 2</span>Passagem e aeroporto</h3><ol start="6"><li><span class="j-num" aria-hidden="true">06</span><p><span class="sr">Etapa 6: </span>O chatbot orienta Dona Lígia a comprar a passagem aérea com segurança (datas, horários e sites confiáveis).</p></li><li><span class="j-num" aria-hidden="true">07</span><p><span class="sr">Etapa 7: </span>O chatbot explica o passo a passo do aeroporto (check-in, portão de embarque).</p></li></ol></section><section class="j-fase"><h3><span class="rotulo">Parte 3</span>Hospedagem</h3><ol start="8"><li><span class="j-num" aria-hidden="true">08</span><p><span class="sr">Etapa 8: </span>O chatbot orienta Dona Lígia a escolher e reservar uma hospedagem com critérios seguros (localização, avaliações, cancelamento).</p></li></ol></section><section class="j-fase"><h3><span class="rotulo">Parte 4</span>No destino</h3><ol start="9"><li><span class="j-num" aria-hidden="true">09</span><p><span class="sr">Etapa 9: </span>O chatbot envia dicas e pontos turísticos do destino escolhido.</p></li></ol></section><section class="j-fase"><h3><span class="rotulo">Parte 5</span>Fim da conversa</h3><ol start="10"><li><span class="j-num" aria-hidden="true">10</span><p><span class="sr">Etapa 10: </span>Dona Lígia recebe um resumo final com checklist completo da viagem e uma mensagem de confirmação.</p></li></ol></section></div>
+<h2 class="ch">Protótipo</h2>
+<p>Para validar a proposta, o fluxo virou um protótipo navegável.</p>
+<p>MVP: a entrega inicial, focada na escolha do destino. Ela testa uma hipótese: pessoas com 50 anos ou mais conseguem escolher um destino sozinhas pelo WhatsApp, sem pedir ajuda a familiares, porque a Lia pergunta uma coisa de cada vez.
+<a target="_blank" rel="noopener" href="https://lia-prototipo-de-testes.vercel.app/">Testar o MVP da Lia<span class="sr"> (abre em nova aba)</span></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.figma.com/design/iS4Jq0wyODvgVXuYrSGNNh/Fluxo-Conversacional---Assistente-viagens?node-id=249-3258&amp;t=ekY5Blnh5QaFz3Wc-1">Acessar os fluxos macro, micro e do MVP no Figma<span class="sr"> (abre em nova aba)</span></a></p></article>
+  <section class="converse" id="lia-prototipo" style="scroll-margin-top:80px"><div class="wrap">
+    <div class="txt"><span class="rotulo">Protótipo navegável · MVP</span><h2>Converse com a Lia</h2><p>Escolha o destino da sua próxima viagem conversando com a Lia, do jeito que seria no WhatsApp.</p><p class="aviso">Protótipo de testes. Use dados fictícios.</p><a class="btn cheio" href="https://lia-prototipo-de-testes.vercel.app/" target="_blank" rel="noopener">Abrir o protótipo em tela cheia<span aria-hidden="true"> ↗</span><span class="sr"> (abre em nova aba)</span></a></div>
+    <div class="celular"><iframe data-src="https://lia-prototipo-de-testes.vercel.app/?modo=vitrine" title="Protótipo da Lia: conversa simulada no WhatsApp" loading="lazy"></iframe><button class="toque" type="button"><span>Toque para conversar</span></button></div>
+  </div></section>
+  <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><span></span><a href="/tom" data-ir="tom">Próximo: Clínica Veterinária Vila Matilde<span aria-hidden="true"> →</span></a></div></nav>
+</div>
+
+<!-- TOM -->
+<div class="tela" data-tela="tom" hidden>
+  <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">Design conversacional · WhatsApp · Bot persona</span><h1>Chatbot - Clínica Veterinária Vila Matilde</h1></div>
+  <article class="wrap case-corpo"><h2 class="ch">Resumo</h2>
+<p>Projetei o Tom, assistente virtual da Clínica Veterinária Vila Matilde no WhatsApp, para tirar do telefone as dúvidas simples e os agendamentos que hoje interrompem a equipe durante os atendimentos.</p>
+<ul>
+<li>Meu papel: conversation designer, do começo ao fim (pesquisa, persona, fluxos, conteúdo e documentação).</li>
+<li>Canal: WhatsApp.</li>
+<li>Ferramentas: Figma e Claude.</li>
+<li>Em números: 12 skills no fluxo micro, 47 termos travados no Glossário, 50 regras de conteúdo numeradas e 88 decisões registradas com o motivo de cada uma.</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.figma.com/design/CJn2oRnApcGtfmjt3jlMvd/Chatbot---Cl%C3%ADnica-veterin%C3%A1ria-Vila-Matilde?node-id=6-915">Acessar o fluxo completo no Figma<span class="sr"> (abre em nova aba)</span></a></p>
+<p><a target="_blank" rel="noopener" href="https://tom-prototipo-de-testes.vercel.app/">Testar o MVP do Tom<span class="sr"> (abre em nova aba)</span></a></p>
+<h2 class="ch">Situação</h2>
+<p>Na Clínica Veterinária Vila Matilde, quem atende o telefone é a mesma pessoa que está cuidando de um pet. Com 38 anos de história e atendimento só por ligação, a veterinária ou a assistente interrompe a consulta para responder dúvidas simples, como valor, horário e endereço. Fora do expediente, o tutor fica sem resposta.</p>
+<p>O WhatsApp é o canal certo: 82% dos usuários já falaram com empresas pelo aplicativo, 75% deles para tirar dúvidas. Mas 59% não gostam de respostas automáticas (<a target="_blank" rel="noopener" href="https://canaltech.com.br/apps/o-que-os-brasileiros-mais-fazem-no-whatsapp-segundo-pesquisa/">Opinion Box, junho de 2025<span class="sr"> (abre em nova aba)</span></a>).</p>
+<h2 class="ch">Tarefa</h2>
+<p>Projetar, sozinho, um assistente no WhatsApp que resolva dúvidas e agendamentos sem interromper a equipe e que chame uma pessoa quando for preciso. O desafio incluía os limites de botões do WhatsApp, a LGPD e a regra do Conselho Federal de Medicina Veterinária, que impede diagnóstico pelo chat.</p>
+<h2 class="ch">Ação</h2>
+<p>Minha primeira versão (V1) foi feita sem regras escritas, e o fluxo ficou inconsistente. Na V2, criei a documentação do projeto (Glossário, Guidelines, registro de Decisões e System prompt) e revisei o fluxo inteiro com o Claude: ele comparava cada mensagem com as regras e propunha correções, e eu decidia o que entrava.</p>
+<p>As decisões que mais mudaram a conversa:</p>
+<ul>
+<li>Pedir o mínimo de dados. O tutor é identificado pelo BSUID, o novo ID do WhatsApp, e o CPF só é pedido se for preciso.</li>
+<li>Cadastro dentro da conversa. Quem ainda não é cliente se cadastra com o Tom, sem esperar a equipe.</li>
+<li>Palavras acessíveis. Uma ação, um nome: “agendar” em todo o fluxo e “Selecione” no lugar de “Toque”.</li>
+<li>Saúde com limite. O Tom dá só orientação geral. Em emergência, passa o telefone da clínica e chama a equipe na hora.</li>
+<li>Confirmar antes de agendar. O tutor escolhe entre os horários livres e confere um resumo com o valor.</li>
+</ul>
+<p>V1: “Toque em ‘Acessar menu’ e selecione uma das opções.”</p>
+<p>V2: “Como posso te ajudar hoje? Selecione ‘Acessar menu’ para ver as opções.”</p>
+<h2 class="ch">Resultado</h2>
+<p>O Tom cobre a jornada do tutor de ponta a ponta e só chama a equipe quando o sistema falha ou há emergência. Simulei o caminho de um tutor novo, do cadastro ao pedido de receita, e corrigi os 4 problemas de experiência que apareceram.</p>
+<p>Quando o Tom estiver no ar, vou medir a satisfação dos tutores, os agendamentos concluídos sem a equipe e a queda nas ligações para a clínica.</p>
+<h2 class="ch">Aprendizados</h2>
+<p>Consistência em conversa não se mantém de cabeça: precisa de registro. Com a documentação, cada texto novo segue as mesmas regras, seja escrito por mim ou pela IA. Os próximos passos são testar o fluxo com tutores reais e desenhar o lembrete de consulta.</p></article>
+  <section class="converse"><div class="wrap">
+    <div class="txt"><span class="rotulo">Protótipo navegável · MVP</span><h2>Converse com o Tom</h2><p>Agende uma consulta para o seu pet conversando com o Tom, como um tutor faria no WhatsApp.</p><p class="aviso">Protótipo de testes. Use dados fictícios.</p><a class="btn cheio" href="https://tom-prototipo-de-testes.vercel.app/" target="_blank" rel="noopener">Abrir o protótipo em tela cheia<span aria-hidden="true"> ↗</span><span class="sr"> (abre em nova aba)</span></a></div>
+    <div class="celular"><iframe data-src="https://tom-prototipo-de-testes.vercel.app/?modo=vitrine" title="Protótipo do Tom: conversa simulada no WhatsApp" loading="lazy"></iframe><button class="toque" type="button"><span>Toque para conversar</span></button></div>
+  </div></section>
+  <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><a href="/lia" data-ir="lia"><span aria-hidden="true">←</span> Anterior: Lia</a><a href="/drogaria" data-ir="drogaria">Próximo: Drogaria Popular<span aria-hidden="true"> →</span></a></div></nav>
+</div>
+
+<!-- DROGARIA -->
+<div class="tela" data-tela="drogaria" hidden>
+  <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">Fluxo determinístico · WhatsApp · FAQ</span><h1>Desenhando uma experiência conversacional para a Drogaria Popular</h1></div>
+  <article class="wrap case-corpo"><h2 class="ch">Desafio</h2>
+<p>A farmácia Drogaria Popular nos contratou para criar um chatbot no WhatsApp para atender seus clientes.</p>
+<p>Escopo do projeto:</p>
+<ul>
+<li>O chatbot precisa identificar se o usuário possui cadastro ou não;</li>
+<li>O chatbot deve fornecer ajuda e tirar dúvidas (FAQ);</li>
+<li>O chatbot não terá IA.</li>
+</ul>
+<h2 class="ch">Processo de criação: Double Diamond</h2>
+<p>Para dar início à resolução do desafio proposto, o Double Diamond foi utilizado para guiar o desenvolvimento do fluxo conversacional. O uso dessa metodologia contribuiu para descobrir, definir, desenvolver e entregar a solução proposta para o desafio.</p>
+<ol class="pg-diamante dd largo" aria-label="As quatro fases do Double Diamond">
+  <li><em>Diverge</em><strong>Descobrir</strong><span>Quais são e de onde vêm os problemas?</span></li>
+  <li><em>Converge</em><strong>Definir</strong><span>Qual o problema devemos focar em resolver?</span></li>
+  <li><em>Diverge</em><strong>Desenvolver</strong><span>Quais são as soluções possíveis para o problema?</span></li>
+  <li><em>Converge</em><strong>Entregar</strong><span>A nossa solução de fato resolve o problema?</span></li>
+</ol>
+
+<h3>1. Descoberta</h3>
+<p>Primeiramente, o levantamento das informações foi realizado através de benchmarking para compreender as principais dúvidas e necessidades do público-alvo, servindo como base para o desenvolvimento da FAQ e posteriormente do fluxo completo. Também utilizei os materiais de estudo da Arara School e Blip Academy, além de pesquisas em artigos sobre UX Writing e boas práticas da área.</p>
+<p>Referências: <a target="_blank" rel="noopener" href="https://academy.blip.ai/course/credencial-fundamentos-em-design-conversacional">Fundamentos em Design Conversacional<span class="sr"> (abre em nova aba)</span></a>, <a target="_blank" rel="noopener" href="https://brasil.uxdesign.cc/heur%C3%ADsticas-de-nielsen-para-bots-60363363d12">Heurísticas de Nielsen para Bots<span class="sr"> (abre em nova aba)</span></a>, <a target="_blank" rel="noopener" href="https://brasil.uxdesign.cc/ux-e-chatbots-boas-pr%C3%A1ticas-para-desenhar-interfaces-conversacionais-9beb0ba293f2">UX e chatbots: boas práticas para desenhar interfaces conversacionais<span class="sr"> (abre em nova aba)</span></a>.</p>
+<h3>2. Definição</h3>
+<ul>
+<li>Heurísticas de Nielsen: voltadas ao UX Writing para garantir clareza, prevenção de erros e liberdade do usuário.</li>
+<li>Tom e voz: Acessível, Empático e Objetivo</li>
+<li>Claro e acolhedor: Sem jargões da área da saúde, focado na compreensão rápida de qualquer usuário.</li>
+<li>Direto ao ponto: Mensagens curtas, ideais para navegação em fluxos determinísticos.</li>
+<li>Emojis estratégicos: Usados para humanizar, reduzindo a carga cognitiva e facilitando a leitura.</li>
+<li>Heminwayapp: faz a classificação do nível de escrita, tendo como objetivo principal: escrever no nível de leitura de 5ª série.</li>
+<li>StartStudio: para estimar o tempo de leitura das mensagens e definir o delay do chatbot.</li>
+</ul>
+<p>Definição do Fluxo Conversacional:</p>
+<ol class="as-flow largo" aria-label="Definição do fluxo conversacional">
+<li><strong>Onboarding</strong></li><li><strong>Validação cadastral</strong></li><li><strong>FAQ</strong></li><li class="fim"><strong>Finalização</strong></li>
+</ol>
+<h3>3. Desenvolvimento</h3>
+<p>Iniciei o desenho do fluxo esboçando um mapa mental. O objetivo foi estruturar e organizar os insights levantados durante a fase de descoberta.</p>
+<div class="mm largo" role="group" aria-label="Mapa mental do fluxo, redesenhado a partir do esboço à mão">
+  <section><h4><span class="rotulo">01</span>Onboarding</h4><ol>
+    <li>Mensagem do usuário</li>
+    <li>É o primeiro contato?</li><li class="mm-ramo"><b>Sim:</b> boas-vindas (“Sou sua assistente virtual e vou te ajudar”), envio da política de privacidade em PDF e pedido de aceite</li><li class="mm-ramo"><b>Não:</b> “Olá, seja bem-vindo de volta” e política de privacidade</li>
+    <li>Aceitou a política?</li><li class="mm-ramo"><b>Sim:</b> validar cadastro</li><li class="mm-ramo"><b>Não:</b> voltar para o fluxo</li>
+  </ol></section>
+  <section><h4><span class="rotulo">02</span>Validar cadastro</h4><ol>
+    <li>“Agora, preciso saber se você tem cadastro com a gente”</li>
+    <li>“Envie seu CPF (somente números)”</li>
+    <li>API valida o CPF</li><li class="mm-ramo"><b>Não encontrou:</b> “Como deseja continuar?” Corrigir o CPF ou fazer um novo cadastro</li><li class="mm-ramo"><b>Encontrou:</b> avisa que encontrou e pergunta se deseja continuar. Se não, corrigir o CPF</li>
+  </ol></section>
+  <section><h4><span class="rotulo">03</span>FAQ</h4><ol>
+    <li>“Toque no botão para acessar o menu”</li>
+    <li>Lista com as opções de dúvidas</li>
+  </ol></section>
+  <section><h4><span class="rotulo">04</span>Finalização</h4><ol>
+    <li>“Te ajudo com algo mais?”</li><li class="mm-ramo"><b>Sim:</b> voltar para o fluxo</li><li class="mm-ramo"><b>Não:</b> finalizar a conversa</li>
+  </ol></section>
+  <section class="mm-exc"><h4>Exceções</h4><ul>
+    <li><b>Erro no CPF:</b> “CPF errado, digite novamente”</li>
+    <li><b>Erro no telefone:</b> “Telefone errado, digite novamente”</li>
+    <li><b>Erro no botão</b></li>
+    <li><b>Erro no sim/não</b></li>
+  </ul></section>
+</div>
+
+<h3>4. Entrega</h3>
+<p>Como resultado das etapas anteriores, a arquitetura do bot da Drogaria Popular foi desenvolvida com base no escopo do projeto.</p>
+<p><a target="_blank" rel="noopener" href="https://www.figma.com/design/TVb5pWH3tjjAR1mfWDVTxu/Drogaria-Popular?node-id=0-1">Acessar o fluxo da Drogaria Popular no Figma<span class="sr"> (abre em nova aba)</span></a></p>
+<h2 class="ch">Conclusão e próximos passos</h2>
+<ul>
+<li>Teste de usabilidade: Antes da implementação do chatbot, será necessário submetê-lo a testes de usabilidade para validar todos os fluxos criados, bem como testes A/B visando a melhoria contínua.</li>
+<li>Features futuras: Criação de novos fluxos conversacionais, como a opção de compras dentro do WhatsApp, aproveitando o desenvolvimento do fluxo de cadastro. Como também a curadoria e análises de métricas, como CSAT, NPS, taxa de transbordo entre outras.</li>
+</ul></article>
+  <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><a href="/tom" data-ir="tom"><span aria-hidden="true">←</span> Anterior: Clínica Veterinária</a><a href="/petgram" data-ir="petgram">Próximo: Petgram<span aria-hidden="true"> →</span></a></div></nav>
+</div>
+
+<!-- PETGRAM -->
+<div class="tela" data-tela="petgram" hidden>
+  <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">UX/UI · App · Cubos Academy</span><h1>Petgram</h1></div>
+  <article class="wrap case-corpo"><section class="pg-abre largo">
+  <dl class="pg-ficha">
+    <div><dt>Contexto</dt><dd>Curso de UX/UI Design, Cubos Academy</dd></div>
+    <div><dt>Meu papel</dt><dd>Gestor do projeto, da pesquisa ao teste</dd></div>
+    <div><dt>Formato</dt><dd>Projeto em grupo, com 3 designers</dd></div>
+  </dl>
+</section>
+
+<h2 class="ch">Problema</h2>
+<p class="pg-pergunta">De que maneira o compartilhamento de histórias e dicas pode ajudar a educar os tutores sobre melhores práticas de cuidados com animais de estimação?</p>
+<p>Tema proposto pela Cubos Academy no curso de UX/UI Design com o intuito de obtermos uma solução para a problemática.</p>
+
+<h2 class="ch">Tarefas</h2>
+<p>Buscar uma solução para a temática levantada, fazendo uso de todas as ferramentas e metodologias ensinadas ao longo do curso.</p>
+<ol class="pg-chips largo" aria-label="Ferramentas usadas, na ordem">
+  <li>Desk research, matriz CSD e mapa relacional</li><li>Questionário e entrevistas</li><li>Análise de recortes</li><li>Diagrama de afinidades</li><li>Mapa de empatia</li><li>Persona</li><li>Canvas de proposta de valor</li><li>Matriz MoSCoW</li><li>Crazy 8</li><li>Userflow e wireframe</li><li>Style guide e protótipo de alta fidelidade</li><li>Teste de usabilidade e análise do teste</li>
+</ol>
+
+<h2 class="ch">Identidade visual</h2>
+<div class="pg-ident largo">
+  <div class="pg-card">
+    <span class="rotulo">Naming</span>
+    <p class="pg-formula" aria-label="Pet mais Instagram é igual a Petgram"><span>Pet</span><b aria-hidden="true">+</b><span>Instagram</span><b aria-hidden="true">=</b><strong>Petgram</strong></p>
+    <p>A idealização do nome se deu através do objetivo principal do projeto, que era de criar uma rede social voltada 100% aos animais de estimação.</p>
+  </div>
+  <div class="pg-card pg-marca">
+    <span class="rotulo">Símbolo</span>
+    <div class="pg-simbolo" aria-hidden="true">P</div>
+    <p>Este símbolo representa nossa logo, que tem como ideia principal a letra "P". A ideia era representar os pets de um jeito simples.</p>
+  </div>
+  <div class="pg-card pg-larga">
+    <span class="rotulo">Brand concept</span>
+    <p class="pg-destaque">Acolher o maior número de tutores possíveis dentro de uma rede social voltada para cachorros e gatos.</p>
+    <p>Um lugar para trocar informações entre si e se conectar com as principais notícias do mundo animal. Pois muitas vezes os tutores se sentem sozinhos para resolver seus problemas do dia a dia em questões que envolvem seus animais.</p>
+  </div>
+</div>
+
+<h2 class="ch">Processo criativo</h2>
+<p>A abordagem metodológica adotada neste projeto foi o Double Diamond.</p>
+<ol class="pg-diamante largo">
+  <li><strong>Descobrir</strong><span>Pesquisa e compreensão do problema</span></li>
+  <li><strong>Definir</strong><span>Síntese de solução do problema</span></li>
+  <li><strong>Desenvolver</strong><span>Geração e avaliação de potenciais soluções</span></li>
+  <li><strong>Entregar</strong><span>Finalização, entrega e mensuração da solução</span></li>
+</ol>
+<details class="pg-mais"><summary>Ler como cada fase aconteceu</summary>
+<p>Iniciando com a fase de descoberta, conduzimos uma pesquisa aprofundada sobre o problema em questão. Em seguida, avançamos para a etapa de definição, que foi fundamental para clarificar e delinear o problema de forma precisa.</p>
+<p>Com o problema claramente definido, entramos na fase de ideação, onde exploramos diversas soluções possíveis para a questão em pauta. Finalmente, concluímos com a fase de entrega, na qual finalizamos a solução identificada e validamos sua eficácia para garantir que atenda de fato às necessidades do problema original.</p>
+</details>
+
+<h2 class="ch">Desk research</h2>
+<p>Artigos, notícias e dados de pesquisas para entender o panorama dos tutores e seus animais de estimação. Os números vêm da pesquisa Radar Pet 2020.</p>
+<ul class="pg-numeros largo">
+  <li><strong>37 mi</strong><span>de domicílios no Brasil contam com algum pet.</span><a class="pg-fonte" href="#fontes-petgram" data-scroll="1">Radar Pet 2020</a></li>
+  <li><strong>42%</strong><span>dos cães são vira-latas (SRD), a grande maioria dos animais de companhia brasileiros.</span><a class="pg-fonte" href="#fontes-petgram" data-scroll="1">Radar Pet 2020</a></li>
+  <li><strong>60%</strong><span>das pessoas responsáveis pelos cuidados dos pets são mulheres. Só cerca de 10% dos tutores moram sozinhos.</span><a class="pg-fonte" href="#fontes-petgram" data-scroll="1">Radar Pet 2020</a></li>
+  <li class="pg-palavra"><strong>Pinscher</strong><span>é a raça preferida dos tutores, seguida de Poodle e Shih Tzu.</span><a class="pg-fonte" href="#fontes-petgram" data-scroll="1">Radar Pet 2020</a></li>
+  <li class="pg-palavra"><strong>Adoção</strong><span>segue sendo tendência: 33% dos cães e 59% dos gatos foram adotados.</span><a class="pg-fonte" href="#fontes-petgram" data-scroll="1">Radar Pet 2020</a></li>
+</ul>
+
+<h2 class="ch">Matriz CSD</h2>
+<p>Um organismo vivo que nos auxiliou bastante na segregação de dados. Ela facilitou a descoberta e análise do nosso problema.</p>
+<div class="pg-csd largo">
+  <section><h3><span class="pg-letra" aria-hidden="true">C</span>Certezas</h3><ul><li>Pinschers são a raça predominante entre os tutores e os seus lares.</li><li>O envelhecimento do pet é uma grande preocupação entre os tutores.</li></ul></section>
+  <section><h3><span class="pg-letra" aria-hidden="true">S</span>Suposições</h3><ul><li>O gasto mensal de um tutor de cachorro é maior do que um tutor de gato.</li><li>Os tutores têm dificuldades para levar seus pets até o veterinário.</li><li>O valor de uma consulta veterinária é bem elevado.</li></ul></section>
+  <section><h3><span class="pg-letra" aria-hidden="true">D</span>Dúvidas</h3><ul><li>Em caso de doenças, os tutores procuram dicas na internet antes de um veterinário?</li><li>Os tutores escolhem determinado pet por observar semelhanças entre si?</li><li>Os tutores conseguem entender as necessidades dos pets pelo comportamento deles?</li><li>Além dos veterinários, os tutores têm outro meio confiável para tirar dúvidas?</li></ul></section>
+</div>
+<details class="pg-mais"><summary>Ler a análise completa da matriz</summary>
+<p><strong>Certezas.</strong> A maioria dos tutores é composta por mulheres, representando cerca de 60% do total. Aproximadamente 58% são casais ou pessoas que vivem juntas, enquanto apenas cerca de 10% vivem sozinhos. A adoção é uma tendência: 33% dos cães e 59% dos gatos foram adotados. A raça Pinscher é a mais comum entre os tutores. A preocupação com o envelhecimento dos pets também é evidente: cerca de metade dos tutores diz se preocupar com isso.</p>
+<p class="pg-nota">Fonte das certezas: Radar Pet 2020. As suposições e dúvidas são hipóteses do time, que a pesquisa com usuários ajudou a responder.</p>
+<p><strong>Suposições.</strong> Levantamos a hipótese de que o gato será o pet do futuro, em parte devido ao seu perfil e ao custo mensal mais baixo em comparação com os cachorros. Os tutores frequentemente buscam esclarecimentos sobre comportamento e saúde, e muitos enfrentam dificuldades na escolha da melhor ração. Pessoas com animais de estimação têm muitas histórias interessantes para compartilhar, o que pode fortalecer a comunicação entre tutores, criando uma rede de apoio e troca de experiências.</p>
+<p><strong>Dúvidas.</strong> Uma questão importante é a busca de informações na internet antes de consultar um veterinário em caso de doenças dos pets. Isso ressalta a importância da conscientização dos tutores sobre a necessidade de procurar fontes confiáveis e da orientação profissional.</p>
+</details>
+
+<h2 class="ch">User research</h2>
+<p>As suposições e dúvidas da desk research viraram a base da pesquisa com o usuário.</p>
+<div class="pg-amostra largo">
+  <div><strong>58</strong><span>pessoas no questionário (quantitativa)</span></div>
+  <div><strong>6</strong><span>pessoas entrevistadas (qualitativa)</span></div>
+</div>
+<h3>O que o questionário mostrou</h3>
+<p class="pg-nota">Fonte: pesquisa do próprio time (questionário com 58 pessoas e 6 entrevistas).</p>
+<ul class="pg-barras largo">
+  <li><span class="pg-rot">Alimentam os pets com ração</span><span class="pg-trilho" aria-hidden="true"><i style="width:88%"></i></span><strong>88%</strong></li>
+  <li><span class="pg-rot">Nunca participaram de uma comunidade voltada aos pets</span><span class="pg-trilho" aria-hidden="true"><i style="width:64%"></i></span><strong>64%</strong></li>
+  <li><span class="pg-rot">Têm cachorro (gatos: 21%)</span><span class="pg-trilho" aria-hidden="true"><i style="width:64%"></i></span><strong>64%</strong></li>
+  <li><span class="pg-rot">Preferem comprar em loja física (on-line: 39%)</span><span class="pg-trilho" aria-hidden="true"><i style="width:63%"></i></span><strong>63%</strong></li>
+  <li><span class="pg-rot">Relataram problemas na ida ao veterinário</span><span class="pg-trilho" aria-hidden="true"><i style="width:7%"></i></span><strong>7%</strong></li>
+</ul>
+<h3>O que as entrevistas confirmaram</h3>
+<p>Os desafios do questionário ressurgiram nas entrevistas: pouca participação em comunidades online ou grupos de tutores, apesar de reconhecerem o potencial desses espaços para compartilhar informações úteis. Também foi ressaltada a importância de verificar a veracidade das informações compartilhadas online, devido ao risco de práticas equivocadas e prejudiciais para os pets.</p>
+
+<h2 class="ch">Diagrama de afinidades</h2>
+<p>Os principais tópicos das entrevistas, agrupados para encontrar padrões nas respostas.</p>
+<div class="afin largo" role="group" aria-label="Diagrama de afinidades: falas das entrevistas agrupadas por tema"><section class="afin-g c0"><h3>Incentivos que fizeram ter um pet <span class="afin-n">6 falas</span></h3><ul><li>“Sempre adorei gatos e queria a companhia de um. Pesquisei sobre diferentes raças de gatos, fiquei fascinado por um específico e decidi pegar pra mim”</li><li>“O fato de ter uma conexão com o animal foi determinante”</li></ul><details class="afin-mais"><summary>Ler mais 4 falas</summary><ul><li>“Vi uma amiga minha postando que tinha encontrado na rua, não teve nenhum detalhe em específico, foi mais isso de ter visto a foto e ficar pensando o tempo todo”</li><li>“Minha decisão de ter um pet foi bastante ponderada. Já desde a infância eu era apaixonada por animais e sempre quis tê-los como parte da família”</li><li>“Sim, eu tenho dois filhos, e aí um deles sempre comentava que gostaria de ter animal”</li><li>“O detalhe mais determinante para mim foi a personalidade do pet”</li></ul></details></section><section class="afin-g c1"><h3>Adoção e resgate do pet <span class="afin-n">4 falas</span></h3><ul><li>“Eu tenho uma gata, vi uma amiga minha postando que tinha encontrado na rua, e que ela precisava doar”</li><li>“O Loop que é meu cachorro e a Pandora que é minha gata, os dois são adotados”</li></ul><details class="afin-mais"><summary>Ler mais 2 falas</summary><ul><li>“Quando fui adotar o Léo, um gato, ele se aproximou e demonstrou uma simpatia incrível”</li><li>“Só resgatei a coitada no meio da noite”</li></ul></details></section><section class="afin-g c2"><h3>Compra do pet <span class="afin-n">2 falas</span></h3><ul><li>“Foi uma benção ter o meu animal do meu lado. E ele foi comprado, tá? Não foi adotado não”</li><li>“Sempre adorei gatos e queria a companhia de um. Pesquisei sobre diferentes raças de gatos, fiquei fascinado por um específico e decidi pegar pra mim, acabei comprando”</li></ul></section><section class="afin-g c3"><h3><span class="rotulo">Bem-estar do pet</span>Mudanças comportamentais <span class="afin-n">6 falas</span></h3><ul><li>“Teve um episódio que eu tava comendo e aí quando eu olhei pra minha gata ela tava babando muito. Eu peguei ela na hora e procurei um veterinário 24 horas”</li><li>“Sim, teve uma vez que ele ficou muito tempo sem comer e não queria mais brincar com ninguém, além de estar bem desanimado”</li></ul><details class="afin-mais"><summary>Ler mais 4 falas</summary><ul><li>“Chegando em casa ele começou a vomitar, e eu percebi que aquilo não estava normal. E no meio do vômito eu encontrei uma borrachinha que foi exatamente aquela que ele tinha comido na casa do meu filho”</li><li>“O Loop, às vezes, pode ser um pouco travesso e roubar algumas comidas, isso acaba o fazendo mal, aí eu percebo logo quando ele fez isso porque ele fica tristinho”</li><li>“Somente no começo quando resgatei ela da rua, ficava sempre encolhida e com medo de interagir mas foi se soltando até sair e brincar normalmente”</li><li>“Houve um episódio em que ele demonstrou comportamento apático e, após consultar o veterinário, percebemos que era uma reação a um novo alimento que tentamos introduzir em sua dieta”</li></ul></details></section><section class="afin-g c0"><h3><span class="rotulo">Bem-estar do pet</span>Quando precisa de itens para o pet <span class="afin-n">5 falas</span></h3><ul><li>“Compra on-line, quase tudo on-line, porque acaba sendo mais barato e algumas lojas, dessas grandes, tem programas de fidelidade e aí dão desconto, então eu acabo sempre comprando on-line”</li><li>“Compra on-line, a comodidade em primeiro lugar né? Sem dúvida. Muito mais tranquilo. Comprar, depois é só retirar na loja. Muito mais fácil, preço também acessível, é mais acessível do que se eu comprar na loja física”</li></ul><details class="afin-mais"><summary>Ler mais 3 falas</summary><ul><li>“Prefiro comprar online, dá pra pesquisar e comparar produtos com facilidade. Além disso, a entrega em casa é muito melhor”</li><li>“Prefiro fazer compras para o Leo em lojas físicas”</li><li>“Gosto de fazer compras para meus pets em lojas físicas”</li></ul></details></section><section class="afin-g c1"><h3><span class="rotulo">Bem-estar do pet</span>Ida ao veterinário <span class="afin-n">6 falas</span></h3><ul><li>“A parte da ida até o veterinário é super tranquila”</li><li>“Não pude levar ainda pela falta de dinheiro e alguns problemas em casa”</li></ul><details class="afin-mais"><summary>Ler mais 4 falas</summary><ul><li>“Eu não tenho nenhum problema em levá-lo no veterinário”</li><li>“É tranquilo. Meu gato é bastante calmo, mas sempre tomo cuidado de escolher um veterinário experiente com a raça”</li><li>“Levar meus pets ao veterinário é um quesito que eu peco um pouco, eu os levo para o veterinário apenas para vacinação”</li><li>“Levar o Léo ao veterinário é uma parte importante do cuidado. Ele passa por exames de rotina, vacinações e consultas periódicas”</li></ul></details></section><section class="afin-g c2"><h3>Notícias sobre pets <span class="afin-n">6 falas</span></h3><ul><li>“Eu gosto de acompanhar pessoas que fazem conteúdos, mas que são dessa área, tipo, veterinários, assim”</li><li>“Eu gosto de ver bastante, eu faço parte do grupo de Canil, eu acho que isso daí me interage bastante, porque as pessoas dão algumas informações que às vezes eu vejo que são necessárias para mim”</li></ul><details class="afin-mais"><summary>Ler mais 4 falas</summary><ul><li>“Tenho muito interesse em conteúdos relacionados a pets”</li><li>“Sim, gosto de ler sobre cuidados pra raça do meu gato”</li><li>“Sim, qualquer conteúdo informativo que me ajude a cuidar da minha gata melhor”</li><li>“Gosto de assistir vídeos engraçados e também sigo tutores de outros animais para aprender mais sobre cuidados e dicas, como alimentação, coisinhas para o pelo, brinquedos”</li></ul></details></section><section class="afin-g c3"><h3>Comunidade para pets <span class="afin-n">3 falas</span></h3><ul><li>“Nunca participei de nada relacionado”</li><li>“Eu participo do próprio grupo do canil onde eu comprei meu cachorro”</li></ul><details class="afin-mais"><summary>Ler mais 1 fala</summary><ul><li>“Sim, já participei de um grupo online de tutores de animais de estimação”</li></ul></details></section></div>
+
+<h2 class="ch">Persona</h2>
+<article class="pg-persona largo" aria-label="Persona Juliana">
+  <div class="pg-quem">
+    <div class="pg-foto" aria-hidden="true">J</div>
+    <div><h3>Juliana</h3><p>29 anos · enfermeira · casada, 2 filhos · São Paulo, SP<br>Tutora da Mel, gata adotada, 2 anos</p></div>
+  </div>
+  <blockquote><p>"Quando olhei para Mel foi amor à primeira vista. A encontrei enquanto voltava do trabalho, ela estava perdida na rua, passando fome e sede. Não pensei duas vezes, peguei ela na hora e levei pra casa."</p></blockquote>
+  <div class="pg-colunas">
+    <section><h4>Objetivos</h4><ul><li>Garantir o bem-estar e a felicidade contínua da Mel</li><li>Aprimorar os conhecimentos sobre cuidados com ela</li><li>Manter uma rotina que dê tempo de qualidade para Mel e a família</li><li>Estimular a interação entre Mel e os filhos</li></ul></section>
+    <section><h4>Dores</h4><ul><li>Conciliar a rotina agitada com os cuidados que a Mel requer</li><li>Lidar com imprevistos financeiros de saúde</li><li>Entender os comportamentos específicos da Mel</li><li>Encontrar a alimentação ideal</li></ul></section>
+  </div>
+</article>
+<div class="emp emp-pet largo" role="group" aria-label="Mapa de empatia da Juliana"><p class="emp-centro"><span class="pg-foto" aria-hidden="true">J</span><span><span class="rotulo">Mapa de empatia</span><strong>Juliana</strong></span></p><section><h3>O que pensa e sente</h3><ul><li>Sente um profundo e incondicional amor pela Mel, considerando-a parte integral de sua vida e membro da família.</li><li>Sente uma grande responsabilidade e preocupação em prover o melhor cuidado para sua gata.</li><li>Vê a Mel como uma fonte constante de alegria e companheirismo na vida cotidiana.</li></ul><details class="afin-mais"><summary>Ler mais 6 itens</summary><ul><li>Se preocupa em saber se Mel está segura e se o ambiente tem suprido suas necessidades de estímulos.</li><li>Se sente influenciada por tutores de animais experientes que compartilham seus conhecimentos e experiências.</li><li>Sente que sua profissão como enfermeira é uma extensão natural do cuidado que ela tem com as pessoas e com a Mel.</li><li>Se preocupa em manter uma rotina organizada para conseguir usufruir dos bons momentos com a Mel e a família.</li><li>Sonha em proporcionar a Mel uma vida longa, saudável e repleta de felicidade.</li><li>Deseja que seus filhos cresçam aprendendo sobre a importância do cuidado e respeito aos animais.</li></ul></details></section><section><h3>O que ouve</h3><ul><li>"Deve dar muito trabalho cuidar da sua gata"</li><li>"Muito legal da sua parte ter adotado a Mel"</li><li>"Eles têm um lar tão acolhedor!"</li></ul><details class="afin-mais"><summary>Ler mais 3 itens</summary><ul><li>"Por que uma gata?"</li><li>"Gostaria de ter outro animal de estimação?"</li><li>"Ela é muito bem cuidada por você, né?"</li></ul></details></section><section><h3>O que vê</h3><ul><li>Outros tutores com as mesmas dúvidas e questionamentos que ela teve quando adotou a Mel.</li><li>A importância de ter um ambiente seguro para Mel.</li><li>Que sempre está aprendendo algo novo sobre a Mel.</li></ul><details class="afin-mais"><summary>Ler mais 4 itens</summary><ul><li>Vê a importância em participar de grupos voltados para os cuidados com os pets.</li><li>Blogs e matérias sobre dicas e cuidados com a Mel são seu ponto fraco.</li><li>A importância da adoção responsável graças a convivência com a Mel.</li><li>Vê a mudança que a adoção proporcionou na vida da Mel e a diferença que isso fez em sua vida.</li></ul></details></section><section><h3>O que fala e faz</h3><ul><li>Comenta bastante sobre a preocupação que sente em relação com a saúde e bem-estar da Mel.</li><li>Sempre opta por frequentar lojas locais pela possibilidade de examinar os produtos pessoalmente e também de obter conselhos dos atendentes.</li><li>Gosta de pesquisar dicas para proporcionar um ambiente mais enriquecedor para a Mel, com brinquedos e atividades estimulantes.</li></ul><details class="afin-mais"><summary>Ler mais 3 itens</summary><ul><li>Fala sobre a rotina agitada e que gostaria de passar mais tempo com a Mel e os filhos.</li><li>Fala que vai levar Mel mais frequentemente no veterinário mas acaba deixando essa opção de lado devido a rotina agitada e as questões financeiras.</li><li>Navega diariamente na internet e gosta de ler notícias e novidades.</li></ul></details></section><section class="emp-dor"><h3>Dores</h3><ul><li>Se preocupa com a segurança de Mel quando ela não está em casa.</li><li>Se sente mal quando não consegue conciliar a rotina profissional com a pessoal, principalmente quando não consegue dar atenção a Mel.</li><li>Preocupação com o bem-estar da Mel enquanto ela não está em casa.</li></ul><details class="afin-mais"><summary>Ler mais 4 itens</summary><ul><li>Frustração em lidar com as mudanças comportamentais da Mel, dúvidas sobre suas reais necessidades.</li><li>Preocupação com a alimentação e nutrição adequada da Mel.</li><li>Dificuldade em encontrar soluções para problemas de saúde ou comportamento da pet.</li><li>Fica aflita em como adaptar a casa para criar um ambiente enriquecido onde a Mel possa se distrair e brincar sempre que quiser.</li></ul></details></section><section class="emp-ganho"><h3>Ganhos</h3><ul><li>Saber que existe 100% de garantia que a Mel não irá para a rua enquanto não estiver sob a supervisão de ninguém.</li><li>Fortalecimento das relações interpessoais ao compartilhar experiências com outros tutores.</li><li>Ela almeja tornar-se uma tutora ainda mais consciente e informada.</li></ul><details class="afin-mais"><summary>Ler mais 6 itens</summary><ul><li>Criação de memórias especiais e momentos marcantes com a Mel e sua família.</li><li>Conseguir compreender melhor sobre a alimentação da Mel, dando a ela uma ração de qualidade.</li><li>Procura atingir um estado de equilíbrio e harmonia em sua vida cotidiana, uma rotina com mais tempo para família e a Mel.</li><li>Sensação de plenitude ao cuidar e proporcionar bem-estar ao pet.</li><li>Passar a praticar atividades físicas frequentemente e enriquecer o ambiente para manter Mel estimulada.</li><li>Contar com o suporte e a compreensão de seu marido e filhos em relação aos cuidados com Mel a tornaria mais segura enquanto está longe.</li></ul></details></section></div>
+
+<h2 class="ch">Canvas de proposta de valor</h2>
+<p>Feito com base na Juliana: à direita, o que ela vive; à esquerda, o que o Petgram oferece para responder a isso.</p>
+<div class="pg-cv largo">
+  <section class="pg-cv-valor" aria-labelledby="cv1">
+    <h3 id="cv1">Proposta de valor</h3>
+    <div class="pg-cv-grupo"><h4>Produtos e serviços</h4><ul><li>Veterinário on-line 24h</li><li>Aba de vacinação que lembra as próximas vacinas</li><li>Aba de exploração com dicas para os tutores</li><li>Agenda e checklist do dia a dia com o pet</li><li>Indicação de locais seguros para deixar o pet em viagens</li></ul></div>
+    <div class="pg-cv-grupo"><h4>Criadores de ganho</h4><ul><li>Aba para curtir e compartilhar publicações</li><li>Conexão com diversos veterinários</li><li>Rede de tutores para troca de experiências e dicas</li><li>Registros da Mel guardados na nuvem</li><li>Comunicação entre ONGs, canis e gatis sobre adoção</li></ul></div>
+    <div class="pg-cv-grupo"><h4>Analgésicos</h4><ul><li>Coleira com microchip para rastrear a Mel</li><li>Um lugar para montar o perfil da Mel e conseguir dicas</li><li>Veterinário on-line com custo-benefício</li></ul></div>
+  </section>
+  <div class="pg-cv-seta" aria-hidden="true"><span aria-hidden="true">⇄</span></div>
+  <section class="pg-cv-cliente" aria-labelledby="cv2">
+    <h3 id="cv2">Perfil do cliente: Juliana</h3>
+    <div class="pg-cv-grupo"><h4>Tarefas</h4><ul><li>Aprender a lidar melhor com os problemas da gata</li><li>Otimizar a rotina para dar mais atenção à Mel</li><li>Organizar as vacinas</li></ul></div>
+    <div class="pg-cv-grupo"><h4>Ganhos</h4><ul><li>Um lugar para tirar dúvidas de maneira segura e responsável</li><li>Saber que a Mel está segura em casa</li><li>Uma dieta receitada por um veterinário</li><li>Dicas para deixar a casa mais estimulante</li><li>Salvar recordações com a Mel e a família</li></ul></div>
+    <div class="pg-cv-grupo"><h4>Dores</h4><ul><li>Não sabe lidar com a alimentação da Mel</li><li>As mudanças de comportamento geram preocupação e ansiedade</li><li>Medo de que a Mel fuja ou sofra um acidente</li><li>Medo de que ela não tenha uma vida longa e feliz</li><li>Falta de acompanhamento de um profissional de saúde</li></ul></div>
+  </section>
+</div>
+<p class="pg-destaque">O que ela mais precisava: um local para tirar dúvidas e aprender a lidar com a gata no dia a dia.</p>
+
+<h2 class="ch">Ideação</h2>
+<p>Como não tínhamos o produto bem definido, fizemos um brainstorming com todo o time e selecionamos algumas ideias.</p>
+<ul class="pg-ideias largo">
+  <li>Rede social voltada para o público pet, com intuito de descontração e aprendizado</li>
+  <li>Local de acolhimento aos tutores para sanar dúvidas e trocar experiências</li>
+  <li>Notícias sobre bem-estar, cuidados e modos de lidar com o pet</li>
+  <li>Perfil do pet para controlar vacinas, medicamentos e consultas</li>
+  <li>Chat para os tutores interagirem e criarem um vínculo de amizade</li>
+</ul>
+<p class="pg-destaque">A decisão: um aplicativo, pela facilidade de acesso, para atingir o maior número possível de tutores e aproximar a comunidade pet.</p>
+
+<h2 class="ch">Matriz MoSCoW</h2>
+<p>Priorização feita com base no que notamos de mais necessário para os tutores, levando em consideração a desk research, os questionários e as entrevistas.</p>
+<div class="pg-moscow largo">
+  <section class="m1"><h3>Deve ter <span>Must have</span></h3><ul><li>Perfil do usuário</li><li>Feed de fotos e bons momentos</li><li>Aba "Dicas e Cuidados"</li><li>Materiais educativos, artigos e vídeos</li><li>Chat entre tutores e grupos</li><li>Aba "Ongs" com contatos para denúncias</li><li>Perfil do pet: vacinas, remédios e consultas</li></ul></section>
+  <section><h3>Deveria ter <span>Should have</span></h3><ul><li>Veterinário 24h</li></ul></section>
+  <section><h3>Poderia ter <span>Could have</span></h3><ul><li>Compra e venda no app</li><li>Localização do pet pelo microchip</li><li>Lugares para deixar o pet em viagens</li><li>Plano Premium com consulta mensal</li></ul></section>
+  <section><h3>Não terá por enquanto <span>Won't have</span></h3><ul><li>Night Mode</li></ul></section>
+</div>
+
+<h2 class="ch">Wireframes</h2>
+<p>Após a criação do userflow, fizemos o wireframe. Ele serviu como base para criar o produto de uma maneira harmônica e definir o que iríamos usar ou alterar.</p>
+<ol class="pg-wf largo" aria-label="Wireframes de baixa fidelidade"><li><div class="pg-tel" role="img" aria-label="Wireframe: Login"><div class="w-logo">Logo</div><b>Login</b><div class="w-campo"></div><b>Senha</b><div class="w-campo"></div><div class="w-btn">Entrar</div><div class="w-link">Criar conta</div><div class="w-redes"><i></i><i></i></div></div><span>Login</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Cadastro"><div class="w-logo">Logo</div><b>Nome completo</b><div class="w-campo"></div><b>E-mail</b><div class="w-campo"></div><b>Senha</b><div class="w-campo"></div><b>Confirme sua senha</b><div class="w-campo"></div><div class="w-btn">Criar conta</div></div><span>Cadastro</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Feed"><div class="w-logo p">Logo</div><div class="w-abas"><i class=on>Home</i><i>Dicas</i><i>Meu pet</i></div><div class="w-user"><i></i>Username</div><div class="w-x g"></div><div class="w-user"><i></i>Username</div><div class="w-x"></div></div><span>Feed</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Dicas e cuidados"><div class="w-logo p">Logo</div><div class="w-abas"><i>Home</i><i class=on>Dicas</i><i>Meu pet</i></div><b>Chamada para uma dica</b><div class="w-x"></div><div class="w-par"><div class="w-x"></div><div class="w-x"></div></div><b>Chamada para um cuidado</b><div class="w-x"></div></div><span>Dicas e cuidados</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Meus pets"><div class="w-logo p">Logo</div><div class="w-abas"><i>Home</i><i>Dicas</i><i class=on>Meu pet</i></div><div class="w-titulo">Meus Pets</div><div class="w-pets"><i></i><i></i><i></i><i></i></div><div class="w-btn claro">Adicionar novo pet</div></div><span>Meus pets</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Perfil do pet"><div class="w-perfil"><i></i><div><b>Nome</b><span>Gato ou cachorro<br>Raça · Idade · Sexo</span></div></div><div class="w-bloco">Consultas e agendas</div><div class="w-bloco">Vacinas</div><div class="w-bloco">Medicamentos</div></div><span>Perfil do pet</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Mensagens"><div class="w-topo">Mensagens</div><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div></div><span>Mensagens</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Conversa"><div class="w-topo"><i></i>Username</div><div class="w-dia">Hoje</div><div class="w-bal e"></div><div class="w-bal d"></div><div class="w-bal e"></div><div class="w-bal d"></div><div class="w-bal e"></div><div class="w-campo baixo"></div></div><span>Conversa</span></li></ol>
+
+<h2 class="ch">Style guide</h2>
+<p>Azul e salmão foram escolhidas para tornar o aplicativo um ambiente criativo, seguro e acolhedor.</p>
+<div class="pg-style largo">
+  <ul class="pg-cores" aria-label="Paleta do Petgram">
+    <li><i style="background:#195CAA"></i><span>Azul principal</span><code>#195CAA</code></li>
+    <li><i style="background:#FFAA9D"></i><span>Salmão</span><code>#FFAA9D</code></li>
+    <li><i style="background:#E8EFF7"></i><span>Neutro claro</span><code>#E8EFF7</code></li>
+    <li><i style="background:#353535"></i><span>Neutro escuro</span><code>#353535</code></li>
+  </ul>
+  <div class="pg-tipo"><span class="rotulo">Tipografia</span><p><strong>Baloo Da</strong> nos títulos e <strong>Nunito</strong> nos textos.</p></div>
+</div>
+
+<h2 class="ch">Teste de usabilidade</h2>
+<p>Com o protótipo em alta fidelidade, testamos no Maze com 15 pessoas e 3 tarefas.</p>
+<div class="maze-tarefas largo"><section class="maze-t"><div class="maze-txt"><span class="rotulo">Tarefa 1</span><h3>Acesse o perfil da Mel e adicione uma vacina</h3><p>As pessoas estavam "cortando caminho" pela foto de perfil da Mel. <b>Mudança:</b> a foto de perfil também passou a levar ao perfil do pet.</p></div><ul class="telas largo" style="--cols:5" aria-label="Mapas de calor da tarefa 1"><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/312268eed6.webp" alt="Feed na aba Início. Os cliques se concentram na foto de perfil da Mel, no topo do post, e na aba Meus pets." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:14%;top:28%;width:22%"></i><i style="left:79%;top:20%;width:20%"></i><i style="left:48%;top:48%;width:14%"></i></span></div><figcaption>Início</figcaption></figure></li><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/87b2607ab8.webp" alt="Aba Meus pets. Os cliques se concentram no card da Mel." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:26%;top:37%;width:34%"></i></span></div><figcaption>Meus pets</figcaption></figure></li><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/d4d5df1c2c.webp" alt="Perfil da Mel. Os cliques se concentram na linha Vacinas." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:36%;top:51%;width:24%"></i><i style="left:58%;top:51%;width:24%"></i></span></div><figcaption>Perfil da Mel</figcaption></figure></li><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/08c7a049ac.webp" alt="Tela de vacinas vazia. Os cliques se concentram no botão Adicionar vacina." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:48%;top:50%;width:30%"></i></span></div><figcaption>Vacinas</figcaption></figure></li><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/c48ec86a28.webp" alt="Formulário de vacina. Os cliques se concentram nos campos nome, laboratório e próxima dose, e no botão Adicionar." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:72%;top:60%;width:16%"></i><i style="left:72%;top:69%;width:16%"></i><i style="left:72%;top:78%;width:16%"></i><i style="left:66%;top:94%;width:24%"></i></span></div><figcaption>Nova vacina</figcaption></figure></li></ul></section><section class="maze-t"><div class="maze-txt"><span class="rotulo">Tarefa 2</span><h3>Navegue até as mensagens e olhe a conversa com a Amora</h3><p><b>100% de assertividade.</b> Sem alterações.</p></div><ul class="telas largo" style="--cols:5" aria-label="Mapas de calor da tarefa 2"><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/312268eed6.webp" alt="Feed na aba Início. Os cliques vão direto ao ícone de Mensagens, na barra de baixo." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:76%;top:95%;width:22%"></i></span></div><figcaption>Início</figcaption></figure></li><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/b8afb8e950.webp" alt="Lista de mensagens. Os cliques se concentram na conversa com a Amora, a primeira da lista." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:22%;top:20%;width:22%"></i><i style="left:44%;top:20%;width:22%"></i><i style="left:66%;top:20%;width:20%"></i></span></div><figcaption>Mensagens</figcaption></figure></li><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/f4e009e3eb.webp" alt="Conversa com a Amora aberta. Tarefa concluída." loading="lazy" decoding="async"></div><figcaption>Conversa</figcaption></figure></li></ul></section><section class="maze-t"><div class="maze-txt"><span class="rotulo">Tarefa 3</span><h3>Veja a matéria sobre enriquecimento ambiental</h3><p><b>Grande acerto.</b> Não foram necessárias alterações.</p></div><ul class="telas largo" style="--cols:5" aria-label="Mapas de calor da tarefa 3"><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/312268eed6.webp" alt="Feed na aba Início. Os cliques vão para a aba Dicas e Cuidados." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:43%;top:20%;width:24%"></i></span></div><figcaption>Início</figcaption></figure></li><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/4b9d7893fa.webp" alt="Aba Dicas e Cuidados. Os cliques se concentram no card de enriquecimento ambiental." loading="lazy" decoding="async"><span class="calor" aria-hidden="true"><i style="left:40%;top:84%;width:26%"></i><i style="left:62%;top:84%;width:22%"></i></span></div><figcaption>Dicas e Cuidados</figcaption></figure></li><li><figure><div class="tela-cel"><img width="428" height="926" src="/img/089fc2f385.webp" alt="Matéria sobre enriquecimento ambiental aberta. Tarefa concluída." loading="lazy" decoding="async"></div><figcaption>Matéria</figcaption></figure></li></ul></section><p class="telas-mais">Mapas de calor do teste no Maze, redesenhados sobre as telas atuais do Petgram.</p></div>
+
+<section class="pg-fontes largo" id="fontes-petgram" aria-labelledby="ft-pg">
+  <h2 class="ch" id="ft-pg">Fontes</h2>
+  <p>Os números da desk research são da Radar Pet 2020 e foram mantidos como usamos no projeto.</p>
+  <ul>
+    <li><a href="https://www.sindan.org.br/wp-content/uploads/2021/02/RADAR-PET-2020.pdf" target="_blank" rel="noopener">Radar Pet 2020, Comac/Sindan (relatório em PDF)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li><a href="https://www.abcdacomunicacao.com.br/pesquisa-radar-pet-brasil-conta-com-a-segunda-maior-populacao-pet-do-mundo/" target="_blank" rel="noopener">Resumo da Radar Pet 2020 na imprensa (ABC da Comunicação)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li>Questionário e entrevistas: pesquisa do próprio time.</li>
+  </ul>
+</section>
+</article>
+  <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><a href="/drogaria" data-ir="drogaria"><span aria-hidden="true">←</span> Anterior: Drogaria Popular</a><a href="/assai" data-ir="assai">Próximo: Redesign Assaí<span aria-hidden="true"> →</span></a></div></nav>
+</div>
+
+<!-- ASSAI -->
+<div class="tela" data-tela="assai" hidden>
+  <div class="wrap case-topo"><a class="voltar" href="/" data-ir="inicio" data-alvo="projetos"><span aria-hidden="true">←</span> Voltar para os projetos</a><span class="rotulo">UX/UI · App · Supermercado</span><h1>Redesign Assaí Atacadista</h1></div>
+  <article class="wrap case-corpo"><section class="largo">
+  <dl class="pg-ficha">
+    <div><dt>Formato</dt><dd>Projeto individual</dd></div>
+    <div><dt>Meu papel</dt><dd>UX/UI designer, da análise ao UI</dd></div>
+    <div><dt>Plataforma</dt><dd>App Android e iOS</dd></div>
+  </dl>
+</section>
+
+<h2 class="ch">Sobre o projeto</h2>
+<p class="pg-pergunta">O app do Assaí não vende. Ele funciona como um jornal digital de ofertas, e a compra acontece no iFood e na Rappi.</p>
+<p>O projeto partiu dessas limitações para propor um app em que a compra acontece do começo ao fim.</p>
+
+<h2 class="ch">Problemas</h2>
+<p>Analisei as avaliações negativas dos últimos três meses na Play Store. Quatro frustrações apareceram de novo e de novo, e muitas vezes levam o usuário a desistir do app.</p>
+<ul class="as-reviews largo">
+  <li><strong>Não existe compra pelo aplicativo</strong><blockquote><p>"Incrível, um aplicativo de compras de mercado que não dá para comprar."</p></blockquote></li>
+  <li><strong>Falta de barra de busca</strong><blockquote><p>"App fraco, falta a função principal, que é pesquisar os produtos."</p></blockquote></li>
+  <li><strong>Ausência de preços</strong><blockquote><p>"Não presta, você não consegue consultar preços."</p></blockquote></li>
+  <li><strong>Cadastro obrigatório para tudo</strong><blockquote><p>"Aplicativo obriga você se cadastrar para poder navegar para ver as ofertas."</p></blockquote></li>
+</ul>
+<p class="pg-nota">Fonte: avaliações de 1 estrela do app Assaí Atacadista na Google Play, de julho a setembro de 2025.</p>
+
+<h2 class="ch">Discovery: contexto do mercado</h2>
+<p>A marca física é forte. O app, não.</p>
+<ul class="pg-numeros largo">
+  <li><strong>2º</strong><span>lugar no Ranking ABRAS 2025, com faturamento de R$ 80,6 bilhões em 2024. Só o Carrefour fatura mais (R$ 120 bilhões).</span><a class="pg-fonte" href="#fontes-assai" data-scroll="1">Ranking ABRAS 2025</a></li>
+  <li><strong>300+</strong><span>lojas em operação no Brasil, frequentadas por cerca de 500 milhões de clientes por ano.</span><a class="pg-fonte" href="#fontes-assai" data-scroll="1">Assaí, dez. 2024</a></li>
+  <li><strong>+32%</strong><span>em vendas online no 4º trimestre de 2024, via parceiros como iFood e Rappi.</span><a class="pg-fonte" href="#fontes-assai" data-scroll="1">Assaí, 4T24</a></li>
+  <li><strong>56%</strong><span>de quem compra supermercado online faz isso todo mês. 31% compram toda semana.</span><a class="pg-fonte" href="#fontes-assai" data-scroll="1">Neogrid e Opinion Box, 2024</a></li>
+  <li><strong>75%</strong><span>dos brasileiros usam apps de lojas ao menos uma vez por mês para pesquisar ou comprar.</span><a class="pg-fonte" href="#fontes-assai" data-scroll="1">Neogrid e Opinion Box, 2025</a></li>
+</ul>
+
+<h3>O custo de vender pelos parceiros</h3>
+<p>As plataformas de entrega cobram uma porcentagem de cada pedido. No iFood, essa conta vai de cerca de 15% a 26,5% por pedido, somando comissão e taxa de pagamento. Com a compra no app próprio, o Assaí deixa de pagar essa comissão e ganha margem.</p>
+<ul class="as-cenarios largo" aria-label="Cenários de perda com taxas de delivery">
+  <li class="as-cen"><span class="rotulo">Conservador</span><p>Vendas online: <b>1%</b> do faturamento (R$ 806 mi)</p><strong>R$ 161,2 mi</strong><span class="as-perda">em taxas por ano</span></li>
+  <li class="as-cen"><span class="rotulo">Intermediário</span><p>Vendas online: <b>2%</b> do faturamento (R$ 1,6 bi)</p><strong>R$ 322,4 mi</strong><span class="as-perda">em taxas por ano</span></li>
+  <li class="as-cen forte"><span class="rotulo">Agressivo</span><p>Vendas online: <b>3%</b> do faturamento (R$ 2,4 bi)</p><strong>R$ 483,6 mi</strong><span class="as-perda">em taxas por ano</span></li>
+</ul>
+<p class="pg-nota">Cálculo próprio: faturamento de 2024 (Ranking ABRAS) com taxa média de 20%.</p>
+
+<h3>Para onde o mercado vai</h3>
+<div class="as-mercado largo">
+  <div><strong>US$ 14,9 bi</strong><span>mercado de supermercado online no Brasil em 2024</span></div>
+  <div class="as-seta" aria-hidden="true"><span aria-hidden="true">→</span></div>
+  <div><strong>US$ 68,7 bi</strong><span>previsão para 2033, crescendo 16,5% ao ano</span></div>
+</div>
+<p class="pg-nota">Fonte: IMARC Group, edição consultada durante o projeto. A página hoje traz uma edição mais nova, com números atualizados.</p>
+
+<h2 class="ch">Objetivos</h2>
+<p class="pg-destaque">Redesenhar o app para a pessoa conseguir comprar nele, achar produtos mais rápido e ter motivo para voltar.</p>
+
+<h2 class="ch">Antes e depois</h2>
+<p>Os problemas das avaliações, olhados pelas heurísticas de Jakob Nielsen, viraram decisões de design. O protótipo final foi avaliado de novo pelas mesmas heurísticas.</p>
+<ol class="as-antes largo">
+  <li><div class="as-a"><span class="rotulo">Antes</span><strong>Falta de barra de busca</strong><p>Não há como buscar produtos ou categorias específicas.</p><small>Controle e liberdade do usuário · Eficiência e flexibilidade de uso</small></div><div class="as-d"><span class="rotulo">Depois</span><strong>Barra de busca no topo</strong><p>Menos tempo gasto para encontrar produtos específicos.</p><small>Eficiência e flexibilidade de uso</small></div></li>
+  <li><div class="as-a"><span class="rotulo">Antes</span><strong>Produtos sem preço</strong><p>O usuário precisa procurar folhetos ou ir até a loja física.</p><small>Visibilidade do status do sistema · Reconhecimento em vez de memorização</small></div><div class="as-d"><span class="rotulo">Depois</span><strong>Preço em todos os produtos</strong><p>Transparência para comparar e decidir.</p><small>Visibilidade do status do sistema · Reconhecimento em vez de memorização</small></div></li>
+  <li><div class="as-a"><span class="rotulo">Antes</span><strong>Sem compra no app</strong><p>O app funciona apenas como um catálogo digital.</p><small>Correspondência entre o sistema e o mundo real · Flexibilidade e eficiência de uso</small></div><div class="as-d"><span class="rotulo">Depois</span><strong>Compra direta no app</strong><p>Carrinho, checkout e pedido sem depender de iFood ou Rappi.</p><small>Controle e liberdade do usuário</small></div></li>
+  <li><div class="as-a"><span class="rotulo">Antes</span><strong>Cadastro obrigatório</strong><p>Login exigido antes de mostrar qualquer funcionalidade.</p><small>Prevenção de erros · Controle e liberdade do usuário</small></div><div class="as-d"><span class="rotulo">Depois</span><strong>Acesso rápido pelo telefone</strong><p>Uma validação simples por número, sem cadastro completo.</p><small>Minimizar barreiras de uso e aumentar a eficiência</small></div></li>
+</ol>
+
+<h2 class="ch">Matriz CSD</h2>
+<p>Os insights das análises iniciais, organizados para levantar hipóteses e guiar os próximos passos.</p>
+<div class="pg-csd largo">
+  <section><h3><span class="pg-letra" aria-hidden="true">C</span>Certezas</h3><ul><li>A marca é reconhecida nacionalmente.</li><li>O modelo de atacarejo é o diferencial da marca.</li><li>Há crescimento no uso de apps de supermercado.</li><li>O app do Assaí não é e-commerce, funciona como catálogo digital.</li><li>As vendas online são terceirizadas via iFood e Rappi.</li></ul></section>
+  <section><h3><span class="pg-letra" aria-hidden="true">S</span>Suposições</h3><ul><li>Uma interface mais fácil de usar faria as pessoas usarem mais o app.</li><li>Há potencial para incluir recursos de fidelização.</li><li>O público do Assaí é menos digitalizado que o da Daki.</li><li>A falta de integração com parceiros gera frustração.</li><li>Usuários podem não entender que o app não vende diretamente.</li></ul></section>
+  <section><h3><span class="pg-letra" aria-hidden="true">D</span>Dúvidas</h3><ul><li>Os usuários desejam comprar direto pelo app?</li><li>Quais funcionalidades são mais valorizadas?</li><li>O Assaí pretende expandir a digitalização?</li><li>Qual o impacto de criar um e-commerce próprio?</li><li>Há barreiras técnicas ou estratégicas ao redesign?</li></ul></section>
+</div>
+
+<h2 class="ch">Proto-persona</h2>
+<article class="pg-persona largo" aria-label="Proto-persona Mariana Souza">
+  <div class="pg-quem">
+    <div class="pg-foto" aria-hidden="true">M</div>
+    <div><h3>Mariana Souza</h3><p>34 anos · assistente administrativa · casada · São Paulo, SP</p></div>
+  </div>
+  <blockquote><p>Leva uma rotina corrida e busca praticidade nas compras do dia a dia. Prefere soluções digitais que economizem tempo e ofereçam transparência nos preços.</p></blockquote>
+  <div class="pg-colunas">
+    <section><h4>Objetivos</h4><ul><li>Otimizar o tempo nas compras do dia a dia</li><li>Ter acesso rápido e transparente aos preços e promoções</li><li>Fazer compras sem precisar sair de casa</li><li>Encontrar praticidade e clareza em apps de supermercado</li></ul></section>
+    <section><h4>Dores</h4><ul><li>Não conseguir comprar diretamente pelo app do Assaí</li><li>Falta de preços visíveis nos produtos</li><li>Dificuldade para encontrar itens específicos</li><li>Exigência de cadastro antes de ver o conteúdo</li><li>Experiência limitada em comparação a Daki, Carrefour e Pão de Açúcar</li></ul></section>
+  </div>
+</article>
+
+<h2 class="ch">Benchmark</h2>
+<p>Apps similares mostraram o que o usuário já espera de um supermercado online.</p>
+<div class="as-tabela largo" role="region" aria-label="Tabela de benchmark, role para o lado no celular" tabindex="0">
+  <table>
+    <caption class="sr">Funcionalidades do Assaí comparadas a três concorrentes</caption>
+    <thead><tr><th scope="col">Funcionalidade</th><th scope="col">Assaí</th><th scope="col">Concorrente 1</th><th scope="col">Concorrente 2</th><th scope="col">Concorrente 3</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Compra online (carrinho)</th><td class="nao">Não tem</td><td>Tem</td><td>Tem</td><td>Tem</td></tr>
+      <tr><th scope="row">Delivery</th><td class="nao">Não tem</td><td>Tem</td><td>Tem</td><td>Tem</td></tr>
+      <tr><th scope="row">Retirada na loja</th><td class="nao">Não tem</td><td>Tem</td><td>Tem</td><td class="nao">Não tem</td></tr>
+      <tr><th scope="row">Checkout completo</th><td class="nao">Não tem</td><td>Tem</td><td>Tem</td><td>Tem</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 class="ch">User flow</h2>
+<p>O caminho da abertura do app até a compra liberada para retirada.</p>
+<ol class="as-flow largo">
+  <li><b>Abre o app</b></li>
+  <li><b>Tem cadastro?</b><span>Se não, informa o telefone e recebe um código</span></li>
+  <li><b>Home</b><span>Pode pesquisar um produto pela busca</span></li>
+  <li><b>Adiciona produtos ao carrinho</b></li>
+  <li><b>Vê a sacola</b><span>Pode voltar e adicionar mais</span></li>
+  <li><b>Segue para o pagamento</b><span>Pix ou cartão</span></li>
+  <li><b>Pagamento autorizado</b></li>
+  <li class="fim"><b>Compra liberada para retirada</b></li>
+</ol>
+
+<h2 class="ch">Wireframes</h2>
+<p>Baixa fidelidade, para definir a estrutura das telas e validar o fluxo antes do visual final.</p>
+<ol class="pg-wf largo" aria-label="Wireframes de baixa fidelidade"><li><div class="pg-tel" role="img" aria-label="Wireframe: Acesso pelo telefone"><div class="w-x g"></div><b>Telefone</b><div class="w-campo"></div><div class="w-btn">Continuar</div><div class="w-teclado"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span>Acesso pelo telefone</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Home"><div class="w-perfil"><i style="width:22%"></i><div><b>Nome</b><span>endereço</span></div></div><div class="w-campo"></div><div class="w-dia">Slogan</div><div class="w-x"></div><div class="w-redes" style="justify-content:space-between"><i></i><i></i><i></i><i></i><i></i></div><b>Ofertas</b><div class="w-par"><div class="w-x"></div><div class="w-x"></div></div><div class="w-redes" style="margin-top:auto;justify-content:space-between;border-top:1px solid #ccc;padding-top:6px"><i></i><i></i><i></i><i></i></div></div><span>Home</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Home com carrinho"><div class="w-perfil"><i style="width:22%"></i><div><b>Nome</b><span>endereço</span></div></div><div class="w-campo"></div><div class="w-dia">Slogan</div><div class="w-x"></div><div class="w-redes" style="justify-content:space-between"><i></i><i></i><i></i><i></i><i></i></div><div class="w-par"><div class="w-x"></div><div class="w-x"></div></div><div class="w-btn">Ver carrinho</div><div class="w-redes" style="margin-top:auto;justify-content:space-between;border-top:1px solid #ccc;padding-top:6px"><i></i><i></i><i></i><i></i></div></div><span>Home com carrinho</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Sacola"><div class="w-perfil"><i style="width:22%"></i><div><b>Nome</b><span>endereço</span></div></div><div class="w-campo"></div><div class="w-lista"><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div><div class="w-msg"><i></i><span></span></div></div><div class="w-btn">Continuar</div><div class="w-redes" style="margin-top:auto;justify-content:space-between;border-top:1px solid #ccc;padding-top:6px"><i></i><i></i><i></i><i></i></div></div><span>Sacola</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Checkout"><div class="w-topo"><span aria-hidden="true">←</span> Checkout</div><div class="w-bloco">Dados do cliente</div><div class="w-bloco">Dados da loja</div><div class="w-bloco">Retirada</div><div class="w-bloco" style="flex:1">Informações do pedido</div><div class="w-btn">Confirmar</div></div><span>Checkout</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Opções de pagamento"><div class="w-topo"><span aria-hidden="true">←</span> Pagamento</div><b>Opções de pagamento</b><div class="w-campo"></div><div class="w-campo"></div><div class="w-campo"></div><div class="w-redes" style="margin-top:auto;justify-content:space-between;border-top:1px solid #ccc;padding-top:6px"><i></i><i></i><i></i><i></i></div></div><span>Opções de pagamento</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Dados de pagamento"><div class="w-topo"><span aria-hidden="true">←</span> Pagamento</div><b>Dados de pagamento</b><div class="w-campo"></div><div class="w-campo"></div><div class="w-campo"></div><div class="w-campo"></div><div class="w-redes" style="margin-top:auto;justify-content:space-between;border-top:1px solid #ccc;padding-top:6px"><i></i><i></i><i></i><i></i></div></div><span>Dados de pagamento</span></li><li><div class="pg-tel" role="img" aria-label="Wireframe: Retirada"><div class="w-x" style="height:45%"></div><div class="w-dia">Mapa da retirada</div><div class="w-bloco" style="flex:1">Atualizações do pedido</div></div><span>Retirada</span></li></ol>
+
+<h2 class="ch">UI Design</h2>
+<p>Navegação simples, botões arredondados, letra legível e só o necessário em cada tela, no tom direto da marca Assaí.</p>
+<ul class="telas largo" style="--cols:4" aria-label="Quatro telas-chave do app redesenhado"><li><figure><div class="tela-cel"><img width="301" height="654" src="/img/2a1b09190f.webp" alt="Tela inicial: loja de retirada no topo, busca, banner de ofertas, categorias e as principais ofertas do dia, com atalho para a sacola." loading="lazy" decoding="async"></div><figcaption>Início</figcaption></figure></li><li><figure><div class="tela-cel"><img width="300" height="654" src="/img/eb917a0b0c.webp" alt="Sacola aberta sobre a tela inicial: lista de produtos com preço e quantidade, e o botão Continuar com o total." loading="lazy" decoding="async"></div><figcaption>Sacola</figcaption></figure></li><li><figure><div class="tela-cel"><img width="300" height="654" src="/img/a4bb013030.webp" alt="Checkout: dados da pessoa, loja de retirada, prazo de retirada e resumo do pedido com subtotal, taxa de serviço e total." loading="lazy" decoding="async"></div><figcaption>Checkout</figcaption></figure></li><li><figure><div class="tela-cel"><img width="300" height="654" src="/img/1e8d519483.webp" alt="Pagamento: escolha entre Pix e cartão de crédito, dados do cartão preenchidos e o botão verde Confirmar e pagar." loading="lazy" decoding="async"></div><figcaption>Pagamento</figcaption></figure></li></ul><p class="telas-mais">As telas mostram o caminho principal: do início ao pagamento, com retirada na loja.</p>
+
+<section class="pg-fontes largo" id="fontes-assai" aria-labelledby="ft-as">
+  <h2 class="ch" id="ft-as">Fontes</h2>
+  <p>Os números são os que estavam disponíveis quando a pesquisa foi feita.</p>
+  <ul>
+    <li><a href="https://supervarejo.com.br/varejo/carrefour-assai-atacadista-e-grupo-mateus-se-mantem-no-topo-do-ranking-abras-2025" target="_blank" rel="noopener">Ranking ABRAS 2025: Carrefour, Assaí e Grupo Mateus no topo (SuperVarejo, abr. 2025)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li><a href="https://mercadoeconsumo.com.br/13/12/2024/noticias-varejo/assai-atinge-marca-de-300-lojas-em-operacao-no-brasil/" target="_blank" rel="noopener">Assaí atinge a marca de 300 lojas (Mercado&amp;Consumo, dez. 2024)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li><a href="https://www.supervarejo.com.br/varejo/assai-registrou-crescimento-de-32-nas-vendas-online-em-2024" target="_blank" rel="noopener">Assaí cresce 32% em vendas online no 4º trimestre de 2024 (SuperVarejo, mar. 2025)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li><a href="https://centraldovarejo.com.br/maioria-dos-brasileiros-faz-compras-online-pelo-menos-1-vez-ao-mes-aponta-estudo" target="_blank" rel="noopener">Hábitos de Compra no Varejo Alimentar, Neogrid e Opinion Box (Central do Varejo, nov. 2024)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li><a href="https://www.ecommercebrasil.com.br/noticias/supermercado-online-ja-e-rotina-para-75-dos-brasileiros" target="_blank" rel="noopener">Supermercado online já é rotina para 75% dos brasileiros (E-Commerce Brasil, jun. 2025)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li><a href="https://brendi.com.br/blog/taxa-ifood-vs-rappi-2026/" target="_blank" rel="noopener">Taxas do iFood e da Rappi (Brendi)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li><a href="https://www.imarcgroup.com/brazil-online-grocery-market" target="_blank" rel="noopener">Brazil Online Grocery Market (IMARC Group)<span class="sr"> (abre em nova aba)</span></a></li>
+    <li>Avaliações do app Assaí Atacadista na Google Play, jul. a set. 2025.</li>
+  </ul>
+</section>
+</article>
+  <nav class="proximo" aria-label="Outros projetos"><div class="wrap"><a href="/petgram" data-ir="petgram"><span aria-hidden="true">←</span> Anterior: Petgram</a><a href="/" data-ir="inicio" data-alvo="projetos">Todos os projetos<span aria-hidden="true"> →</span></a></div></nav>
+</div>
+</main>
+
+<footer class="rodape"><div class="wrap"><span>Leonardo Fernandes · São Paulo</span><span>Na trilha enquanto eu escrevo: Djonga, BK e Black Alien.</span><span class="feito"><span>Feito com Claude, pipa e muita conversa.</span></span></div></footer>
+
+<dialog class="lupa" id="lupa" aria-labelledby="lupa-t"><div class="lupa-topo"><span id="lupa-t">Imagem ampliada</span><button type="button" class="ampliar" data-fechar>Fechar</button></div><div class="lupa-corpo"><img alt=""></div></dialog>
+<script>
+function irPara(el){
+  // rola até a seção e leva o foco junto (ajuda leitor de tela e funciona mesmo quando a página está dentro de outra janela)
+  if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex','-1');
+  el.scrollIntoView({block:'start'});
+  try { el.focus({preventScroll:false}); } catch(e) { el.focus(); }
+}
+(function(){
+  const raiz = document.documentElement;
+  function lerTema(){ try { return localStorage.getItem('tema'); } catch(e) { return null; } }
+  function aplicarTema(tema){ raiz.dataset.tema = tema; document.querySelectorAll('.tema-seg button').forEach(b => b.setAttribute('aria-checked', b.dataset.tema === tema ? 'true' : 'false')); const t=document.getElementById('trocarTema'); if (t) t.setAttribute('aria-label', tema === 'escuro' ? 'Ativar tema claro' : 'Ativar tema escuro'); }
+  const escolhido = lerTema();
+  aplicarTema(escolhido || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro'));
+  document.querySelectorAll('.tema-seg button').forEach(el => el.addEventListener('click', () => { aplicarTema(el.dataset.tema); try { localStorage.setItem('tema', el.dataset.tema); } catch(e) {} }));
+  const trocar=document.getElementById('trocarTema'); if (trocar) trocar.addEventListener('click', () => { const novo = raiz.dataset.tema === 'escuro' ? 'claro' : 'escuro'; aplicarTema(novo); try { localStorage.setItem('tema', novo); } catch(e) {} });
+  document.querySelectorAll('.tema-seg').forEach(g => g.addEventListener('keydown', e => { if (!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) return; e.preventDefault(); const bs=[...g.querySelectorAll('button')]; const atual=bs.findIndex(b=>b.getAttribute('aria-checked')==='true'); const prox=bs[(atual+1)%bs.length]; prox.click(); prox.focus(); }));
+  document.documentElement.lang = 'pt-BR';
+  document.querySelectorAll('a.card').forEach((a, i) => { const h = a.querySelector('h4, h3'), p = a.querySelector('p'); if (!h) return; a.setAttribute('aria-label', 'Acessar projeto: ' + h.textContent.trim()); if (p) { p.id = p.id || 'card-desc-' + i; a.setAttribute('aria-describedby', p.id); } });
+  const telas = [...document.querySelectorAll('[data-tela]')];
+  const nomes = telas.map(t => t.dataset.tela);
+  const menu = document.getElementById('menu'), botao = document.getElementById('abrirMenu');
+  const botaoTxt = document.getElementById('abrirMenuTxt');
+  const telaPequena = () => window.matchMedia('(max-width:1080px)').matches;
+  function medirTopo(){ const r = document.getElementById('topo').getBoundingClientRect(); document.documentElement.style.setProperty('--topo-h', Math.max(0, r.bottom) + 'px'); }
+  function fecharMenu(devolverFoco){ if (!menu.classList.contains('aberto')) return; menu.classList.remove('aberto'); document.body.classList.remove('menu-aberto'); botao.setAttribute('aria-expanded','false'); botaoTxt.textContent = 'Menu'; if (devolverFoco) botao.focus(); }
+  function abrirMenu(){ medirTopo(); menu.classList.add('aberto'); document.body.classList.add('menu-aberto'); botao.setAttribute('aria-expanded','true'); botaoTxt.textContent = 'Fechar'; const primeiro = menu.querySelector('a'); if (primeiro) primeiro.focus(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('aberto')) fecharMenu(true); if (e.key === 'Tab' && menu.classList.contains('aberto') && telaPequena()) { const itens = [document.getElementById('trocarTema'), botao, ...menu.querySelectorAll('a')].filter(Boolean); const i = itens.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); itens[itens.length-1].focus(); } else if (!e.shiftKey && i === itens.length-1) { e.preventDefault(); itens[0].focus(); } } });
+  window.addEventListener('resize', () => { if (!telaPequena()) fecharMenu(false); else if (menu.classList.contains('aberto')) medirTopo(); });
+  // rotas: no site publicado cada página tem endereço próprio (/lia, /sobre); no artifact continua com # (#lia)
+  const LIMPO = !!window.ROTAS_LIMPAS;
+  const caminho = n => n === 'inicio' ? '/' : '/' + n;
+  function rotaAtual(){
+    if (LIMPO) return location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').replace(/^index$/, '') || 'inicio';
+    return location.hash.slice(1) || 'inicio';
+  }
+  function mostrar(nome, alvo){
+    if (!nomes.includes(nome)) nome = 'inicio';
+    telas.forEach(t => t.hidden = t.dataset.tela !== nome);
+    document.querySelectorAll('.menu a[data-ir]').forEach(a => {
+      const atual = (a.dataset.ir === nome && !a.classList.contains('btn')) && (nome !== 'inicio' || a.dataset.alvo === 'projetos');
+      if (atual && nome !== 'inicio') a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+    });
+    const titulos = {inicio:'Leonardo Fernandes — Designer Conversacional', sobre:'Sobre mim — Leonardo Fernandes', lia:'Lia, assistente de viagens — Leonardo Fernandes', tom:'Tom, Clínica Veterinária Vila Matilde — Leonardo Fernandes', drogaria:'Drogaria Popular — Leonardo Fernandes', petgram:'Petgram — Leonardo Fernandes', assai:'Redesign Assaí Atacadista — Leonardo Fernandes'};
+    document.title = titulos[nome] || titulos.inicio;
+    fecharMenu();
+    requestAnimationFrame(() => {
+      const el = alvo && document.getElementById(alvo);
+      if (el) irPara(el); else { window.scrollTo(0, 0); if (window.__iniciado) { const h = document.querySelector('.tela:not([hidden]) h1'); if (h) { h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); } } }
+      window.__iniciado = true;
+    });
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[data-ir]');
+    if (a) { e.preventDefault(); const nome = a.dataset.ir; if (LIMPO) { if (location.pathname !== caminho(nome) || location.hash) history.pushState(null, '', caminho(nome)); } else if (location.hash !== '#' + nome) history.pushState(null, '', '#' + nome); mostrar(nome, a.dataset.alvo); return; }
+    const s = e.target.closest('a[data-scroll]');
+    if (s) { e.preventDefault(); const el = document.getElementById(s.getAttribute('href').slice(1)); if (el) irPara(el); }
+  });
+  window.addEventListener('hashchange', () => { if (!LIMPO) mostrar(rotaAtual()); });
+  window.addEventListener('popstate', () => mostrar(rotaAtual()));
+  botao.addEventListener('click', () => { if (menu.classList.contains('aberto')) fecharMenu(false); else abrirMenu(); });
+  const topo = document.getElementById('topo');
+  window.addEventListener('scroll', () => topo.classList.toggle('rolou', window.scrollY > 8), {passive:true});
+  document.getElementById('copiarEmail').addEventListener('click', () => {
+    const txt = document.getElementById('emailTxt').textContent, aviso = document.getElementById('copiado');
+    const ok = () => aviso.textContent = 'E-mail copiado.';
+    const falha = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('emailTxt')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); aviso.textContent = 'Selecionei o e-mail. Use Ctrl+C para copiar.'; };
+    try { navigator.clipboard.writeText(txt).then(ok, falha); } catch(e) { falha(); }
+  });
+  // o nome aparece no topo só quando o nome grande da página inicial sai da tela
+  const nomeHero = document.querySelector('.hero h1');
+  let heroVisivel = true;
+  function atualizarMarca(){ const naInicio = !document.querySelector('[data-tela="inicio"]').hidden; document.body.classList.toggle('nome-no-hero', naInicio && heroVisivel); }
+  if (nomeHero && 'IntersectionObserver' in window) { new IntersectionObserver(es => { heroVisivel = es[0].isIntersecting; atualizarMarca(); }, {rootMargin:'-80px 0px 0px 0px'}).observe(nomeHero); }
+  ['hashchange','popstate'].forEach(ev => window.addEventListener(ev, () => setTimeout(atualizarMarca, 0)));
+  document.addEventListener('click', () => setTimeout(atualizarMarca, 0));
+  const luz = document.querySelector('.luz'), heroLuz = document.querySelector('.hero');
+  if (luz && heroLuz) {
+    heroLuz.addEventListener('pointermove', e => { luz.style.setProperty('--lx', e.clientX + 'px'); luz.style.setProperty('--ly', e.clientY + 'px'); luz.classList.add('acesa'); });
+    heroLuz.addEventListener('pointerleave', () => luz.classList.remove('acesa'));
+    ['hashchange','popstate'].forEach(ev => window.addEventListener(ev, () => luz.classList.remove('acesa'))); }
+  // link antigo com # (ex.: leonvrdof.vercel.app/#lia) vira o endereço novo (/lia)
+  if (LIMPO && nomes.includes(location.hash.slice(1))) history.replaceState(null, '', caminho(location.hash.slice(1)));
+  mostrar(rotaAtual());
+  atualizarMarca();
+
+  // Pipa: o cursor vira vento. A pipa segue o mouse com atraso, inclina e a linha estica.
+  (function(){
+    const pipa=document.getElementById('pipa'), linha=document.getElementById('linha'), svg=document.getElementById('pipaSvg');
+    if(!pipa||!svg) return;
+    const parado=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const base={x:130,y:120}, ancora={x:150,y:420};
+    let alvo={x:0,y:0}, atual={x:0,y:0,r:0}, t0=performance.now();
+    function desenhar(px,py,r){
+      pipa.setAttribute('transform','translate('+(px-107)+','+(py-82)+') rotate('+r.toFixed(2)+' 107 82)');
+      const folga=Math.max(0,60-(ancora.y-py)*0.12);
+      const cx=(px+ancora.x)/2-30+folga, cy=(py+ancora.y)/2+30;
+      linha.setAttribute('d','M'+px.toFixed(1)+' '+py.toFixed(1)+' Q '+cx.toFixed(1)+' '+cy.toFixed(1)+' '+ancora.x+' '+ancora.y);
+    }
+    if(parado){desenhar(base.x,base.y,0);return;}
+    window.addEventListener('pointermove',e=>{
+      if(e.pointerType!=='mouse') return;
+      const r=svg.getBoundingClientRect(); if(!r.width) return;
+      const cx=r.left+r.width/2, cy=r.top+r.height*0.3;
+      alvo.x=Math.max(-1,Math.min(1,(e.clientX-cx)/(window.innerWidth/2)));
+      alvo.y=Math.max(-1,Math.min(1,(e.clientY-cy)/(window.innerHeight/2)));
+    },{passive:true});
+    function quadro(t){
+      const s=(t-t0)/1000;
+      atual.x+=(alvo.x-atual.x)*0.05; atual.y+=(alvo.y-atual.y)*0.05;
+      const brisa=Math.sin(s*0.9)*6, sobe=Math.sin(s*1.3)*5;
+      const px=base.x+atual.x*45+brisa, py=base.y+atual.y*30+sobe;
+      const r=atual.x*14+Math.sin(s*1.1)*3;
+      atual.r+=(r-atual.r)*0.1;
+      desenhar(px,py,atual.r);
+      requestAnimationFrame(quadro);
+    }
+    requestAnimationFrame(quadro);
+  })();
+})();
+(function(){
+  const lupa = document.getElementById('lupa'); if (!lupa || !lupa.showModal) { document.querySelectorAll('[data-ampliar]').forEach(b => b.hidden = true); return; }
+  const img = lupa.querySelector('img'), titulo = document.getElementById('lupa-t'); let origem = null;
+  document.querySelectorAll('[data-ampliar]').forEach(b => b.addEventListener('click', () => {
+    const fig = b.closest('figure'), o = fig.querySelector('.fig-img img');
+    img.src = o.src; img.alt = o.alt; img.style.width = (o.naturalWidth || 900) + 'px';
+    titulo.textContent = fig.querySelector('figcaption span').textContent;
+    origem = b; lupa.showModal(); lupa.querySelector('[data-fechar]').focus();
+  }));
+  lupa.querySelector('[data-fechar]').addEventListener('click', () => lupa.close());
+  lupa.addEventListener('click', e => { if (e.target === lupa) lupa.close(); });
+  lupa.addEventListener('close', () => { img.removeAttribute('src'); if (origem) origem.focus(); });
+})();
+(function(){
+  // carrega a conversa dentro do celular só quando o case abre, já no tema do portfólio
+  function carregar(){ document.querySelectorAll('.tela:not([hidden]) .celular iframe[data-src]').forEach(f => { if (f.src) return; const tema = document.documentElement.dataset.tema === 'escuro' ? 'escuro' : 'claro'; f.src = f.dataset.src + '&tema=' + tema; }); }
+  ['hashchange','popstate','click'].forEach(ev => addEventListener(ev, () => setTimeout(carregar, 60))); setTimeout(carregar, 300);
+})();
+document.querySelectorAll('.toque').forEach(bt => bt.addEventListener('click', () => { const f = bt.parentElement.querySelector('iframe'); bt.remove(); if (f) f.focus(); }));
+</script>
+
+</body>
+</html>
