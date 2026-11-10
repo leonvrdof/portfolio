@@ -22,7 +22,7 @@ html = f'''<!doctype html>
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://leonvrdof.vercel.app/">
-<meta property="og:image" content="https://leonvrdof.vercel.app/og.png">
+<meta property="og:image" content="https://leonvrdof.vercel.app/capa.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta property="og:image:alt" content="Leonardo Fernandes, Designer Conversacional e UX Writer. Ao lado, um celular com a conversa da Lia, assistente de viagens no WhatsApp.">
@@ -73,6 +73,8 @@ h = re.sub(r'<img [^>]*>', dim, h)
 open(SITE + '/index.html', 'w', encoding='utf-8').write(h)
 print('imagens', len(os.listdir(d)), 'html', len(h))
 shutil.copy(AQUI / 'og' / 'og-1x.png', SITE + '/og.png')
+# mesmo arquivo com outro nome: o endereço novo faz WhatsApp e LinkedIn buscarem a imagem de novo
+shutil.copy(AQUI / 'og' / 'og-1x.png', SITE + '/capa.png')
 shutil.copy(AQUI / 'curriculo.pdf', SITE + '/curriculo.pdf')
 
 # páginas com endereço próprio: /lia, /tom, /sobre... (a Vercel serve lia.html em /lia por causa do cleanUrls)
