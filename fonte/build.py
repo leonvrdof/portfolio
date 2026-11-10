@@ -69,6 +69,8 @@ ass_b = open(AQUI / 'corpos' / 'assai-body.html', encoding='utf-8').read()
 ass_b = troca(ass_b, '<figure class="ph"><div>Telas finais do app</div><figcaption>A imagem original entra aqui na versão final do site.</figcaption></figure>', assai_ui())
 
 for velho, novo in reescritas.LIA: lia_b = troca(lia_b, velho, novo)
+# Figma: links do case apontam para a página atual do MVP (a 249:3258 é a v1, histórico)
+lia_b = lia_b.replace('node-id=249-3258&amp;t=ekY5Blnh5QaFz3Wc-1', 'node-id=301-4931')
 for velho, novo in reescritas.PET: pet_b = troca(pet_b, velho, novo)
 for velho, novo in reescritas.ASS: ass_b = troca(ass_b, velho, novo)
 

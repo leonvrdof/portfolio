@@ -1,5 +1,8 @@
 # Reescritas anti "AI slop" dentro dos cases. Os textos originais continuam nos arquivos .md e nos bodies.
 LIA = [
+ # MVP 1.1 (10/11/2026): nova funcionalidade Dicas do destino, depois do teste com um designer conversacional
+ ("Testar o MVP da Lia</a></p>",
+  "Testar o MVP da Lia</a></p>\n<p>MVP 1.1: num teste com um designer conversacional, o painel de testes mostrou um ponto de confusão. Depois de confirmar a viagem, o “Sim” em “Posso te ajudar com mais alguma coisa?” voltava para a escolha do destino, e a pessoa esperava sugestões para a viagem que tinha acabado de confirmar. Troquei o Sim e o Não por três opções: “Dicas de passeios”, “Planejar nova viagem” e “Não, obrigado”. As dicas mostram passeios do destino escolhido, como a Dona Lígia tinha pedido na validação.</p>"),
  ("Além disso, fatores externos, como a rotina de trabalho do esposo, acabam dificultando a tomada de decisão e fazendo com que ela adie viagens repetidamente, o que gera frustração e estresse, principalmente pela sensação de que o tempo está passando e ela não está aproveitando como gostaria.",
   "A rotina de trabalho do esposo também pesa: ela adia viagens repetidamente, e isso gera frustração e estresse, com a sensação de que o tempo está passando e ela não está aproveitando como gostaria."),
  ("Esse cenário mostra a necessidade de uma solução que ofereça mais clareza, segurança e apoio para pessoas que desejam viajar, mas se sentem perdidas diante de tantas escolhas e informações.",

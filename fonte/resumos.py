@@ -12,7 +12,7 @@ def _resumo(id_, frase, ficha, numeros, links=''):
 </section>
 '''
 
-FIG_LIA = 'https://www.figma.com/design/iS4Jq0wyODvgVXuYrSGNNh/Fluxo-Conversacional---Assistente-viagens?node-id=249-3258&amp;t=ekY5Blnh5QaFz3Wc-1'
+FIG_LIA = 'https://www.figma.com/design/iS4Jq0wyODvgVXuYrSGNNh/Fluxo-Conversacional---Assistente-viagens?node-id=301-4931'
 FIG_DRO = 'https://www.figma.com/design/TVb5pWH3tjjAR1mfWDVTxu/Drogaria-Popular?node-id=0-1'
 
 LIA = _resumo('resumo-lia',
@@ -21,7 +21,7 @@ LIA = _resumo('resumo-lia',
      ('Meu papel', 'Conversation designer, da entrevista ao protótipo'),
      ('Canais', 'WhatsApp e BlipChat'),
      ('Modelo', 'Híbrido: menu guiado e IA em momentos específicos')],
-    '1 entrevista guiada, fluxo feliz em 4 etapas principais, jornada detalhada em 10 etapas e fluxo revisado depois da validação com a entrevistada.',
+    '1 entrevista guiada, fluxo feliz em 4 etapas principais, jornada detalhada em 10 etapas, fluxo revisado depois da validação com a entrevistada e MVP 1.1 com dicas de passeios depois de um teste de usabilidade.',
     f'<a href="#lia-prototipo" data-scroll="1">Conversar com a Lia</a><a target="_blank" rel="noopener" href="{FIG_LIA}">Acessar os fluxos no Figma</a>')
 
 DRO = _resumo('resumo-drogaria',
