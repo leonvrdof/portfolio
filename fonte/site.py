@@ -22,10 +22,10 @@ html = f'''<!doctype html>
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://leonvrdof.vercel.app/">
-<meta property="og:image" content="https://leonvrdof.vercel.app/capa.png">
+<meta property="og:image" content="https://leonvrdof.vercel.app/capa-v3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
-<meta property="og:image:alt" content="Leonardo Fernandes, Designer Conversacional e UX Writer. Ao lado, um celular com a conversa da Lia, assistente de viagens no WhatsApp.">
+<meta property="og:image:alt" content="Leonardo Fernandes, Designer Conversacional e UX Writer. Acima do nome, o desenho de uma pipa com a linha e a lata.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F7F7F5">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -75,6 +75,7 @@ print('imagens', len(os.listdir(d)), 'html', len(h))
 shutil.copy(AQUI / 'og' / 'og-1x.png', SITE + '/og.png')
 # mesmo arquivo com outro nome: o endereço novo faz WhatsApp e LinkedIn buscarem a imagem de novo
 shutil.copy(AQUI / 'og' / 'og-1x.png', SITE + '/capa.png')
+shutil.copy(AQUI / 'og' / 'og-1x.png', SITE + '/capa-v3.png')   # ao trocar a imagem, mude o número: o nome novo faz os apps buscarem de novo
 shutil.copy(AQUI / 'curriculo.pdf', SITE + '/curriculo.pdf')
 
 # páginas com endereço próprio: /lia, /tom, /sobre... (a Vercel serve lia.html em /lia por causa do cleanUrls)
