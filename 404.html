@@ -569,14 +569,15 @@ html[data-tema="escuro"] .marca .logo-pipa polygon{stroke:var(--tinta);stroke-wi
 .decisoes li span{font-size:16px}
 .decisoes li{background:var(--papel);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:8px}
 .v1v2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:8px}
-.v1v2 figure{margin:0;background:#EFEAE2;border-radius:var(--raio-m);padding:20px;display:flex;flex-direction:column;gap:12px;color:#121212}
+.v1v2 figure{margin:0;background:#EFEAE2;border:1px solid #8A8478;border-radius:var(--raio-m);padding:20px;display:flex;flex-direction:column;gap:12px;color:#121212}
 .v1v2 figcaption{font-weight:700;font-size:14px}
 .v1v2 .depois figcaption{color:#0B6B3A}
 .v1v2 figure:not(.depois) figcaption{color:#A10D25}
-.case-corpo .v1v2 .bolha{color:#121212;margin:0;align-self:flex-start;max-width:92%;background:#fff;border-radius:4px 12px 12px 12px;padding:12px 14px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.4;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.case-corpo .v1v2 .bolha{color:#121212;margin:0;align-self:flex-start;max-width:92%;background:#fff;border-radius:4px 12px 12px 12px;padding:12px 14px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.4;border:1px solid #8A8478}
 .case-corpo .v1v2 .nota{font-size:14px;color:#3B3B3B}
-html[data-tema="escuro"] .v1v2 figure{background:#0B141A;color:#E9EDEF}
-html[data-tema="escuro"] .case-corpo .v1v2 .bolha{background:#202C33;color:#E9EDEF}
+/* escuro: cartão e balão com borda de pelo menos 3:1, para a forma não sumir no fundo */
+html[data-tema="escuro"] .v1v2 figure{background:#1B2228;border-color:#6B7780;color:#E9EDEF}
+html[data-tema="escuro"] .case-corpo .v1v2 .bolha{background:#33424C;border-color:#6B7780;color:#E9EDEF}
 html[data-tema="escuro"] .case-corpo .v1v2 .nota{color:#C9D1D6}
 html[data-tema="escuro"] .v1v2 .depois figcaption{color:#5FD08F}
 html[data-tema="escuro"] .v1v2 figure:not(.depois) figcaption{color:#FF8A9A}
