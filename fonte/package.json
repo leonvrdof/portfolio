@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "description": "Testes do portfólio (node testes/qa.js)",
+  "devDependencies": { "axe-core": "^4.10.2", "playwright": "^1.50.0" }
+}
