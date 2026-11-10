@@ -1673,6 +1673,8 @@ function irPara(el){
   // carrega a conversa dentro do celular só quando o case abre, já no tema do portfólio
   function carregar(){ document.querySelectorAll('.tela:not([hidden]) .celular iframe[data-src]').forEach(f => { if (f.src) return; const tema = document.documentElement.dataset.tema === 'escuro' ? 'escuro' : 'claro'; f.src = f.dataset.src + '&tema=' + tema; }); }
   ['hashchange','popstate','click'].forEach(ev => addEventListener(ev, () => setTimeout(carregar, 60))); setTimeout(carregar, 300);
+  // quando o tema do portfólio muda, o celular troca junto (recarrega o protótipo no tema novo)
+  new MutationObserver(() => { const tema = document.documentElement.dataset.tema === 'escuro' ? 'escuro' : 'claro'; document.querySelectorAll('.celular iframe[data-src]').forEach(f => { if (f.src && !f.src.endsWith('&tema=' + tema)) f.src = f.dataset.src + '&tema=' + tema; }); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-tema'] });
 })();
 document.querySelectorAll('.toque').forEach(bt => bt.addEventListener('click', () => { const f = bt.parentElement.querySelector('iframe'); bt.remove(); if (f) f.focus(); }));
 </script>
