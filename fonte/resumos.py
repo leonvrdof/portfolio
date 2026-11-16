@@ -21,7 +21,7 @@ LIA = _resumo('resumo-lia',
      ('Meu papel', 'Conversation designer, da entrevista ao protótipo'),
      ('Canais', 'WhatsApp e BlipChat'),
      ('Modelo', 'Híbrido: menu guiado e IA em momentos específicos')],
-    '1 entrevista guiada, fluxo feliz em 4 etapas principais, jornada detalhada em 10 etapas, fluxo revisado depois da validação com a entrevistada e MVP 1.1 com dicas de passeios depois de um teste de usabilidade.',
+    '1 entrevista guiada, fluxo feliz em 4 etapas principais, jornada detalhada em 10 etapas, fluxo revisado depois da validação com a entrevistada e MVP 1.1 com dicas de passeios. No teste de usabilidade, 7 de 8 pessoas escolheram o destino que queriam, com facilidade média de 5,0.',
     f'<a href="#lia-prototipo" data-scroll="1">Conversar com a Lia</a><a target="_blank" rel="noopener" href="{FIG_LIA}">Acessar os fluxos no Figma</a>')
 
 DRO = _resumo('resumo-drogaria',
@@ -86,7 +86,7 @@ TOM = _resumo('resumo-tom',
      ('Meu papel', 'Conversation designer, do começo ao fim: pesquisa, persona, fluxos, conteúdo e documentação'),
      ('Canal', 'WhatsApp'),
      ('Ferramentas', 'Figma e Claude')],
-    '12 skills no fluxo micro, 47 termos travados no Glossário, 50 regras de conteúdo numeradas e 88 decisões registradas com o motivo de cada uma.',
+    '12 skills no fluxo micro, 47 termos travados no Glossário, 50 regras de conteúdo numeradas e 88 decisões registradas com o motivo de cada uma. No teste de usabilidade, 8 de 8 pessoas agendaram a consulta sozinhas.',
     f'<a href="#tom-prototipo" data-scroll="1">Conversar com o Tom</a><a target="_blank" rel="noopener" href="{FIG_TOM}">Acessar o fluxo completo no Figma</a>')
 
 TOM_DADOS = '''<ul class="dados largo" aria-label="Dados da pesquisa Opinion Box, junho de 2025">

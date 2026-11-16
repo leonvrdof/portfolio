@@ -77,6 +77,12 @@ for velho, novo in reescritas.ASS: ass_b = troca(ass_b, velho, novo)
 # resumo no topo dos cases (o conteúdo original continua inteiro) e frase do desafio da Drogaria
 import resumos
 lia_b = resumos.LIA + lia_b
+# resultados dos testes de usabilidade (testes.py): Lia ganha a seção no fim; Tom troca a promessa de medir pelos números
+import testes
+lia_b = lia_b + testes.LIA
+_m = re.search(r'<p>Quando o Tom estiver no ar, vou medir[\s\S]*?</p>\n', tom_b); assert _m, 'resultado tom'
+tom_b = tom_b.replace(_m.group(0), testes.TOM, 1)
+tom_b = troca(tom_b, *testes.TOM_APRENDIZADOS)
 # Tom: resumo em caixa (mesmo conteúdo) e visuais com o que o case já diz
 _m = re.search(r'<h2 class="ch">Resumo</h2>[\s\S]*?Testar o MVP do Tom[\s\S]*?</p>\n', tom_b); assert _m, 'resumo tom'
 tom_b = tom_b.replace(_m.group(0), resumos.TOM, 1)
@@ -114,7 +120,7 @@ def acessivel(html_txt):
 assert t.count('  <nav class="proximo"') == 5
 t = t.replace('  <nav class="proximo"', resumos.CONVITE + '  <nav class="proximo"')
 assert t.count('/* imagens dos cases */') == 1
-t = t.replace('/* imagens dos cases */', resumos.CSS + resumos.CSS_TOM + '/* imagens dos cases */')
+t = t.replace('/* imagens dos cases */', resumos.CSS + resumos.CSS_TOM + testes.CSS + '/* imagens dos cases */')
 assert t.count('<section class="converse"><div class="wrap">') == 1
 t = t.replace('<section class="converse"><div class="wrap">', '<section class="converse" id="tom-prototipo" style="scroll-margin-top:80px"><div class="wrap">')
 t = t.replace('{{IMG_PET_CAPA}}', b64('pg-home1.jpg')).replace('{{IMG_ASS_CAPA}}', b64('as-inicio.jpg'))
