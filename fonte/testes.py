@@ -118,7 +118,7 @@ TOM = (
     ], 'Métricas do teste do Tom contra as metas')
     + '<p>Da primeira mensagem até a consulta confirmada, a mediana foi de 2 min 47 s. Duas pessoas não deram nota, por isso são 6 notas.</p>\n'
     + '<h3>O que mudei, e por quê</h3>\n'
-    + '<p>O primeiro teste já mudou o fluxo. As mudanças entraram antes dos outros 7 participantes.</p>\n'
+    + '<p>O primeiro teste já mudou o fluxo: as duas primeiras mudanças entraram antes dos outros 7 participantes.</p>\n'
     + _mudancas([
         ('12/11', 'Minhas consultas',
          'o Ítalo Brito, designer conversacional, agendou, voltou para agendar de novo, e o Tom começou outro agendamento sem mostrar a consulta marcada.',
@@ -128,12 +128,15 @@ TOM = (
          'no mesmo teste, faltava um jeito de agendar para outro pet sem recomeçar a conversa.',
          'o resumo da consulta ganhou Trocar pet, e a escolha do pet sempre mostra Outro pet, mesmo com um pet cadastrado.',
          'os 7 participantes seguintes escolheram o pet sem erro. O custo foi um toque a mais.'),
+        ('', 'CPF protegido também com espaços',
+         'um participante digitou o CPF com um espaço no meio, e o registro do teste guardou o número inteiro, sem máscara.',
+         'a máscara passou a reconhecer o CPF com pontos, traço ou espaços entre os números, no navegador e no servidor. O registro antigo foi corrigido.',
+         'nenhum CPF fica inteiro no registro dos testes.'),
     ])
     + '<h3>O que ainda falta</h3>\n'
     + '<ul>'
     '<li>Reconhecer pedidos escritos, como “gostaria de agendar uma consulta para meu pet” no menu, antes de responder que não entendeu.</li>'
     '<li>Oferecer horários à tarde na lista de horários livres: uma pessoa pediu a tarde, e a lista só tinha a manhã.</li>'
-    '<li>Proteger o CPF também quando a pessoa digita com espaços: o teste encontrou um caso que passou sem máscara pelo registro.</li>'
     '<li>Testar as funções de quem volta, como remarcar e trocar de pet.</li>'
     '</ul>\n'
 )
