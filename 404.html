@@ -169,13 +169,15 @@ html[data-tema="escuro"] .tema .lua{display:block}
 .hero p{margin:0;max-width:560px;font-size:1.25rem;color:var(--texto)}
 /* prova logo abaixo da promessa (auditoria RCD, item 2) e frase que explica o que acontece no clique (item 3) */
 /* selo de disponibilidade: texto sempre visível (a cor do ponto só reforça), alvo de toque de 44px, leva ao contato */
-.disponivel{display:inline-flex;align-items:center;gap:8px;width:fit-content;max-width:100%;min-height:44px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--ok,#0B6B3A);background:var(--ok-fundo,#E3F3EA);color:var(--tinta);font-weight:600;font-size:clamp(.875rem,3.8vw,1rem);line-height:1.3;text-decoration:none}
-.disponivel:hover{text-decoration:underline;text-underline-offset:3px}
+.disponivel{position:relative;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;width:fit-content;max-width:100%;min-height:32px;padding:5px 12px;border-radius:999px;border:1.5px solid var(--ok,#0B6B3A);background:var(--ok-fundo,#E3F3EA);color:var(--tinta);font-weight:600;font-size:.875rem;line-height:1.3;text-decoration:none}
+/* área de toque de 44px sem aumentar o selo */
+.disponivel::after{content:"";position:absolute;inset:-6px -2px}
+.disponivel:hover{color:var(--tinta);text-decoration:underline;text-underline-offset:3px}
 .disponivel .seta{flex:none;transition:transform .2s}
 .disponivel:hover .seta{transform:translateX(3px)}
 @media (prefers-reduced-motion:reduce){.disponivel .seta{transition:none}}
 .disponivel:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
-.disponivel .ponto{flex:none;width:10px;height:10px;border-radius:50%;background:var(--ok,#0B6B3A);box-shadow:0 0 0 0 color-mix(in srgb,var(--ok,#0B6B3A) 60%,transparent);animation:pulso 2.4s ease-out 3}
+.disponivel .ponto{flex:none;width:8px;height:8px;border-radius:50%;background:var(--ok,#0B6B3A);box-shadow:0 0 0 0 color-mix(in srgb,var(--ok,#0B6B3A) 60%,transparent);animation:pulso 2.4s ease-out 3}
 @keyframes pulso{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok,#0B6B3A) 55%,transparent)}70%,100%{box-shadow:0 0 0 8px transparent}}
 @media (prefers-reduced-motion:reduce){.disponivel .ponto{animation:none}}
 .hero p.prova{display:flex;gap:12px;align-items:flex-start;font-size:1rem;line-height:1.5;color:var(--tinta);border-left:4px solid var(--vermelho);padding-left:16px}
@@ -762,7 +764,7 @@ dialog.lupa.cert{width:auto;max-width:min(1100px,96vw);overflow:hidden}
   <div class="wrap" id="aviso404" hidden><p class="aviso" role="status" style="margin:24px 0 0"><strong>Página não encontrada.</strong> Este endereço não existe. Você está na página inicial do portfólio.</p></div>
   <section class="wrap hero">
     <div class="txt">
-      <a class="disponivel" href="/" data-ir="inicio" data-alvo="contato"><span class="ponto" aria-hidden="true"></span>Disponível para oportunidades<span class="sr">: acessar o contato</span><svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="disponivel" href="/" data-ir="inicio" data-alvo="contato"><span class="ponto" aria-hidden="true"></span>Disponível para oportunidades<span class="sr">: acessar o contato</span><svg class="seta" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       <span class="rotulo">Designer conversacional · UX Writer</span>
       <h1 class="nome lanterna">Leonardo<br><span style="white-space:nowrap">Fernandes<svg class="bola" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><defs><clipPath id="bolaClip"><circle r="47"/></clipPath></defs><g class="bola-giro"><circle r="47" fill="#C8102E"/><g clip-path="url(#bolaClip)" fill="#141414"><polygon points="0.0,-15.0 14.3,-4.6 8.8,12.1 -8.8,12.1 -14.3,-4.6"/><polygon points="18.8,-25.9 13.7,-41.5 27.0,-51.2 40.4,-41.5 35.3,-25.9"/><polygon points="30.4,9.9 43.7,0.2 57.1,9.9 52.0,25.5 35.5,25.5"/><polygon points="0.0,32.0 13.3,41.7 8.2,57.3 -8.2,57.3 -13.3,41.7"/><polygon points="-30.4,9.9 -35.5,25.5 -52.0,25.5 -57.1,9.9 -43.7,0.2"/><polygon points="-18.8,-25.9 -35.3,-25.9 -40.4,-41.5 -27.0,-51.2 -13.7,-41.5"/></g><g stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><line x1="0.0" y1="-15.0" x2="0.0" y2="-31.0"/><line x1="14.3" y1="-4.6" x2="29.5" y2="-9.6"/><line x1="8.8" y1="12.1" x2="18.2" y2="25.1"/><line x1="-8.8" y1="12.1" x2="-18.2" y2="25.1"/><line x1="-14.3" y1="-4.6" x2="-29.5" y2="-9.6"/></g></g><circle r="47" fill="none" stroke="currentColor" stroke-width="3"/></svg></span></h1>
       <p>Desenho conversas de chatbots e assistentes no WhatsApp: o fluxo, o tom de voz e cada mensagem, testados com quem vai usar.</p>
