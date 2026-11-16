@@ -79,7 +79,7 @@ LIA = (
     + '<p>Corrigi cada problema assim que ele apareceu, com o teste rodando.</p>\n'
     + _mudancas([
         ('10/11', 'Dicas de passeios no fim da conversa',
-         'um designer conversacional confirmou a viagem para Natal, respondeu “Sim” em “Posso te ajudar com mais alguma coisa?” '
+         'o Ítalo Brito, designer conversacional, confirmou a viagem para Natal, respondeu “Sim” em “Posso te ajudar com mais alguma coisa?” '
          'esperando sugestões para essa viagem, e a Lia voltou para a escolha do destino.',
          'o Sim e o Não viraram três opções: “Dicas de passeios”, “Planejar nova viagem” e “Não, obrigado”. É o MVP 1.1.',
          'quem quer outra viagem diz isso com um botão, e quem quer sugestões recebe passeios do destino escolhido.'),
@@ -121,7 +121,7 @@ TOM = (
     + '<p>O primeiro teste já mudou o fluxo. As mudanças entraram antes dos outros 7 participantes.</p>\n'
     + _mudancas([
         ('12/11', 'Minhas consultas',
-         'um designer conversacional agendou, voltou para agendar de novo, e o Tom começou outro agendamento sem mostrar a consulta marcada.',
+         'o Ítalo Brito, designer conversacional, agendou, voltou para agendar de novo, e o Tom começou outro agendamento sem mostrar a consulta marcada.',
          'ao agendar, o Tom mostra a consulta já marcada, com Reagendar, Cancelar consulta e Nova consulta. Também virou item do menu.',
          'resolve o caso do primeiro teste. Ainda falta alguém que volte para remarcar.'),
         ('12/11', 'Trocar pet e Outro pet',
