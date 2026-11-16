@@ -79,12 +79,12 @@ LIA = (
     + '<p>Corrigi cada problema assim que ele apareceu, com o teste rodando.</p>\n'
     + _mudancas([
         ('10/11', 'Dicas de passeios no fim da conversa',
-         'o Ítalo Brito, designer conversacional, confirmou a viagem para Natal, respondeu “Sim” em “Posso te ajudar com mais alguma coisa?” '
+         'o primeiro participante confirmou a viagem para Natal, respondeu “Sim” em “Posso te ajudar com mais alguma coisa?” '
          'esperando sugestões para essa viagem, e a Lia voltou para a escolha do destino.',
          'o Sim e o Não viraram três opções: “Dicas de passeios”, “Planejar nova viagem” e “Não, obrigado”. É o MVP 1.1.',
          'quem quer outra viagem diz isso com um botão, e quem quer sugestões recebe passeios do destino escolhido.'),
         ('12/11', 'Cidade no lugar do país',
-         'uma pessoa digitou “Bolívia”, e a Lia respondeu que não encontrou o destino.',
+         'um participante digitou “Bolívia”, e a Lia respondeu que não encontrou o destino.',
          'a pergunta pede a cidade, com um exemplo, e quem digita um país recebe as cidades daquele país para escolher.',
          'nenhum participante depois digitou só o país.'),
         ('12/11', 'Soma de pessoas',
@@ -121,7 +121,7 @@ TOM = (
     + '<p>O primeiro teste já mudou o fluxo: as duas primeiras mudanças entraram antes dos outros 7 participantes.</p>\n'
     + _mudancas([
         ('12/11', 'Minhas consultas',
-         'o Ítalo Brito, designer conversacional, agendou, voltou para agendar de novo, e o Tom começou outro agendamento sem mostrar a consulta marcada.',
+         'o primeiro participante agendou, voltou para agendar de novo, e o Tom começou outro agendamento sem mostrar a consulta marcada.',
          'ao agendar, o Tom mostra a consulta já marcada, com Reagendar, Cancelar consulta e Nova consulta. Também virou item do menu.',
          'resolve o caso do primeiro teste. Ainda falta alguém que volte para remarcar.'),
         ('12/11', 'Trocar pet e Outro pet',
@@ -129,14 +129,14 @@ TOM = (
          'o resumo da consulta ganhou Trocar pet, e a escolha do pet sempre mostra Outro pet, mesmo com um pet cadastrado.',
          'os 7 participantes seguintes escolheram o pet sem erro. O custo foi um toque a mais.'),
         ('', 'CPF protegido também com espaços',
-         'um participante digitou o CPF com um espaço no meio, e o registro do teste guardou o número inteiro, sem máscara.',
+         'um participante digitou o CPF com um espaço entre os números, e o registro do teste guardou o número inteiro, sem máscara.',
          'a máscara passou a reconhecer o CPF com pontos, traço ou espaços entre os números, no navegador e no servidor. O registro antigo foi corrigido.',
          'nenhum CPF fica inteiro no registro dos testes.'),
     ])
     + '<h3>O que ainda falta</h3>\n'
     + '<ul>'
     '<li>Reconhecer pedidos escritos, como “gostaria de agendar uma consulta para meu pet” no menu, antes de responder que não entendeu.</li>'
-    '<li>Oferecer horários à tarde na lista de horários livres: uma pessoa pediu a tarde, e a lista só tinha a manhã.</li>'
+    '<li>Oferecer horários à tarde na lista de horários livres: um participante pediu a tarde, e a lista só tinha a manhã.</li>'
     '<li>Testar as funções de quem volta, como remarcar e trocar de pet.</li>'
     '</ul>\n'
 )
