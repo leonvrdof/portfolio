@@ -145,6 +145,13 @@ html[data-tema="escuro"] .tema .lua{display:block}
 .hero h1{font-size:clamp(2.4rem,12vw,9rem);overflow-wrap:anywhere}
 .hero p{margin:0;max-width:560px;font-size:1.25rem;color:var(--texto)}
 /* prova logo abaixo da promessa (auditoria RCD, item 2) e frase que explica o que acontece no clique (item 3) */
+/* selo de disponibilidade: texto sempre visível (a cor do ponto só reforça), alvo de toque de 44px, leva ao contato */
+.disponivel{display:inline-flex;align-items:center;gap:10px;width:fit-content;min-height:44px;padding:8px 18px;border-radius:999px;border:1.5px solid var(--ok,#0B6B3A);background:var(--ok-fundo,#E3F3EA);color:var(--tinta);font-weight:600;font-size:1rem;line-height:1.3;text-decoration:none}
+.disponivel:hover{text-decoration:underline;text-underline-offset:3px}
+.disponivel:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+.disponivel .ponto{flex:none;width:10px;height:10px;border-radius:50%;background:var(--ok,#0B6B3A);box-shadow:0 0 0 0 color-mix(in srgb,var(--ok,#0B6B3A) 60%,transparent);animation:pulso 2.4s ease-out infinite}
+@keyframes pulso{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok,#0B6B3A) 55%,transparent)}70%,100%{box-shadow:0 0 0 8px transparent}}
+@media (prefers-reduced-motion:reduce){.disponivel .ponto{animation:none}}
 .hero p.prova{display:flex;gap:12px;align-items:flex-start;font-size:1rem;line-height:1.5;color:var(--tinta);border-left:4px solid var(--vermelho);padding-left:16px}
 .hero p.prova svg{flex:none;color:var(--vermelho);margin-top:0}
 .hero p.gatilho{font-size:14px;margin-top:-12px}
@@ -204,14 +211,18 @@ html[data-tema="escuro"] .bl-botoes span{background:#202C33;color:#53BDEB}
 .digitando i{width:6px;height:6px;border-radius:50%;background:#8696A0;animation:pula 1s infinite}
 .digitando i:nth-child(2){animation-delay:.15s}.digitando i:nth-child(3){animation-delay:.3s}
 @keyframes pula{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-3px);opacity:1}}
-/* com mouse: o último balão chega quando a pessoa passa o mouse ou foca o card */
+/* o último balão chega com o "digitando": com mouse, ao passar o mouse ou focar o card; no celular, quando o card aparece na tela (classe .visto, posta pelo script). Sem script ou com movimento reduzido, a conversa aparece inteira e parada. */
+@media (prefers-reduced-motion:no-preference){
+  html.anima .capa-zap .ultimo,html.anima .capa-zap .bl-botoes{display:none}
+  html.anima .capa-zap .digitando{display:flex;max-height:40px;overflow:hidden}
+  html.anima .card.visto .capa-zap .digitando{animation:some .15s 1.1s forwards}
+  html.anima .card.visto .capa-zap .ultimo{display:block;animation:chega .25s 1.1s both}
+  html.anima .card.visto .capa-zap .bl-botoes{display:flex;animation:chega .25s 1.4s both}
+}
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
-  .capa-zap .ultimo,.capa-zap .bl-botoes{display:none}
-  .capa-zap .digitando{display:flex}
-  .capa-zap .digitando{max-height:40px;overflow:hidden}
-  .card:hover .capa-zap .digitando,.card:focus-visible .capa-zap .digitando{animation:some .15s .7s forwards}
-  .card:hover .capa-zap .ultimo,.card:focus-visible .capa-zap .ultimo{display:block;animation:chega .25s .7s both}
-  .card:hover .capa-zap .bl-botoes,.card:focus-visible .capa-zap .bl-botoes{display:flex;animation:chega .25s 1s both}
+  html.anima .card:hover .capa-zap .digitando,html.anima .card:focus-visible .capa-zap .digitando{animation:some .15s .7s forwards}
+  html.anima .card:hover .capa-zap .ultimo,html.anima .card:focus-visible .capa-zap .ultimo{display:block;animation:chega .25s .7s both}
+  html.anima .card:hover .capa-zap .bl-botoes,html.anima .card:focus-visible .capa-zap .bl-botoes{display:flex;animation:chega .25s 1s both}
 }
 @keyframes some{to{max-height:0;padding-top:0;padding-bottom:0;opacity:0;margin-top:-8px}}
 @keyframes chega{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -649,6 +660,7 @@ dialog.lupa.cert{width:auto;max-width:min(1100px,96vw);overflow:hidden}
   <div class="wrap" id="aviso404" hidden><p class="aviso" role="status" style="margin:24px 0 0"><strong>Página não encontrada.</strong> Este endereço não existe. Você está na página inicial do portfólio.</p></div>
   <section class="wrap hero">
     <div class="txt">
+      <a class="disponivel" href="#inicio" data-ir="inicio" data-alvo="contato"><span class="ponto" aria-hidden="true"></span>Disponível para oportunidades<span class="sr">: acessar o contato</span></a>
       <span class="rotulo">Designer conversacional · UX Writer</span>
       <h1 class="nome lanterna">Leonardo<br><span style="white-space:nowrap">Fernandes<svg class="bola" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><defs><clipPath id="bolaClip"><circle r="47"/></clipPath></defs><g class="bola-giro"><circle r="47" fill="#C8102E"/><g clip-path="url(#bolaClip)" fill="#141414"><polygon points="0.0,-15.0 14.3,-4.6 8.8,12.1 -8.8,12.1 -14.3,-4.6"/><polygon points="18.8,-25.9 13.7,-41.5 27.0,-51.2 40.4,-41.5 35.3,-25.9"/><polygon points="30.4,9.9 43.7,0.2 57.1,9.9 52.0,25.5 35.5,25.5"/><polygon points="0.0,32.0 13.3,41.7 8.2,57.3 -8.2,57.3 -13.3,41.7"/><polygon points="-30.4,9.9 -35.5,25.5 -52.0,25.5 -57.1,9.9 -43.7,0.2"/><polygon points="-18.8,-25.9 -35.3,-25.9 -40.4,-41.5 -27.0,-51.2 -13.7,-41.5"/></g><g stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><line x1="0.0" y1="-15.0" x2="0.0" y2="-31.0"/><line x1="14.3" y1="-4.6" x2="29.5" y2="-9.6"/><line x1="8.8" y1="12.1" x2="18.2" y2="25.1"/><line x1="-8.8" y1="12.1" x2="-18.2" y2="25.1"/><line x1="-14.3" y1="-4.6" x2="-29.5" y2="-9.6"/></g></g><circle r="47" fill="none" stroke="currentColor" stroke-width="3"/></svg></span></h1>
       <p>Desenho conversas de chatbots e assistentes no WhatsApp: o fluxo, o tom de voz e cada mensagem, testados com quem vai usar.</p>
@@ -951,6 +963,14 @@ function irPara(el){
   const nomeHero = document.querySelector('.hero h1');
   let heroVisivel = true;
   function atualizarMarca(){ const naInicio = !document.querySelector('[data-tela="inicio"]').hidden; document.body.classList.toggle('nome-no-hero', naInicio && heroVisivel); }
+  /* cards de chatbot: no celular (sem mouse) a conversa anima quando o card aparece na tela; com mouse, ao passar o mouse */
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('anima');
+    if (matchMedia('(hover: none)').matches) {
+      const ioZap = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visto'); ioZap.unobserve(e.target); } }), {threshold:.6});
+      document.querySelectorAll('.card').forEach(c => { if (c.querySelector('.capa-zap')) ioZap.observe(c); });
+    }
+  }
   if (nomeHero && 'IntersectionObserver' in window) { new IntersectionObserver(es => { heroVisivel = es[0].isIntersecting; atualizarMarca(); }, {rootMargin:'-80px 0px 0px 0px'}).observe(nomeHero); }
   ['hashchange','popstate'].forEach(ev => window.addEventListener(ev, () => setTimeout(atualizarMarca, 0)));
   document.addEventListener('click', () => setTimeout(atualizarMarca, 0));
