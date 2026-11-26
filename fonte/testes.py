@@ -26,14 +26,14 @@ def _metas(linhas, rotulo):
             f'<tbody>{corpo}</tbody></table></div>\n')
 
 
-def _metas2(linhas, rotulo):
+def _metas2(linhas, rotulo, n_todos=11, n_50=3):
     corpo = ''.join(
-        f'<tr><th scope="row">{m}</th><td>{meta}</td><td>{todos}</td><td>{mais50}</td><td>{_sit(sit)}</td></tr>'
-        for m, meta, todos, mais50, sit in linhas)
+        f'<tr><th scope="row">{m}</th><td>{meta}</td><td>{todos}</td><td>{mais50}</td><td>{_sit(sit, cls)}</td></tr>'
+        for m, meta, todos, mais50, sit, cls in linhas)
     return (f'<div class="metas largo" role="region" aria-label="{rotulo}" tabindex="0"><table>'
             f'<caption>{rotulo}</caption>'
-            '<thead><tr><th scope="col">Métrica</th><th scope="col">Meta</th><th scope="col">Todos (8)</th>'
-            '<th scope="col">50 anos ou mais (3)</th><th scope="col">Situação</th></tr></thead>'
+            f'<thead><tr><th scope="col">Métrica</th><th scope="col">Meta</th><th scope="col">Todos ({n_todos})</th>'
+            f'<th scope="col">50 anos ou mais ({n_50})</th><th scope="col">Situação</th></tr></thead>'
             f'<tbody>{corpo}</tbody></table></div>\n')
 
 
@@ -55,26 +55,27 @@ BATIDA = ('Batida', 'ok')
 
 LIA = (
     '<h2 class="ch">Teste de usabilidade</h2>\n'
-    '<p>8 pessoas testaram o MVP com uma tarefa: escolher o destino de uma viagem com a ajuda da Lia. '
+    '<p>11 pessoas testaram o MVP com uma tarefa: escolher o destino de uma viagem com a ajuda da Lia. '
     'O teste continua aberto, e estes números são atualizados até o fim da rodada.</p>\n'
     '<p>A Lia é aberta a todo mundo, mas foi desenhada pensando em quem tem 50 anos ou mais. Por isso, além do resultado geral, '
     'separei o das 3 pessoas desse grupo.</p>\n'
     + _dados([
-        ('7 de 8', 'pessoas escolheram o destino que queriam (87,5%)', 'Meta batida: 80% ou mais', 'ok'),
+        ('7 de 11', 'pessoas escolheram o destino que queriam (64%)', 'Meta não batida: 80% ou mais', 'nao'),
         ('5,0', 'de facilidade média, numa escala de 1 a 5, em 7 notas', 'Meta batida: 4 ou mais', 'ok'),
         ('3 de 3', 'pessoas com 50 anos ou mais escolheram o destino que queriam, todas com nota 5', 'Metas batidas também nesse grupo', 'ok'),
     ], 'Principais números do teste da Lia')
     + '<h3>Métricas e metas</h3>\n'
     + _metas2([
-        ('Escolheram o destino que queriam', '80% ou mais', '7 de 8 (87,5%)', '3 de 3 (100%)', 'Batida nos dois'),
-        ('Facilidade média (1 a 5)', '4 ou mais', '5,0 (7 notas)', '5,0 (3 notas)', 'Batida nos dois'),
+        ('Escolheram o destino que queriam', '80% ou mais', '7 de 11 (64%)', '3 de 3 (100%)', 'Não batida no geral, batida em 50+', 'nao'),
+        ('Facilidade média (1 a 5)', '4 ou mais', '5,0 (7 notas)', '5,0 (3 notas)', 'Batida nos dois', 'ok'),
     ], 'Métricas do teste da Lia contra as metas, para todos e para quem tem 50 anos ou mais')
-    + '<p>Do começo da conversa até a viagem confirmada, a mediana foi de 5 min 25 s, perto dos 5 minutos que o convite do teste prometia.</p>\n'
+    + '<p>Do começo da conversa até a viagem confirmada, a mediana foi de 5 min 25 s, perto dos 5 minutos que o convite do teste prometia. A nota de facilidade é pedida no fim da conversa, por isso só quem chegou ao fim deu nota.</p>\n'
     + '<p>As 3 pessoas com 50 anos ou mais conseguiram usar a Lia sozinhas. Uma delas escreveu “4 adultos e 1 criança”, '
     'a Lia entendeu 4, e ela corrigiu pelo botão “Corrigir informações”. Outra mandou uma foto e tocou num botão antigo, '
     'e a Lia trouxe a conversa de volta. Com 3 pessoas, é um bom sinal, mas ainda não é uma conclusão.</p>\n'
-    + '<p>As 8 conversas terminaram com a viagem confirmada, mas uma conta como falha: a pessoa pediu sugestões '
-    '“para o Natal e Ano Novo” e a Lia entendeu a cidade de Natal.</p>\n'
+    + '<p>Das 11 pessoas, 8 confirmaram a viagem, mas uma conta como falha: a pessoa pediu sugestões '
+    '“para o Natal e Ano Novo” e a Lia entendeu a cidade de Natal. As outras 3 pararam no meio da conversa: '
+    'uma escreveu “não sei ainda” quando a Lia pediu as datas, e duas pararam nas perguntas de preferência das sugestões.</p>\n'
     + '<h3>O que mudei, e por quê</h3>\n'
     + '<p>Corrigi cada problema assim que ele apareceu, com o teste rodando.</p>\n'
     + _mudancas([
@@ -91,6 +92,13 @@ LIA = (
          'uma participante escreveu “4 adultos e 1 criança”, a Lia entendeu 4, e ela precisou corrigir.',
          'a Lia soma os grupos (“4 adultos e 1 criança” vira 5) e ignora idades, como em “filho de 8 anos”.',
          'passou nos 23 casos de teste, e ninguém depois precisou corrigir o número de pessoas.'),
+        ('', 'Datas em aberto',
+         'uma participante escreveu “não sei ainda” quando a Lia pediu as datas. A Lia só aceitava ida e volta no formato dia/mês/ano, '
+         'pediu de novo, e a conversa parou ali.',
+         'a pergunta das datas ganhou a opção “Ainda não sei”. Quem ainda não tem as datas diz quanto tempo quer ficar e, se souber, o mês, '
+         'e a Lia segue com a viagem. Me inspirei na busca flexível do Booking (“Tenho flexibilidade”) e do Airbnb, que também '
+         'perguntam a duração e o mês em vez de travar sem as datas. É o MVP 1.2.',
+         'não ter as datas deixou de ser um bloqueio. Ainda não houve participante nesse caminho depois da correção.'),
     ])
     + '<p>Com poucas sessões depois das correções, não dá para falar em melhora estatística. O que o teste mostra é o ciclo: '
     'um problema visto numa conversa real, a correção logo em seguida e as conversas seguintes sem ele.</p>\n'
@@ -98,6 +106,7 @@ LIA = (
     + '<ul>'
     '<li>Reconhecer o pedido antes de ler um dado: “Quero sugestões” digitado na pergunta da cidade e o feriado de Natal lido como a cidade.</li>'
     '<li>Não encerrar a conversa por um “não” no meio de uma frase longa.</li>'
+    '<li>Entender por que quem pede sugestões para nas perguntas de preferência, onde 2 pessoas pararam.</li>'
     '<li>Testar com mais pessoas de 50 anos ou mais, para o resultado desse grupo ganhar peso.</li>'
     '</ul>\n'
 )

@@ -21,7 +21,7 @@ LIA = _resumo('resumo-lia',
      ('Meu papel', 'Conversation designer, da entrevista ao protótipo'),
      ('Canais', 'WhatsApp e BlipChat'),
      ('Modelo', 'Híbrido: menu guiado e IA em momentos específicos')],
-    '1 entrevista guiada, fluxo feliz em 4 etapas principais, jornada detalhada em 10 etapas, fluxo revisado depois da validação com a entrevistada e MVP 1.1 com dicas de passeios. No teste de usabilidade, 7 de 8 pessoas escolheram o destino que queriam, com facilidade média de 5,0.',
+    '1 entrevista guiada, fluxo feliz em 4 etapas principais, jornada detalhada em 10 etapas, fluxo revisado depois da validação com a entrevistada e MVP 1.2 com dicas de passeios e datas em aberto. No teste de usabilidade, 7 de 11 pessoas escolheram o destino que queriam, com facilidade média de 5,0.',
     f'<a href="#lia-prototipo" data-scroll="1">Conversar com a Lia</a><a target="_blank" rel="noopener" href="{FIG_LIA}">Acessar os fluxos no Figma</a>')
 
 DRO = _resumo('resumo-drogaria',
