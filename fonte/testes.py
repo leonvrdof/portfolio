@@ -26,14 +26,14 @@ def _metas(linhas, rotulo):
             f'<tbody>{corpo}</tbody></table></div>\n')
 
 
-def _metas2(linhas, rotulo):
+def _metas2(linhas, rotulo, n_todos=11, n_50=3):
     corpo = ''.join(
-        f'<tr><th scope="row">{m}</th><td>{meta}</td><td>{todos}</td><td>{mais50}</td><td>{_sit(sit)}</td></tr>'
-        for m, meta, todos, mais50, sit in linhas)
+        f'<tr><th scope="row">{m}</th><td>{meta}</td><td>{todos}</td><td>{mais50}</td><td>{_sit(sit, cls)}</td></tr>'
+        for m, meta, todos, mais50, sit, cls in linhas)
     return (f'<div class="metas largo" role="region" aria-label="{rotulo}" tabindex="0"><table>'
             f'<caption>{rotulo}</caption>'
-            '<thead><tr><th scope="col">Métrica</th><th scope="col">Meta</th><th scope="col">Todos (8)</th>'
-            '<th scope="col">50 anos ou mais (3)</th><th scope="col">Situação</th></tr></thead>'
+            f'<thead><tr><th scope="col">Métrica</th><th scope="col">Meta</th><th scope="col">Todos ({n_todos})</th>'
+            f'<th scope="col">50 anos ou mais ({n_50})</th><th scope="col">Situação</th></tr></thead>'
             f'<tbody>{corpo}</tbody></table></div>\n')
 
 
@@ -55,50 +55,50 @@ BATIDA = ('Batida', 'ok')
 
 LIA = (
     '<h2 class="ch">Teste de usabilidade</h2>\n'
-    '<p>8 pessoas testaram o MVP com uma tarefa: escolher o destino de uma viagem com a ajuda da Lia. '
-    'O teste continua aberto, e estes números são atualizados até o fim da rodada.</p>\n'
-    '<p>A Lia é aberta a todo mundo, mas foi desenhada pensando em quem tem 50 anos ou mais. Por isso, além do resultado geral, '
-    'separei o das 3 pessoas desse grupo.</p>\n'
+    '<p>11 pessoas testaram o MVP com uma tarefa: escolher o destino de uma viagem com a ajuda da Lia. '
+    'Como a Lia foi desenhada pensando em quem tem 50 anos ou mais, separei também o resultado desse grupo.</p>\n'
     + _dados([
-        ('7 de 8', 'pessoas escolheram o destino que queriam (87,5%)', 'Meta batida: 80% ou mais', 'ok'),
+        ('7 de 11', 'pessoas escolheram o destino que queriam (64%)', 'Meta não batida: 80% ou mais', 'nao'),
         ('5,0', 'de facilidade média, numa escala de 1 a 5, em 7 notas', 'Meta batida: 4 ou mais', 'ok'),
-        ('3 de 3', 'pessoas com 50 anos ou mais escolheram o destino que queriam, todas com nota 5', 'Metas batidas também nesse grupo', 'ok'),
+        ('3 de 3', 'pessoas com 50 anos ou mais escolheram o destino que queriam, todas com nota 5', 'Metas batidas nesse grupo', 'ok'),
     ], 'Principais números do teste da Lia')
-    + '<h3>Métricas e metas</h3>\n'
-    + _metas2([
-        ('Escolheram o destino que queriam', '80% ou mais', '7 de 8 (87,5%)', '3 de 3 (100%)', 'Batida nos dois'),
-        ('Facilidade média (1 a 5)', '4 ou mais', '5,0 (7 notas)', '5,0 (3 notas)', 'Batida nos dois'),
-    ], 'Métricas do teste da Lia contra as metas, para todos e para quem tem 50 anos ou mais')
-    + '<p>Do começo da conversa até a viagem confirmada, a mediana foi de 5 min 25 s, perto dos 5 minutos que o convite do teste prometia.</p>\n'
-    + '<p>As 3 pessoas com 50 anos ou mais conseguiram usar a Lia sozinhas. Uma delas escreveu “4 adultos e 1 criança”, '
-    'a Lia entendeu 4, e ela corrigiu pelo botão “Corrigir informações”. Outra mandou uma foto e tocou num botão antigo, '
-    'e a Lia trouxe a conversa de volta. Com 3 pessoas, é um bom sinal, mas ainda não é uma conclusão.</p>\n'
-    + '<p>As 8 conversas terminaram com a viagem confirmada, mas uma conta como falha: a pessoa pediu sugestões '
-    '“para o Natal e Ano Novo” e a Lia entendeu a cidade de Natal.</p>\n'
+    + '<p>Das 11 pessoas, 8 confirmaram a viagem, mas uma conta como falha: pediu sugestões “para o Natal e Ano Novo” '
+    'e a Lia entendeu a cidade de Natal. As outras 3 pararam no meio: uma não tinha as datas da viagem, '
+    'e duas pararam nas perguntas de preferência das sugestões.</p>\n'
+    + '<p>Quem confirmou levou 5 min 25 s, na mediana. A nota de facilidade é pedida no fim da conversa, '
+    'por isso só quem chegou ao fim deu nota.</p>\n'
+    + '<p>As 3 pessoas com 50 anos ou mais usaram a Lia sozinhas, mesmo quando algo saiu do previsto: uma corrigiu o número de pessoas '
+    'pelo botão “Corrigir informações”, e outra mandou uma foto e a Lia trouxe a conversa de volta. '
+    'Com 3 pessoas, é um bom sinal, mas ainda não é uma conclusão.</p>\n'
     + '<h3>O que mudei, e por quê</h3>\n'
-    + '<p>Corrigi cada problema assim que ele apareceu, com o teste rodando.</p>\n'
+    + '<p>Com poucas sessões, não dá para falar em melhora estatística. O que o teste mostra é o ciclo: '
+    'um problema visto numa conversa real e a correção logo em seguida, com o teste rodando.</p>\n'
     + _mudancas([
-        ('10/11', 'Dicas de passeios no fim da conversa',
-         'o primeiro participante confirmou a viagem para Natal, respondeu “Sim” em “Posso te ajudar com mais alguma coisa?” '
-         'esperando sugestões para essa viagem, e a Lia voltou para a escolha do destino.',
-         'o Sim e o Não viraram três opções: “Dicas de passeios”, “Planejar nova viagem” e “Não, obrigado”. É o MVP 1.1.',
-         'quem quer outra viagem diz isso com um botão, e quem quer sugestões recebe passeios do destino escolhido.'),
-        ('12/11', 'Cidade no lugar do país',
-         'um participante digitou “Bolívia”, e a Lia respondeu que não encontrou o destino.',
-         'a pergunta pede a cidade, com um exemplo, e quem digita um país recebe as cidades daquele país para escolher.',
-         'nenhum participante depois digitou só o país.'),
-        ('12/11', 'Soma de pessoas',
-         'uma participante escreveu “4 adultos e 1 criança”, a Lia entendeu 4, e ela precisou corrigir.',
-         'a Lia soma os grupos (“4 adultos e 1 criança” vira 5) e ignora idades, como em “filho de 8 anos”.',
-         'passou nos 23 casos de teste, e ninguém depois precisou corrigir o número de pessoas.'),
+        ('', 'Dicas de passeios',
+         'depois de confirmar a viagem, um participante respondeu “Sim” em “Posso te ajudar com mais alguma coisa?” '
+         'esperando dicas, e a Lia voltou para a escolha do destino.',
+         'o Sim e o Não viraram “Dicas de passeios”, “Planejar nova viagem” e “Não, obrigado”. É o MVP 1.1.',
+         'quem quer dicas recebe passeios do destino escolhido.'),
+        ('', 'Cidade no lugar do país',
+         'um participante digitou “Bolívia”, e a Lia não encontrou o destino.',
+         'quem digita um país recebe as cidades daquele país para escolher.',
+         'ninguém depois digitou só o país.'),
+        ('', 'Soma de pessoas',
+         'uma participante escreveu “4 adultos e 1 criança”, e a Lia entendeu 4.',
+         'a Lia soma os grupos e ignora idades, como em “filho de 8 anos”.',
+         'passou nos 23 casos de teste, e ninguém depois precisou corrigir.'),
+        ('', 'Datas em aberto',
+         'uma participante escreveu “não sei ainda” quando a Lia pediu as datas. A Lia só aceitava dia/mês/ano, e a conversa parou.',
+         'entrou a opção “Ainda não sei”: a pessoa diz quanto tempo quer ficar e, se souber, o mês, '
+         'como na busca flexível do Booking e do Airbnb. É o MVP 1.2.',
+         'não ter as datas deixou de travar a conversa. Ninguém passou por esse caminho ainda.'),
     ])
-    + '<p>Com poucas sessões depois das correções, não dá para falar em melhora estatística. O que o teste mostra é o ciclo: '
-    'um problema visto numa conversa real, a correção logo em seguida e as conversas seguintes sem ele.</p>\n'
     + '<h3>O que ainda falta</h3>\n'
     + '<ul>'
-    '<li>Reconhecer o pedido antes de ler um dado: “Quero sugestões” digitado na pergunta da cidade e o feriado de Natal lido como a cidade.</li>'
+    '<li>Entender o pedido antes de ler um dado, como “Natal e Ano Novo” lido como a cidade de Natal.</li>'
+    '<li>Descobrir por que 2 pessoas pararam nas perguntas de preferência das sugestões.</li>'
     '<li>Não encerrar a conversa por um “não” no meio de uma frase longa.</li>'
-    '<li>Testar com mais pessoas de 50 anos ou mais, para o resultado desse grupo ganhar peso.</li>'
+    '<li>Testar com mais pessoas de 50 anos ou mais.</li>'
     '</ul>\n'
 )
 
